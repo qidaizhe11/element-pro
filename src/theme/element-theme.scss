@@ -1,0 +1,29 @@
+$--menu-item-color: rgba(255, 255, 255, 0.65);
+$--menu-item-fill: #001529;
+$--menu-item-hover-fill: #001529;
+
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";
+
+.el-menu-item {
+  &:hover {
+    color: #fff;
+
+    > a {
+      color: #fff;
+    }
+  }
+
+  > a {
+    color: $--menu-item-color;
+    text-decoration: none;
+    outline: none;
+  }
+}
+
+.el-submenu {
+  &:hover {
+    color: #fff;
+  }
+}
