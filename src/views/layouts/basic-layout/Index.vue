@@ -4,7 +4,7 @@
       <div class="logo">
         <router-link to="/">
           <img :src="logo" alt="logo" />
-          <h1>Ping检测系统</h1>
+          <h1>Element UI Pro</h1>
         </router-link>
       </div>
       <el-menu mode="vertical" theme="dark">

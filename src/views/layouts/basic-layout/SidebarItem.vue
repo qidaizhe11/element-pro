@@ -8,34 +8,39 @@
         </template>
         <sidebar-item :menus="menu.children"></sidebar-item>
       </el-submenu>
-      <el-menu-item v-else :key="menu.key" :index="menu.key">
+      <template v-else>
         <template v-if="menu.externalLink">
-          <a :href="menu.path" :target="item.target">
-            <i v-if="menu.icon" :class="menu.icon"></i>
-            <span>{{menu.name}}</span>
+          <a :href="menu.path" :target="item.target" :key="menu.key">
+            <el-menu-item :index="menu.key">
+              <i v-if="menu.icon" :class="menu.icon"></i>
+              <span>{{menu.name}}</span>
+            </el-menu-item>
           </a>
         </template>
         <template v-else>
-          <router-link :to="menu.path">
-            <i v-if="menu.icon" :class="menu.icon"></i>
-            <span>{{menu.name}}</span>
+          <router-link :to="menu.path" :key="menu.key">
+            <el-menu-item :index="menu.key">
+              <i v-if="menu.icon" :class="menu.icon"></i>
+              <span>{{menu.name}}</span>
+            </el-menu-item>
           </router-link>
+          </el-menu-item>
         </template>
-      </el-menu-item>
+      </template>
     </template>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
-  name: 'SidebarItem',
-  props: {
-    menus: {
-      type: Array,
-      default: []
+  import Vue from 'vue'
+  export default Vue.extend({
+    name: 'SidebarItem',
+    props: {
+      menus: {
+        type: Array,
+        default: []
+      }
     }
-  }
-})
+  })
 </script>
 

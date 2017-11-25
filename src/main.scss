@@ -12,3 +12,13 @@ body {
   width: 100%;
   margin: 40px 0 !important;
 }
+
+a {
+  outline: none;
+  text-decoration: none;
+
+  &:hover {
+    outline: 0;
+    text-decoration: none;
+  }
+}

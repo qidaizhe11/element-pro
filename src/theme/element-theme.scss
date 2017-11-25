@@ -6,16 +6,19 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 @import "~element-ui/packages/theme-chalk/src/index";
 
+.el-menu {
+  border-right: 0;
+}
+
 .el-menu-item {
   &:hover {
     color: #fff;
-
-    > a {
+    background: transparent;
+    >a {
       color: #fff;
     }
   }
-
-  > a {
+  >a {
     color: $--menu-item-color;
     text-decoration: none;
     outline: none;
@@ -23,7 +26,32 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 }
 
 .el-submenu {
-  &:hover {
+  .el-submenu__title:hover {
     color: #fff;
+    background-color: transparent;
+
+    .el-submenu__icon-arrow {
+      color: #fff;
+    }
+  }
+
+  > .el-menu {
+    background-color: #000c17;
+  }
+}
+
+.el-menu-item.is-active {
+  color: #fff;
+  background-color: #1890ff;
+  >a {
+    color: #fff;
+  }
+}
+.el-submenu.is-active {
+  >.el-submenu__title {
+    color: #fff;
+    >.el-submenu__icon-arrow {
+      color: #fff;
+    }
   }
 }
