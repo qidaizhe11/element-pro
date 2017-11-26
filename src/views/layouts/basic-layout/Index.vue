@@ -13,8 +13,17 @@
       </el-menu>
     </el-aside>
     <el-container>
-      <el-header>
-
+      <el-header height="64px" class="header">
+        <div class="right">
+          <el-dropdown class="action">
+            <span class="account">Hehe</span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item disabled>个人中心</el-dropdown-item>
+              <el-dropdown-item disabled>设置</el-dropdown-item>
+              <el-dropdown-item divided>退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
       </el-header>
       <el-main>
         <router-view></router-view>
@@ -107,17 +116,25 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import "~theme/theme.scss";
+@import '~theme/theme.scss';
 
 .app-container {
   position: relative;
   height: 100%;
 }
 
+.header {
+  padding: 0 12px 0 0;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  display: flex;
+  justify-content: flex-end;
+}
+
 .sider {
   // height: 100%;
   min-height: 100vh;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   position: relative;
   z-index: 10;
   background-color: $sider-fill;
@@ -144,6 +161,25 @@ export default Vue.extend({
     margin: 0 0 0 12px;
     // font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: 600;
+  }
+}
+
+.right {
+  height: 100%;
+  .action {
+    cursor: pointer;
+    padding: 0 12px;
+    transition: all .3s;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    > i {
+      font-size: 16px;
+      vertical-align: middle;
+    }
+    &:hover {
+      background: $primary-1;
+    }
   }
 }
 </style>
