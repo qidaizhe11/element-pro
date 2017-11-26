@@ -7,8 +7,8 @@ import App from './App.vue'
 import router from './router'
 
 import 'bootstrap/dist/css/bootstrap-reboot.css'
-import 'font-awesome/css/font-awesome.min.css'
 import './theme/element-theme.scss'
+import './assets/anticon/iconfont.css'
 import './main.scss'
 
 Vue.config.productionTip = false

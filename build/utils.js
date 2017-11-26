@@ -32,6 +32,9 @@ exports.cssLoaders = function (options) {
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
     if (loader) {
+      if (loader === 'sass') {
+        loaders.push('resolve-url-loader')
+      }
       loaders.push({
         loader: loader + '-loader',
         options: Object.assign({}, loaderOptions, {
