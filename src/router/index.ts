@@ -11,6 +11,24 @@ function isValidRoute(navData: any, path: string): boolean {
   navData.filter((item: any) => item.layout === path)[0].children
 }
 
+function getPlainChildRoutes(nodeList: any[], parentPath = '') {
+  const arr: any[] = []
+  nodeList.map((item) => {
+    const itemPath = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/')
+    if (item.children) {
+      arr.push(...getPlainChildRoutes(item.children, itemPath))
+    } else {
+      const routeConfig: RouteConfig = {
+        path: itemPath,
+        component: item.component,
+        name: item.name
+      }
+      arr.push(routeConfig)
+    }
+  })
+  return arr
+}
+
 function _getRouteData(navData: any, path: string): any {
   if (!isValidRoute(navData, path)) {
     return
@@ -19,35 +37,13 @@ function _getRouteData(navData: any, path: string): any {
     navData.filter((item: any) => item.layout === path)[0]
   )
 
-  let children: any[] = []
-  route.children.map((item: any) => {
-    let routeData = []
-    if (item.children) {
-      routeData = item.children.map((childItem: any) => {
-        const childPath = item.path + '/' + childItem.path
-        const childConfig: RouteConfig = {
-          path: childPath,
-          component: childItem.component,
-          name: childItem.name
-        }
-        return childConfig
-      })
-    } else {
-      const routeConfig: RouteConfig = {
-        path: item.path,
-        name: item.name,
-        component: item.component
-      }
-      routeData = [routeConfig]
-    }
-    children = children.concat(routeData)
-  })
+  const childRoutes = getPlainChildRoutes(route.children)
 
   const rootConfig: RouteConfig = {
     path: route.path,
     name: route.name,
     component: route.component,
-    children: children
+    children: childRoutes
   }
   return rootConfig
 }
