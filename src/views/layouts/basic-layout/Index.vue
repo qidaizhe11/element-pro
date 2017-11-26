@@ -14,6 +14,7 @@
     </el-aside>
     <el-container>
       <el-header height="64px" class="header">
+        <ant-icon type='menufold' class="trigger" />
         <div class="right">
           <el-dropdown class="action">
             <span class="account">
@@ -43,6 +44,7 @@ import logo from 'assets/logo.png'
 import SidebarItem from './SidebarItem.vue'
 
 import Avatar from 'components/Avatar/index.vue'
+import AntIcon from 'components/Icon/AntIcon.vue'
 
 interface SubMenu {
   name: string
@@ -83,7 +85,8 @@ export default Vue.extend({
   },
   components: {
     SidebarItem,
-    Avatar
+    Avatar,
+    AntIcon
   },
   methods: {
     getNavMenuItems(menusData: any[], parentPath = '') {
@@ -138,7 +141,7 @@ export default Vue.extend({
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .sider {
@@ -171,6 +174,17 @@ export default Vue.extend({
     margin: 0 0 0 12px;
     // font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: 600;
+  }
+}
+
+.trigger {
+  font-size: 20px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: all .3s;
+  padding: 0 24px;
+  &:hover {
+    background: $color-primary-1;
   }
 }
 
