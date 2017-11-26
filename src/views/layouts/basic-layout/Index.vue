@@ -7,7 +7,7 @@
           <h1>Element UI Pro</h1>
         </router-link>
       </div>
-      <el-menu mode="vertical" theme="dark">
+      <el-menu mode="vertical">
         <sidebar-item :menus="navMenuItems">
         </sidebar-item>
       </el-menu>
@@ -16,7 +16,10 @@
       <el-header height="64px" class="header">
         <div class="right">
           <el-dropdown class="action">
-            <span class="account">Hehe</span>
+            <span class="account">
+              <avatar class="avatar" size="small" :src="currentUser.avatar" />
+              {{currentUser.name}}
+            </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item disabled>个人中心</el-dropdown-item>
               <el-dropdown-item disabled>设置</el-dropdown-item>
@@ -38,6 +41,8 @@ import { getRouteData, navData } from 'router'
 import logo from 'assets/logo.png'
 
 import SidebarItem from './SidebarItem.vue'
+
+import Avatar from 'components/Avatar/index.vue'
 
 interface SubMenu {
   name: string
@@ -66,14 +71,19 @@ export default Vue.extend({
     return {
       logo,
       menus,
-      navMenuItems
+      navMenuItems,
+      currentUser: {
+        name: 'Serati Ma',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dRFVcIqZOYPcSNrlJsqQ.png'
+      }
     }
   },
   mounted() {
     this.navMenuItems = this.getNavMenuItems(this.menus)
   },
   components: {
-    SidebarItem
+    SidebarItem,
+    Avatar
   },
   methods: {
     getNavMenuItems(menusData: any[], parentPath = '') {
@@ -178,7 +188,15 @@ export default Vue.extend({
       vertical-align: middle;
     }
     &:hover {
-      background: $primary-1;
+      background: $color-primary-1;
+    }
+  }
+  .account {
+    .avatar {
+      margin: 20px 8px 20px 0;
+      color: $color-primary;
+      background: rgba(255, 255, 255, 0.85);
+      vertical-align: middle;
     }
   }
 }
