@@ -7,7 +7,8 @@
           <h1>Element UI Pro</h1>
         </router-link>
       </div>
-      <el-menu mode="vertical">
+      <el-menu mode="vertical" :default-active="selectedKey" :default-openeds="openKeys"
+        :unique-opened="true">
         <sidebar-item :menus="navMenuItems">
         </sidebar-item>
       </el-menu>
@@ -18,8 +19,8 @@
         <div class="right">
           <el-dropdown class="action">
             <span class="account">
-              <avatar class="avatar" size="small" :src="currentUser.avatar" />
-              {{currentUser.name}}
+              <avatar class="avatar" size="small" :src="currentUser.avatar"
+              /> {{currentUser.name}}
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item disabled>个人中心</el-dropdown-item>
@@ -69,19 +70,25 @@ export default Vue.extend({
       return prev.concat(current.children)
     }, [])
     const navMenuItems: any[] = []
+    const openKeys: string[] = []
 
     return {
-      logo,
       menus,
+      logo,
       navMenuItems,
+      selectedKey: '',
+      openKeys,
       currentUser: {
         name: 'Serati Ma',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dRFVcIqZOYPcSNrlJsqQ.png'
+        avatar:
+          'https://gw.alipayobjects.com/zos/rmsportal/dRFVcIqZOYPcSNrlJsqQ.png'
       }
     }
   },
-  mounted() {
+  created() {
     this.navMenuItems = this.getNavMenuItems(this.menus)
+    this.selectedKey = this.getCurrentMenuSelectedKey()
+    this.openKeys = this.getDefaultCollapsedSubMenus()
   },
   components: {
     SidebarItem,
@@ -89,6 +96,27 @@ export default Vue.extend({
     AntIcon
   },
   methods: {
+    getDefaultCollapsedSubMenus(): string[] {
+      const currentMenuSelectedKey = this.getCurrentMenuSelectedKey()
+      let keys = currentMenuSelectedKey.split('/').slice(1)
+      if (keys.length === 1 && keys[0] === '') {
+        keys = [this.menus[0].key]
+      }
+      keys.splice(-1, 1)
+      let tempKey = ''
+      const menuKeys = keys.map(key => {
+        tempKey += `/${key}`
+        return tempKey
+      })
+      return menuKeys
+    },
+    getCurrentMenuSelectedKey(): string {
+      const path = this.$route.path
+      if (!path) {
+        return this.menus[0].key
+      }
+      return path
+    },
     getNavMenuItems(menusData: any[], parentPath = '') {
       if (!menusData) {
         return []
@@ -181,7 +209,7 @@ export default Vue.extend({
   font-size: 20px;
   line-height: 64px;
   cursor: pointer;
-  transition: all .3s;
+  transition: all 0.3s;
   padding: 0 24px;
   &:hover {
     background: $color-primary-1;
@@ -193,7 +221,7 @@ export default Vue.extend({
   .action {
     cursor: pointer;
     padding: 0 12px;
-    transition: all .3s;
+    transition: all 0.3s;
     height: 100%;
     display: flex;
     align-items: center;
