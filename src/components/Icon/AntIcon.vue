@@ -7,10 +7,6 @@ export default Vue.component('ant-icon', {
     type: {
       type: String,
       required: true
-    },
-    class: {
-      type: String,
-      default: ''
     }
   },
   render: function(h, context) {
