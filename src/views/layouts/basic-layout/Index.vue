@@ -7,11 +7,13 @@
           <h1>Element UI Pro</h1>
         </router-link>
       </div>
-      <el-menu mode="vertical" :default-active="selectedKey" :default-openeds="openKeys"
+      <!-- <el-menu mode="vertical" :default-active="selectedKey" :default-openeds="openKeys"
         :unique-opened="true" :collapse="true">
         <sidebar-item :menus="navMenuItems">
         </sidebar-item>
-      </el-menu>
+      </el-menu> -->
+      <side-menu :menus="menus" :selected-key="selectedKey"
+        :open-keys="openKeys"></side-menu>
     </el-aside>
     <el-container>
       <el-header height="64px" class="header">
@@ -43,6 +45,7 @@ import { getRouteData, navData } from 'router'
 import logo from 'assets/logo.png'
 
 import SidebarItem from './SidebarItem.vue'
+import SideMenu from './SideMenu.vue'
 
 import Avatar from 'components/Avatar/index.vue'
 import AntIcon from 'components/Icon/AntIcon.vue'
@@ -92,6 +95,7 @@ export default Vue.extend({
   },
   components: {
     SidebarItem,
+    SideMenu,
     Avatar,
     AntIcon
   },
