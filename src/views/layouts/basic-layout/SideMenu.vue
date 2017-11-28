@@ -18,6 +18,10 @@ export default Vue.extend({
       default() {
         return []
       }
+    },
+    collapse: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -68,7 +72,7 @@ export default Vue.extend({
       props: {
         mode: 'vertical',
         'unique-opened': true,
-        'collapse': true,
+        'collapse': this.collapse,
         'default-active': this.selectedKey,
         'default-openeds': this.openKeys
       }

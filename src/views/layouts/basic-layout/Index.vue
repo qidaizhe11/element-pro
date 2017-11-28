@@ -1,6 +1,6 @@
 <template>
   <el-container class="app-container">
-    <el-aside width="64px" class="sider collapse">
+    <el-aside :width="siderWidth" :class="{'sider': true, 'collapse': collapse}">
       <div class="logo">
         <router-link to="/">
           <img :src="logo" alt="logo" />
@@ -13,11 +13,11 @@
         </sidebar-item>
       </el-menu> -->
       <side-menu :menus="menus" :selected-key="selectedKey"
-        :open-keys="openKeys"></side-menu>
+        :open-keys="openKeys" :collapse="collapse"></side-menu>
     </el-aside>
     <el-container>
       <el-header height="64px" class="header">
-        <ant-icon type='menufold' class="trigger" />
+        <ant-icon type='menufold' class="trigger" @click="toggle" />
         <div class="right">
           <el-dropdown class="action">
             <span class="account">
@@ -41,6 +41,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { debounce } from 'lodash'
+
 import { getRouteData, navData } from 'router'
 import logo from 'assets/logo.png'
 
@@ -81,11 +83,17 @@ export default Vue.extend({
       navMenuItems,
       selectedKey: '',
       openKeys,
+      collapse: false,
       currentUser: {
         name: 'Serati Ma',
         avatar:
           'https://gw.alipayobjects.com/zos/rmsportal/dRFVcIqZOYPcSNrlJsqQ.png'
       }
+    }
+  },
+  computed: {
+    siderWidth(): string {
+      return this.collapse ? '64px' : '256px'
     }
   },
   created() {
@@ -155,6 +163,15 @@ export default Vue.extend({
         }
         return returnItem
       })
+    },
+    toggle() {
+      this.collapse = !this.collapse
+      debounce(this.triggerResizeEvent, 600)
+    },
+    triggerResizeEvent() {
+      const event = document.createEvent('HTMLEvents')
+      event.initEvent('resize', true, false)
+      window.dispatchEvent(event)
     }
   }
 })
@@ -183,9 +200,16 @@ export default Vue.extend({
   position: relative;
   z-index: 10;
   background-color: $sider-fill;
+  transition: all .3s;
 
   &.collapse {
     overflow: inherit;
+  }
+}
+
+.sider.collapse {
+  .logo {
+    padding-left: 16px;
   }
 }
 

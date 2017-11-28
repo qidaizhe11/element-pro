@@ -15,7 +15,8 @@ export default Vue.component('ant-icon', {
         'anticon': true,
         [`icon-${context.props.type}`]: true,
         [context.data.staticClass || '']: context.data.staticClass
-      }
+      },
+      on: context.data.on
     })
   }
 })

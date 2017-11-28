@@ -24,7 +24,7 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
     >a {
       color: #fff;
     }
-    >i {
+    i {
       color: #fff;
     }
   }
@@ -36,17 +36,30 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 }
 
 .el-submenu {
-  .el-submenu__title:hover {
-    color: #fff;
-    background-color: transparent;
-
-    >i {
+  .el-submenu__title {
+    &:hover {
       color: #fff;
+      background-color: transparent;
+
+      >i {
+        color: #fff;
+      }
+    }
+
+    > span {
+      opacity: 1;
+      transition: opacity .3s ease-in-out;
     }
   }
 
   > .el-menu {
     background-color: #000c17;
+  }
+}
+
+.el-menu--collapse {
+  >.el-menu-item span, >.el-submenu>.el-submenu__title span {
+    opacity: 0;
   }
 }
 
@@ -67,20 +80,6 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
       color: #fff;
     }
   }
-}
-
-.el-menu--collapse>div>.el-menu-item span,
-.el-menu--collapse>div>a>.el-menu-item span,
-.el-menu--collapse>div>.el-submenu>.el-submenu__title span {
-  height: 0;
-  width: 0;
-  overflow: hidden;
-  visibility: hidden;
-  display: inline-block;
-}
-.el-menu--collapse>div>.el-menu-item .el-submenu__icon-arrow,
-.el-menu--collapse>div>.el-submenu>.el-submenu__title .el-submenu__icon-arrow {
-  display: none;
 }
 
 .el-dropdown-menu.el-popper[x-placement^="bottom"] {
