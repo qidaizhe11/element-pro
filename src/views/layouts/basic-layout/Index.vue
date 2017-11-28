@@ -17,7 +17,7 @@
     </el-aside>
     <el-container>
       <el-header height="64px" class="header">
-        <ant-icon type='menufold' class="trigger" @click="toggle" />
+        <ant-icon :type="collapse ? 'menuunfold' : 'menufold'" class="trigger" @click="toggle" />
         <div class="right">
           <el-dropdown class="action">
             <span class="account">
