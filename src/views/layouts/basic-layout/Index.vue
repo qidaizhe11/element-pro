@@ -8,7 +8,7 @@
         </router-link>
       </div>
       <el-menu mode="vertical" :default-active="selectedKey" :default-openeds="openKeys"
-        :unique-opened="true">
+        :unique-opened="true" :collapse="false">
         <sidebar-item :menus="navMenuItems">
         </sidebar-item>
       </el-menu>

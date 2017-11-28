@@ -10,7 +10,7 @@
       </el-submenu>
       <template v-else>
         <template v-if="menu.externalLink">
-          <a :href="menu.path" :target="item.target" :key="menu.key">
+          <a :href="menu.path" :target="menu.target" :key="menu.key">
             <el-menu-item :index="menu.key">
               <i v-if="menu.icon" :class="menu.icon"></i>
               <span>{{menu.name}}</span>

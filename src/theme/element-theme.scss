@@ -10,11 +10,21 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
   border-right: 0;
 }
 
+.el-menu-item [class^=anticon], .el-submenu [class^=anticon] {
+  margin-right: 5px;
+  width: 24px;
+  text-align: center;
+  font-size: 18px;
+}
+
 .el-menu-item {
   &:hover {
     color: #fff;
     background: transparent;
     >a {
+      color: #fff;
+    }
+    >i {
       color: #fff;
     }
   }
@@ -30,7 +40,7 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
     color: #fff;
     background-color: transparent;
 
-    .el-submenu__icon-arrow {
+    >i {
       color: #fff;
     }
   }
@@ -46,11 +56,14 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
   >a {
     color: #fff;
   }
+  i {
+    color: inherit;
+  }
 }
 .el-submenu.is-active {
   >.el-submenu__title {
     color: #fff;
-    >.el-submenu__icon-arrow {
+    >i {
       color: #fff;
     }
   }
