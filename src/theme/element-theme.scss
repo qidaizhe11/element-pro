@@ -69,6 +69,20 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
   }
 }
 
+.el-menu--collapse>div>.el-menu-item span,
+.el-menu--collapse>div>a>.el-menu-item span,
+.el-menu--collapse>div>.el-submenu>.el-submenu__title span {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  display: inline-block;
+}
+.el-menu--collapse>div>.el-menu-item .el-submenu__icon-arrow,
+.el-menu--collapse>div>.el-submenu>.el-submenu__title .el-submenu__icon-arrow {
+  display: none;
+}
+
 .el-dropdown-menu.el-popper[x-placement^="bottom"] {
   margin-top: 4px;
 }

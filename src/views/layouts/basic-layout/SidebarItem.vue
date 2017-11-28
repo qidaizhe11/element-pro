@@ -13,7 +13,7 @@
           <a :href="menu.path" :target="menu.target" :key="menu.key">
             <el-menu-item :index="menu.key">
               <i v-if="menu.icon" :class="menu.icon"></i>
-              <span>{{menu.name}}</span>
+              <span slot="title">{{menu.name}}</span>
             </el-menu-item>
           </a>
         </template>
@@ -21,7 +21,7 @@
           <router-link :to="menu.path" :key="menu.key">
             <el-menu-item :index="menu.key">
               <i v-if="menu.icon" :class="menu.icon"></i>
-              <span>{{menu.name}}</span>
+              <span slot="title">{{menu.name}}</span>
             </el-menu-item>
           </router-link>
           </el-menu-item>
@@ -32,15 +32,15 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
-  export default Vue.extend({
-    name: 'SidebarItem',
-    props: {
-      menus: {
-        type: Array,
-        default: []
-      }
+import Vue from 'vue'
+export default Vue.extend({
+  name: 'SidebarItem',
+  props: {
+    menus: {
+      type: Array,
+      default: []
     }
-  })
+  }
+})
 </script>
 

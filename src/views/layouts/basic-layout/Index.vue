@@ -1,6 +1,6 @@
 <template>
   <el-container class="app-container">
-    <el-aside width="256px" class="sider">
+    <el-aside width="64px" class="sider collapse">
       <div class="logo">
         <router-link to="/">
           <img :src="logo" alt="logo" />
@@ -8,7 +8,7 @@
         </router-link>
       </div>
       <el-menu mode="vertical" :default-active="selectedKey" :default-openeds="openKeys"
-        :unique-opened="true" :collapse="false">
+        :unique-opened="true" :collapse="true">
         <sidebar-item :menus="navMenuItems">
         </sidebar-item>
       </el-menu>
@@ -179,6 +179,10 @@ export default Vue.extend({
   position: relative;
   z-index: 10;
   background-color: $sider-fill;
+
+  &.collapse {
+    overflow: inherit;
+  }
 }
 
 .logo {
