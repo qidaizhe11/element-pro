@@ -41,42 +41,78 @@ export default Vue.extend({
         }
         const key = item.key || itemPath
         if (item.children && item.children.some((child: any) => child.name)) {
-          return h('el-submenu', {
+          return h(
+            'el-submenu',
+            {
+              props: {
+                index: key
+              },
+              key: key,
+              scopedSlots: {
+                title: (props: any) => {
+                  return [
+                    item.icon && h('i', { class: item.icon }),
+                    h('span', { slot: 'title' }, item.name)
+                  ]
+                }
+              }
+            },
+            this.getNavMenuItems(h, item.children, itemPath)
+          )
+        }
+
+        const elMenuItem = h(
+          'el-menu-item',
+          {
             props: {
               index: key
-            },
-            key: key,
-            scopedSlots: {
-              title: (props: any) => {
-                return [
-                  item.icon && h('i', { class: item.icon }),
-                  h('span', { slot: 'title' }, item.name)
-                ]
-              }
             }
-          }, this.getNavMenuItems(h, item.children, itemPath))
+          },
+          [
+            item.icon && h('i', { class: item.icon }),
+            h('span', { slot: 'title' }, item.name)
+          ]
+        )
+
+        if (/^https?:\/\//.test(itemPath)) {
+          return h(
+            'a',
+            {
+              attrs: {
+                href: itemPath,
+                target: item.target
+              }
+            },
+            [elMenuItem]
+          )
+        } else {
+          return h(
+            'router-link',
+            {
+              props: {
+                to: itemPath
+              }
+            },
+            [elMenuItem]
+          )
         }
-        return h('el-menu-item', {
-          props: {
-            index: key
-          }
-        }, [
-          item.icon && h('i', { class: item.icon }),
-          h('span', { slot: 'title' }, item.name)
-        ])
       })
     }
   },
   render(h): VNode {
-    return h('el-menu', {
-      props: {
-        mode: 'vertical',
-        'unique-opened': true,
-        'collapse': this.collapse,
-        'default-active': this.selectedKey,
-        'default-openeds': this.openKeys
-      }
-    }, this.getNavMenuItems(h, this.menus))
+    return h(
+      'el-menu',
+      {
+        props: {
+          mode: 'vertical',
+          'unique-opened': true,
+          collapse: this.collapse,
+          'default-active': this.selectedKey,
+          'default-openeds': this.openKeys
+        }
+      },
+      this.getNavMenuItems(h, this.menus)
+    )
   }
 })
 </script>
