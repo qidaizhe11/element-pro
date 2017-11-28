@@ -41,15 +41,16 @@ export default Vue.extend({
             props: {
               index: key
             },
-            key: key
-          }, [
-            h('div', {
-              slot: 'title'
-            }, [
-              item.icon && h('i', { class: item.icon }),
-              h('span', { slot: 'title' }, item.name)
-            ])
-          ].concat(this.getNavMenuItems(h, item.children, itemPath)))
+            key: key,
+            scopedSlots: {
+              title: (props: any) => {
+                return [
+                  item.icon && h('i', { class: item.icon }),
+                  h('span', { slot: 'title' }, item.name)
+                ]
+              }
+            }
+          }, this.getNavMenuItems(h, item.children, itemPath))
         }
         return h('el-menu-item', {
           props: {
