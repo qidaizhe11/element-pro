@@ -7,11 +7,6 @@
           <h1>Element UI Pro</h1>
         </router-link>
       </div>
-      <!-- <el-menu mode="vertical" :default-active="selectedKey" :default-openeds="openKeys"
-        :unique-opened="true" :collapse="true">
-        <sidebar-item :menus="navMenuItems">
-        </sidebar-item>
-      </el-menu> -->
       <side-menu :menus="menus" :selected-key="selectedKey"
         :open-keys="openKeys" :collapse="collapse"></side-menu>
     </el-aside>
@@ -46,7 +41,6 @@ import { debounce } from 'lodash'
 import { getRouteData, navData } from 'router'
 import logo from 'assets/logo.png'
 
-import SidebarItem from './SidebarItem.vue'
 import SideMenu from './SideMenu.vue'
 
 import Avatar from 'components/Avatar/index.vue'
@@ -74,13 +68,11 @@ export default Vue.extend({
     const menus: any = navData.reduce((prev: any, current: any) => {
       return prev.concat(current.children)
     }, [])
-    const navMenuItems: any[] = []
     const openKeys: string[] = []
 
     return {
       menus,
       logo,
-      navMenuItems,
       selectedKey: '',
       openKeys,
       collapse: false,
@@ -102,12 +94,10 @@ export default Vue.extend({
     }
   },
   created() {
-    this.navMenuItems = this.getNavMenuItems(this.menus)
     this.selectedKey = this.getCurrentMenuSelectedKey()
     this.openKeys = this.getDefaultCollapsedSubMenus()
   },
   components: {
-    SidebarItem,
     SideMenu,
     Avatar,
     AntIcon
@@ -133,41 +123,6 @@ export default Vue.extend({
         return this.menus[0].key
       }
       return path
-    },
-    getNavMenuItems(menusData: any[], parentPath = '') {
-      if (!menusData) {
-        return []
-      }
-      return menusData.map((item: any) => {
-        if (!item.name) {
-          return null
-        }
-        let itemPath = ''
-        if (item.path.indexOf('http') === 0) {
-          itemPath = item.path
-        } else {
-          itemPath = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/')
-        }
-        if (item.children && item.children.some((child: any) => child.name)) {
-          const returnItem: SubMenu = {
-            name: item.name,
-            key: item.key || itemPath,
-            icon: item.icon,
-            children: this.getNavMenuItems(item.children, itemPath)
-          }
-          return returnItem
-        }
-
-        const returnItem: MenuItem = {
-          name: item.name,
-          key: item.key || itemPath,
-          icon: item.icon,
-          path: itemPath,
-          target: item.target,
-          externalLink: /^https?:\/\//.test(itemPath)
-        }
-        return returnItem
-      })
     },
     toggle() {
       this.collapse = !this.collapse
