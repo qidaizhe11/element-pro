@@ -96,6 +96,11 @@ export default Vue.extend({
       return this.collapse ? '64px' : '256px'
     }
   },
+  watch: {
+    collapse(value) {
+      this.openKeys = this.getDefaultCollapsedSubMenus()
+    }
+  },
   created() {
     this.navMenuItems = this.getNavMenuItems(this.menus)
     this.selectedKey = this.getCurrentMenuSelectedKey()
