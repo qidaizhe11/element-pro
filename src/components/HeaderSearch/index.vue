@@ -1,16 +1,38 @@
 <template>
-  <span class="headerSearch">
+  <span class="headerSearch" @click="enterSearchMode">
     <i class="el-icon-search icon"></i>
-    <el-autocomplete class="autocomplete" ref="autocomplete"></el-autocomplete>
+    <el-autocomplete v-model="value" :class="['autocomplete', {show: searchMode}]"
+      ref="autocomplete" :fetch-suggestions="querySearch" @blur="leaveSearchMode"></el-autocomplete>
   </span>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+
 export default Vue.extend({
   data() {
     return {
-
+      searchMode: false,
+      value: ''
+    }
+  },
+  methods: {
+    querySearch(queryString: string, cb: any) {
+      const results = [
+        { value: '搜索提示一' },
+        { value: '搜索提示二' },
+        { value: '搜索提示三' }
+      ]
+      cb(results)
+    },
+    enterSearchMode() {
+      this.searchMode = true
+      const autocompleteRef: any = this.$refs.autocomplete
+      autocompleteRef.$refs.input.focus()
+    },
+    leaveSearchMode() {
+      this.searchMode = false
+      this.value = ''
     }
   }
 })
@@ -24,7 +46,7 @@ export default Vue.extend({
   }
   .autocomplete {
     transition: width 0.3s, margin-left 0.3s;
-    // width: 0;
+    width: 0;
     background: transparent;
     border-radius: 0;
 
@@ -36,14 +58,17 @@ export default Vue.extend({
         padding-right: 0;
         box-shadow: none !important;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           border-bottom: 1px solid #d9d9d9;
         }
       }
     }
 
-    width: 210px;
-    margin-left: 8px;
+    &.show {
+      width: 210px;
+      margin-left: 8px;
+    }
   }
 }
 </style>
