@@ -14,6 +14,8 @@
       <el-header height="64px" class="header">
         <ant-icon :type="collapse ? 'menuunfold' : 'menufold'" class="trigger" @click="toggle" />
         <div class="right">
+          <header-search class="action search">
+          </header-search>
           <el-dropdown class="action">
             <span class="account">
               <avatar class="avatar" size="small" :src="currentUser.avatar"
@@ -45,6 +47,7 @@ import SideMenu from './SideMenu.vue'
 
 import Avatar from 'components/Avatar/index.vue'
 import AntIcon from 'components/Icon/AntIcon.vue'
+import HeaderSearch from 'components/HeaderSearch/index.vue'
 
 interface SubMenu {
   name: string
@@ -100,7 +103,8 @@ export default Vue.extend({
   components: {
     SideMenu,
     Avatar,
-    AntIcon
+    AntIcon,
+    HeaderSearch
   },
   methods: {
     getDefaultCollapsedSubMenus(): string[] {
@@ -210,6 +214,8 @@ export default Vue.extend({
 
 .right {
   height: 100%;
+  display: flex;
+
   .action {
     cursor: pointer;
     padding: 0 12px;
@@ -223,6 +229,13 @@ export default Vue.extend({
     }
     &:hover {
       background: $color-primary-1;
+    }
+  }
+  .search {
+    padding: 0;
+    margin: 0 12px;
+    &:hover {
+      background: transparent;
     }
   }
   .account {
