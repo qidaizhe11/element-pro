@@ -2,7 +2,8 @@
   <span class="headerSearch" @click="enterSearchMode">
     <i class="el-icon-search icon"></i>
     <el-autocomplete v-model="value" :class="['autocomplete', {show: searchMode}]"
-      ref="autocomplete" :fetch-suggestions="querySearch" @blur="leaveSearchMode"></el-autocomplete>
+      :fetch-suggestions="querySearch"
+      @blur="leaveSearchMode"></el-autocomplete>
   </span>
 </template>
 
@@ -27,12 +28,9 @@ export default Vue.extend({
     },
     enterSearchMode() {
       this.searchMode = true
-      const autocompleteRef: any = this.$refs.autocomplete
-      autocompleteRef.$refs.input.focus()
     },
     leaveSearchMode() {
       this.searchMode = false
-      this.value = ''
     }
   }
 })
@@ -58,10 +56,12 @@ export default Vue.extend({
         padding-right: 0;
         box-shadow: none !important;
 
-        &:hover,
-        &:focus {
-          border-bottom: 1px solid #d9d9d9;
-        }
+        border-bottom: 1px solid #d9d9d9;
+
+        // &:hover,
+        // &:focus {
+        //   border-bottom: 1px solid #d9d9d9;
+        // }
       }
     }
 
