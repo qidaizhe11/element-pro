@@ -3,7 +3,7 @@
     <i class="el-icon-search icon"></i>
     <el-autocomplete v-model="value" :class="['autocomplete', {show: searchMode}]"
       ref="autocomplete" :fetch-suggestions="querySearch"
-      @blur="leaveSearchMode"></el-autocomplete>
+      @blur="leaveSearchMode" @select="onSearchSelect"></el-autocomplete>
   </span>
 </template>
 
@@ -38,8 +38,12 @@ export default Vue.extend({
     },
     leaveSearchMode() {
       this.searchMode = false
+      this.value = ''
       const ref: any = this.$refs.autocomplete
       ref.close()
+    },
+    onSearchSelect(value: any) {
+      this.searchMode = true
     }
   }
 })
@@ -66,11 +70,6 @@ export default Vue.extend({
         box-shadow: none !important;
 
         border-bottom: 1px solid #d9d9d9;
-
-        // &:hover,
-        // &:focus {
-        //   border-bottom: 1px solid #d9d9d9;
-        // }
       }
     }
 
