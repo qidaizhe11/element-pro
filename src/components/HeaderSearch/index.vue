@@ -2,7 +2,7 @@
   <span class="headerSearch" @click="enterSearchMode">
     <i class="el-icon-search icon"></i>
     <el-autocomplete v-model="value" :class="['autocomplete', {show: searchMode}]"
-      :fetch-suggestions="querySearch"
+      ref="autocomplete" :fetch-suggestions="querySearch"
       @blur="leaveSearchMode"></el-autocomplete>
   </span>
 </template>
@@ -31,9 +31,15 @@ export default Vue.extend({
     },
     enterSearchMode() {
       this.searchMode = true
+      const ref: any = this.$refs.autocomplete
+      setTimeout(() => {
+        ref.$refs.input.focus()
+      }, 300)
     },
     leaveSearchMode() {
       this.searchMode = false
+      const ref: any = this.$refs.autocomplete
+      ref.close()
     }
   }
 })
