@@ -7,12 +7,13 @@
           <h1>Element UI Pro</h1>
         </router-link>
       </div>
-      <side-menu :menus="menus" :selected-key="selectedKey"
-        :open-keys="openKeys" :collapse="collapse"></side-menu>
+      <side-menu :menus="menus" :selected-key="selectedKey" :open-keys="openKeys"
+        :collapse="collapse"></side-menu>
     </el-aside>
     <el-container>
       <el-header height="64px" class="header">
-        <ant-icon :type="collapse ? 'menuunfold' : 'menufold'" class="trigger" @click="toggle" />
+        <ant-icon :type="collapse ? 'menuunfold' : 'menufold'" class="trigger"
+          @click="toggle" />
         <div class="right">
           <header-search class="action search">
           </header-search>
@@ -38,6 +39,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import {
+  Container,
+  Aside,
+  Header,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Main
+} from 'element-ui'
 import { debounce } from 'lodash'
 
 import { getRouteData, navData } from 'router'
@@ -48,6 +58,14 @@ import SideMenu from './SideMenu.vue'
 import Avatar from 'components/Avatar/index.vue'
 import AntIcon from 'components/Icon/AntIcon.vue'
 import HeaderSearch from 'components/HeaderSearch/index.vue'
+
+Vue.use(Container)
+Vue.use(Aside)
+Vue.use(Header)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Main)
 
 interface SubMenu {
   name: string
@@ -164,7 +182,7 @@ export default Vue.extend({
   position: relative;
   z-index: 10;
   background-color: $sider-fill;
-  transition: all .3s;
+  transition: all 0.3s;
 
   &.collapse {
     overflow: inherit;

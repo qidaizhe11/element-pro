@@ -13,7 +13,7 @@ module.exports = {
     sourceMap: sourceMapEnabled,
     extract: isProduction
   }), {
-    ts: ['ts-loader', 'tslint-loader']
+    ts: ['babel-loader', 'ts-loader', 'tslint-loader']
   }),
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,

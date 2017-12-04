@@ -9,6 +9,9 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { Autocomplete } from 'element-ui'
+
+Vue.use(Autocomplete)
 
 export default Vue.extend({
   data() {
