@@ -15,7 +15,8 @@
         <ant-icon :type="collapse ? 'menuunfold' : 'menufold'" class="trigger"
           @click="toggle" />
         <div class="right">
-          <header-search class="action search">
+          <header-search class="action search" placeholder="站内搜索" v-model="searchValue"
+            :data="suggestionData" @select="onSearchSelect">
           </header-search>
           <el-dropdown class="action">
             <span class="account">
@@ -91,12 +92,16 @@ export default Vue.extend({
     }, [])
     const openKeys: string[] = []
 
+    const suggestionData = ['搜索提示一', '搜索提示二', '搜索提示三']
+
     return {
       menus,
       logo,
       selectedKey: '',
       openKeys,
       collapse: false,
+      suggestionData,
+      searchValue: '',
       currentUser: {
         name: 'Serati Ma',
         avatar:
@@ -112,6 +117,9 @@ export default Vue.extend({
   watch: {
     collapse(value) {
       this.openKeys = this.getDefaultCollapsedSubMenus()
+    },
+    searchValue(value) {
+      console.log('search input', value)
     }
   },
   created() {
@@ -125,6 +133,9 @@ export default Vue.extend({
     HeaderSearch
   },
   methods: {
+    onSearchSelect(value: string) {
+      console.log('search select', value)
+    },
     getDefaultCollapsedSubMenus(): string[] {
       const currentMenuSelectedKey = this.getCurrentMenuSelectedKey()
       let keys = currentMenuSelectedKey.split('/').slice(1)
