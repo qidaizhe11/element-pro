@@ -18,6 +18,8 @@
           <header-search class="action search" placeholder="站内搜索" v-model="searchValue"
             :data="suggestionData" @select="onSearchSelect">
           </header-search>
+          <notice-icon class="action">
+          </notice-icon>
           <el-dropdown class="action">
             <span class="account">
               <avatar class="avatar" size="small" :src="currentUser.avatar"
@@ -59,6 +61,7 @@ import SideMenu from './SideMenu.vue'
 import Avatar from 'components/Avatar/index.vue'
 import AntIcon from 'components/Icon/AntIcon.vue'
 import HeaderSearch from 'components/HeaderSearch/index.vue'
+import NoticeIcon from 'components/NoticeIcon/index.vue'
 
 Vue.use(Container)
 Vue.use(Aside)
@@ -130,7 +133,8 @@ export default Vue.extend({
     SideMenu,
     Avatar,
     AntIcon,
-    HeaderSearch
+    HeaderSearch,
+    NoticeIcon
   },
   methods: {
     onSearchSelect(value: string) {
