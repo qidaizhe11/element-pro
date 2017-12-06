@@ -18,7 +18,7 @@
           <header-search class="action search" placeholder="站内搜索" v-model="searchValue"
             :data="suggestionData" @select="onSearchSelect">
           </header-search>
-          <notice-icon class="action">
+          <notice-icon class="action notice">
           </notice-icon>
           <el-dropdown class="action">
             <span class="account">
@@ -270,6 +270,9 @@ export default Vue.extend({
     &:hover {
       background: transparent;
     }
+  }
+  .notice {
+    padding: 0;
   }
   .account {
     .avatar {
