@@ -1,13 +1,14 @@
 <template>
   <div class="wrapper">
-    <el-popover ref="notice-popover" placement="bottom" width="160" v-model="popoverVisible">
-      <div>
-        <p>这是一段内容这是一段内容确定删除吗？</p>
-        <div style="text-align: right; margin: 0">
-          <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
-          <el-button type="primary" size="mini" @click="visible2 = false">确定</el-button>
-        </div>
-      </div>
+    <el-popover ref="notice-popover" placement="bottom" width="160"
+      v-model="popoverVisible">
+      <el-tabs v-model="activeTab" @tab-click="onTabChange">
+        <template v-for="tab in tabOptions">
+          <el-tab-pane :key="tab.title" :label="tab.titleShow" :name="tab.title">
+            {{tab.emptyText}}
+          </el-tab-pane>
+        </template>
+      </el-tabs>
     </el-popover>
 
     <div class="noticeIcon" v-popover:notice-popover>
@@ -21,23 +22,51 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Badge, Popover, Button } from 'element-ui'
+import { Badge, Popover, Button, Tabs, TabPane } from 'element-ui'
 
 Vue.use(Badge)
 Vue.use(Popover)
 Vue.use(Button)
+Vue.use(Tabs)
+Vue.use(TabPane)
 
 export default Vue.extend({
   data() {
+    const activeTab = this.tabs && this.tabs.length > 0 ? this.tabs[0].title : ''
     return {
-      popoverVisible: false
+      popoverVisible: false,
+      activeTab
+    }
+  },
+  props: {
+    tabs: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
+  computed: {
+    tabOptions(): any[] {
+      return this.tabs.map(tab => {
+        const titleShow = tab.list && tab.list.length > 0 ?
+        `${tab.title} (${tab.list.length})` : tab.title
+        return {
+          ...tab,
+          titleShow
+        }
+      })
+    }
+  },
+  methods: {
+    onTabChange(tab: any, event: any) {
+      console.log('NoticeIcon/index, onTabChange, tab:', tab, 'event:', event)
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
-
 .noticeIcon {
   width: 100%;
   height: 100%;
@@ -52,7 +81,6 @@ export default Vue.extend({
     z-index: 1;
   }
 }
-
 </style>
 
 

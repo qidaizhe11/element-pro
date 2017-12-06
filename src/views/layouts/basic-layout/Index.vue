@@ -18,7 +18,7 @@
           <header-search class="action search" placeholder="站内搜索" v-model="searchValue"
             :data="suggestionData" @select="onSearchSelect">
           </header-search>
-          <notice-icon class="action notice">
+          <notice-icon class="action notice" :tabs="noticeTabs">
           </notice-icon>
           <el-dropdown class="action">
             <span class="account">
@@ -97,6 +97,21 @@ export default Vue.extend({
 
     const suggestionData = ['搜索提示一', '搜索提示二', '搜索提示三']
 
+    const noticeTabs = [
+      {
+        title: '通知',
+        list: [],
+        emptyText: '你已查看所有通知',
+        emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg'
+      },
+      {
+        title: '消息',
+        list: ['hehe', 'haha'],
+        emptyText: '你已读完所有消息',
+        emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg'
+      }
+    ]
+
     return {
       menus,
       logo,
@@ -105,6 +120,7 @@ export default Vue.extend({
       collapse: false,
       suggestionData,
       searchValue: '',
+      noticeTabs,
       currentUser: {
         name: 'Serati Ma',
         avatar:
