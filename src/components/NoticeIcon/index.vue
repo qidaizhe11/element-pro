@@ -1,10 +1,11 @@
 <template>
   <div class="wrapper">
-    <el-popover ref="notice-popover" placement="bottom" width="160"
-      v-model="popoverVisible">
-      <el-tabs v-model="activeTab" @tab-click="onTabChange">
+    <el-popover ref="notice-popover" v-model="popoverVisible" popper-class="notice-popover"
+      placement="bottom-end">
+      <el-tabs class="tabs" v-model="activeTab" @tab-click="onTabChange">
         <template v-for="tab in tabOptions">
-          <el-tab-pane :key="tab.title" :label="tab.titleShow" :name="tab.title">
+          <el-tab-pane class="tab-pane" :key="tab.title" :label="tab.titleShow"
+            :name="tab.title">
             {{tab.emptyText}}
           </el-tab-pane>
         </template>
@@ -32,7 +33,8 @@ Vue.use(TabPane)
 
 export default Vue.extend({
   data() {
-    const activeTab = this.tabs && this.tabs.length > 0 ? this.tabs[0].title : ''
+    const activeTab =
+      this.tabs && this.tabs.length > 0 ? this.tabs[0].title : ''
     return {
       popoverVisible: false,
       activeTab
@@ -49,8 +51,10 @@ export default Vue.extend({
   computed: {
     tabOptions(): any[] {
       return this.tabs.map(tab => {
-        const titleShow = tab.list && tab.list.length > 0 ?
-        `${tab.title} (${tab.list.length})` : tab.title
+        const titleShow =
+          tab.list && tab.list.length > 0
+            ? `${tab.title} (${tab.list.length})`
+            : tab.title
         return {
           ...tab,
           titleShow
@@ -66,6 +70,12 @@ export default Vue.extend({
 })
 </script>
 
+<style lang="scss">
+.notice-popover {
+  padding-top: 4px;
+}
+</style>
+
 <style lang="scss" scoped>
 .noticeIcon {
   width: 100%;
@@ -79,6 +89,13 @@ export default Vue.extend({
 .badge {
   /deep/ .el-badge__content {
     z-index: 1;
+  }
+}
+
+.tabs {
+  /deep/ .el-tabs__nav-scroll {
+    display: flex;
+    justify-content: center;
   }
 }
 </style>
