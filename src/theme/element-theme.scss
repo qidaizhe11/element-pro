@@ -47,7 +47,7 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
     }
 
     .el-submenu__icon-arrow {
-      margin-top: -5px;
+      margin-top: -4px;
     }
   }
 
@@ -81,4 +81,10 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 .el-autocomplete-suggestion.el-popper[x-placement^="bottom"] {
   margin-top: 6px;
+}
+
+.el-badge {
+  .el-badge__content {
+    box-sizing: content-box;
+  }
 }
