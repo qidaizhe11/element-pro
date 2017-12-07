@@ -6,13 +6,14 @@
         <template v-for="tab in tabOptions">
           <el-tab-pane class="tab-pane" :key="tab.title" :label="tab.titleShow"
             :name="tab.title">
-            {{tab.emptyText}}
+            <!-- {{tab.emptyText}} -->
+            <notice-list></notice-list>
           </el-tab-pane>
         </template>
       </el-tabs>
     </el-popover>
 
-    <div class="noticeIcon" v-popover:notice-popover>
+    <div class="noticeButton" v-popover:notice-popover>
       <el-badge :value="13" class="badge">
         <i class="el-icon-bell"></i>
       </el-badge>
@@ -24,6 +25,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Badge, Popover, Button, Tabs, TabPane } from 'element-ui'
+
+import NoticeList from './NoticeList.vue'
 
 Vue.use(Badge)
 Vue.use(Popover)
@@ -62,6 +65,9 @@ export default Vue.extend({
       })
     }
   },
+  components: {
+    NoticeList
+  },
   methods: {
     onTabChange(tab: any, event: any) {
       console.log('NoticeIcon/index, onTabChange, tab:', tab, 'event:', event)
@@ -72,7 +78,8 @@ export default Vue.extend({
 
 <style lang="scss">
 .notice-popover {
-  padding-top: 4px;
+  width: 336px;
+  padding: 4px 0 0 0;
 
   &[x-placement^='bottom'] {
     margin-top: -8px;
@@ -81,13 +88,15 @@ export default Vue.extend({
 </style>
 
 <style lang="scss" scoped>
-.noticeIcon {
+.noticeButton {
   width: 100%;
   height: 100%;
   padding: 0 12px;
 
   display: flex;
   align-items: center;
+
+  transition: all .3s;
 }
 
 .badge {
@@ -100,6 +109,10 @@ export default Vue.extend({
   /deep/ .el-tabs__nav-scroll {
     display: flex;
     justify-content: center;
+  }
+
+  /deep/ .el-tabs__header {
+    margin-bottom: 4px;
   }
 }
 </style>

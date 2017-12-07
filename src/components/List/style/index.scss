@@ -1,0 +1,14 @@
+
+$list-cls: 'ep-list';
+
+.#{$list-cls} {
+  position: relative;
+  * {
+    outline: none;
+  }
+
+  &-empty-text {
+    padding: 16px;
+    text-align: center;
+  }
+}
