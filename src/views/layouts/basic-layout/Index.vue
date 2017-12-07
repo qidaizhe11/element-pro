@@ -276,6 +276,7 @@ export default Vue.extend({
       font-size: 16px;
       vertical-align: middle;
     }
+    &.popover-open,
     &:hover {
       background: $color-primary-1;
     }

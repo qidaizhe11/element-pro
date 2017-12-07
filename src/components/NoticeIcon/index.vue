@@ -1,7 +1,7 @@
 <template>
-  <div class="wrapper">
-    <el-popover ref="notice-popover" v-model="popoverVisible" popper-class="notice-popover"
-      placement="bottom-end">
+  <div class="wrapper" :class="{ 'popover-open': popoverOpen }">
+    <el-popover ref="notice-popover" v-model="popoverOpen" popper-class="notice-popover"
+      placement="bottom-end" :offset="-3">
       <el-tabs class="tabs" v-model="activeTab" @tab-click="onTabChange">
         <template v-for="tab in tabOptions">
           <el-tab-pane class="tab-pane" :key="tab.title" :label="tab.titleShow"
@@ -36,7 +36,7 @@ export default Vue.extend({
     const activeTab =
       this.tabs && this.tabs.length > 0 ? this.tabs[0].title : ''
     return {
-      popoverVisible: false,
+      popoverOpen: false,
       activeTab
     }
   },
@@ -73,6 +73,10 @@ export default Vue.extend({
 <style lang="scss">
 .notice-popover {
   padding-top: 4px;
+
+  &[x-placement^='bottom'] {
+    margin-top: -8px;
+  }
 }
 </style>
 
