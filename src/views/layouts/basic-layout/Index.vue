@@ -103,13 +103,13 @@ export default Vue.extend({
         list: [],
         emptyText: '你已查看所有通知',
         emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg'
-      },
-      {
-        title: '消息',
-        list: ['hehe', 'haha'],
-        emptyText: '你已读完所有消息',
-        emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg'
       }
+      // {
+      //   title: '消息',
+      //   list: ['hehe', 'haha'],
+      //   emptyText: '你已读完所有消息',
+      //   emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg'
+      // }
     ]
 
     return {

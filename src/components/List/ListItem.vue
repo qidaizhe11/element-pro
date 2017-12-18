@@ -4,6 +4,7 @@
     <div class="ep-list-item-content">
       <slot></slot>
     </div>
+    <slot name="action"></slot>
   </div>
 </template>
 
@@ -15,6 +16,9 @@ export default Vue.extend({
     return {
 
     }
+  },
+  created() {
+    console.log('ListItem, created, this.slots:', this.$slots)
   }
 })
 </script>
