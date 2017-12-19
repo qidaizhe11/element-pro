@@ -23,11 +23,24 @@ export default Vue.extend({
     }
   },
   render(h) {
-    return h('div', { class: 'ep-list-item' }, [
-      this.$slots.meta,
-      h('div', { class: 'ep-list-item-content' }, this.$slots.default),
-      this.renderActions(h)
+    const content = h(
+      'div',
+      { class: 'ep-list-item-content' },
+      this.$slots.default
+    )
+    const meta = this.$slots.meta
+    const extra = this.$slots.extra
+    const actions = this.renderActions(h)
+
+    const extraContent = h('div', { class: 'ep-list-item-extra-wrapper' }, [
+      h('div', { class: 'ep-list-item-main' }, [meta, content, actions]),
+      h('div', { class: 'ep-list-item-extra' }, extra)
     ])
+
+    if (extra) {
+      return h('div', { class: 'ep-list-item' }, [extraContent])
+    }
+    return h('div', { class: 'ep-list-item' }, [meta, content, actions])
   }
 })
 </script>
