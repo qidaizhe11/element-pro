@@ -11,4 +11,28 @@ $list-cls: 'ep-list';
     padding: 16px;
     text-align: center;
   }
+
+  &-item {
+    align-items: center;
+    display: flex;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e8e8e8;
+
+    &-meta {
+      align-items: flex-start;
+      display: flex;
+      font-size: 0;
+      &-avatar {
+        flex: 0;
+        margin-right: 16px;
+      }
+      &-content {
+        flex: 1 0;
+      }
+      &-title {
+
+      }
+    }
+  }
 }
