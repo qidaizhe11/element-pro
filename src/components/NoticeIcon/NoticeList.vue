@@ -3,8 +3,8 @@
     <ep-list>
       <template v-for="(item, i) in data">
         <ep-list-item :key="i">
-          <ep-list-item-meta slot="meta" title="hehe">
-            <img slot="avatar" src="">
+          <ep-list-item-meta slot="meta" title="hehe" description="这是描述">
+            <avatar slot="avatar" class="avatar" src=""></avatar>
           </ep-list-item-meta>
           <span>{{item.title}}</span>
           <a slot="action">edit</a>
@@ -17,9 +17,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import EpList from '../List/index.vue'
-import EpListItem from '../List/ListItem.vue'
-import EpListItemMeta from '../List/ListItemMeta.vue'
+import EpList from 'components/List/index.vue'
+import EpListItem from 'components/List/ListItem.vue'
+import EpListItemMeta from 'components/List/ListItemMeta.vue'
+
+import Avatar from 'components/Avatar/index.vue'
 
 export default Vue.extend({
   props: {
@@ -33,7 +35,8 @@ export default Vue.extend({
   components: {
     EpList,
     EpListItem,
-    EpListItemMeta
+    EpListItemMeta,
+    Avatar
   }
 })
 </script>
