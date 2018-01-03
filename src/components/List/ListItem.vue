@@ -1,6 +1,6 @@
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { VNode } from 'vue'
 
 export default Vue.extend({
   data() {
@@ -22,7 +22,7 @@ export default Vue.extend({
       return h('div', { class: 'ep-list-item-actions' }, children)
     }
   },
-  render(h) {
+  render(h): VNode {
     const content = h(
       'div',
       { class: 'ep-list-item-content' },
