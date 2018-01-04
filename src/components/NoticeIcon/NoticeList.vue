@@ -3,8 +3,15 @@
     <ep-list class="list">
       <template v-for="(item, i) in data">
         <ep-list-item :key="i" class="item">
-          <ep-list-item-meta slot="meta" class="meta" :title="item.title" :description="item.datetime">
+          <ep-list-item-meta slot="meta" class="meta">
             <avatar slot="avatar" class="avatar" :src="item.avatar"></avatar>
+            <div slot="title" class="title">
+              {{item.title}}
+            </div>
+            <div slot="description">
+              <div class="description">{{item.description}}</div>
+              <div class="datetime">{{item.datetime}}</div>
+            </div>
           </ep-list-item-meta>
         </ep-list-item>
       </template>
@@ -39,6 +46,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '~theme/theme.scss';
 .list {
   max-height: 400px;
   overflow: auto;
@@ -49,13 +57,32 @@ export default Vue.extend({
     padding-left: 24px;
     padding-right: 24px;
 
+    &:last-child {
+      border-bottom: 0;
+    }
+    &:hover {
+      background: $color-primary-1;
+    }
+
     .meta {
       width: 100%;
     }
-
     .avatar {
       background: #fff;
       margin-top: 4px;
+    }
+    .title {
+      font-weight: normal;
+      margin-bottom: 8px;
+    }
+    .description {
+      font-size: 12px;
+      line-height: $line-height-base;
+    }
+    .datetime {
+      font-size: 12px;
+      margin-top: 4px;
+      line-height: $line-height-base;
     }
   }
 }
