@@ -7,7 +7,7 @@
           <el-tab-pane class="tab-pane" :key="tab.title" :label="tab.titleShow"
             :name="tab.title">
             <!-- {{tab.emptyText}} -->
-            <notice-list :data="noticeList" title="通知"></notice-list>
+            <notice-list :data="getNoticeData(tab.list)" title="通知"></notice-list>
           </el-tab-pane>
         </template>
       </el-tabs>
@@ -35,49 +35,13 @@ Vue.use(Button)
 Vue.use(Tabs)
 Vue.use(TabPane)
 
-const notices = [
-  {
-    id: '000000001',
-    avatar:
-      'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
-    title: '你收到了 14 份新周报',
-    datetime: '2017-08-09',
-    type: '通知'
-  },
-  {
-    id: '000000002',
-    avatar:
-      'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
-    title: '你推荐的 曲妮妮 已通过第三轮面试',
-    datetime: '2017-08-08',
-    type: '通知'
-  },
-  {
-    id: '000000003',
-    avatar:
-      'https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png',
-    title: '这种模板可以区分多种通知类型',
-    datetime: '2017-08-07',
-    read: true,
-    type: '通知'
-  }
-]
-
 export default Vue.extend({
   data() {
     const activeTab =
       this.tabs && this.tabs.length > 0 ? this.tabs[0].title : ''
-
-    const noticeList = notices.map(notice => {
-      return {
-        ...notice,
-        datetime: moment(notice.datetime).fromNow()
-      }
-    })
     return {
       popoverOpen: false,
-      activeTab,
-      noticeList
+      activeTab
     }
   },
   props: {
@@ -108,6 +72,17 @@ export default Vue.extend({
   methods: {
     onTabChange(tab: any, event: any) {
       console.log('NoticeIcon/index, onTabChange, tab:', tab, 'event:', event)
+    },
+    getNoticeData(noticeList: any[]) {
+      if (!noticeList || noticeList.length < 0) {
+        return []
+      }
+      return noticeList.map(item => {
+        return {
+          ...item,
+          datetime: moment(item.datetime).fromNow()
+        }
+      })
     }
   }
 })
