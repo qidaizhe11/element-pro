@@ -28,6 +28,7 @@ $border-color-split: #e8e8e8;
     &-meta {
       align-items: flex-start;
       display: flex;
+      flex: 1;
       font-size: 0;
       &-avatar {
         flex: 0;

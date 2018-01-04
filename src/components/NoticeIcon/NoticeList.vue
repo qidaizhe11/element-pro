@@ -3,12 +3,9 @@
     <ep-list>
       <template v-for="(item, i) in data">
         <ep-list-item :key="i">
-          <ep-list-item-meta slot="meta" title="hehe" description="这是描述">
+          <ep-list-item-meta slot="meta" :title="item.title" description="这是描述">
             <avatar slot="avatar" class="avatar" src=""></avatar>
           </ep-list-item-meta>
-          <span>{{item.title}}</span>
-          <a slot="action">edit</a>
-          <a slot="action">delete</a>
         </ep-list-item>
       </template>
     </ep-list>

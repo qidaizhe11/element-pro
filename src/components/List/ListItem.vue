@@ -19,15 +19,15 @@ export default Vue.extend({
             h('em', { class: 'ep-list-item-action-split' })
         ])
       })
-      return h('div', { class: 'ep-list-item-actions' }, children)
+      return h('div', { class: 'ep-list-item-action' }, children)
     }
   },
   render(h): VNode {
-    const content = h(
+    const content = this.$slots.default ? h(
       'div',
       { class: 'ep-list-item-content' },
       this.$slots.default
-    )
+    ) : null
     const meta = this.$slots.meta
     const extra = this.$slots.extra
     const actions = this.renderActions(h)
