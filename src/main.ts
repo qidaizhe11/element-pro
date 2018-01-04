@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 // import ElementUI from 'element-ui'
+import 'moment/locale/zh-cn'
 
 import App from './App.vue'
 import router from './router'

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <ep-list>
+    <ep-list class="list">
       <template v-for="(item, i) in data">
-        <ep-list-item :key="i">
-          <ep-list-item-meta slot="meta" :title="item.title" description="这是描述">
-            <avatar slot="avatar" class="avatar" src=""></avatar>
+        <ep-list-item :key="i" class="item">
+          <ep-list-item-meta slot="meta" class="meta" :title="item.title" :description="item.datetime">
+            <avatar slot="avatar" class="avatar" :src="item.avatar"></avatar>
           </ep-list-item-meta>
         </ep-list-item>
       </template>
@@ -39,7 +39,24 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.list {
+  max-height: 400px;
+  overflow: auto;
+  .item {
+    transition: all 0.3s;
+    overflow: hidden;
+    cursor: pointer;
+    padding-left: 24px;
+    padding-right: 24px;
 
+    .meta {
+      width: 100%;
+    }
 
-
+    .avatar {
+      background: #fff;
+      margin-top: 4px;
+    }
+  }
+}
 </style>
