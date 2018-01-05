@@ -28,8 +28,7 @@ const navData = [
           {
             name: '分析页',
             path: 'analysis',
-            icon: anticon('areachart'),
-            component: () => import('../components/HelloWorld.vue')
+            component: () => import('../views/Dashboard/Analysis/index.vue')
           },
           {
             name: '监控页',
