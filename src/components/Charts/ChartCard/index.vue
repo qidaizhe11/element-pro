@@ -1,7 +1,10 @@
 <template>
   <ll-card :body-style="{padding: '20px 24px 8px 24px'}">
     <div class="chart-card">
-      <div class="chart-top">
+      <div class="chart-top" :class="{'chart-top-margin': !hasChildren && !hasFooter}">
+        <div v-if="$slots.avatar" class="avatar">
+          <slot name="avatar"></slot>
+        </div>
         <div class="meta-wrap">
           <div class="meta">
             <span class="title">{{title}}</span>
@@ -12,7 +15,12 @@
           <div v-if="total" class="total" v-html="total"></div>
         </div>
       </div>
-      <div v-if="$slots.footer" class="footer">
+      <div v-if="hasChildren" class="content" :style="{height: contentHeight || 'auto'}">
+        <div :class="{'content-fixed': contentHeight}">
+          <slot></slot>
+        </div>
+      </div>
+      <div v-if="hasFooter" class="footer" :class="{'footer-margin': !hasChildren}">
         <slot name="footer"></slot>
       </div>
     </div>
@@ -33,7 +41,16 @@ export default Vue.extend({
   },
   props: {
     title: String,
-    total: null
+    total: Number || null,
+    contentHeight: String || null
+  },
+  computed: {
+    hasChildren(): boolean {
+      return !!this.$slots.default
+    },
+    hasFooter(): boolean {
+      return !!this.$slots.footer
+    }
   },
   data() {
     return {
