@@ -61,7 +61,7 @@ export default Vue.extend({
       border-bottom: 0;
     }
     &:hover {
-      background: $color-primary-1;
+      background: $primary-1;
     }
 
     .meta {

@@ -284,7 +284,7 @@ export default Vue.extend({
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   position: relative;
   z-index: 10;
-  background-color: $sider-fill;
+  background-color: $layout-sider-background;
   transition: all 0.3s;
 
   &.collapse {
@@ -329,7 +329,7 @@ export default Vue.extend({
   transition: all 0.3s;
   padding: 0 24px;
   &:hover {
-    background: $color-primary-1;
+    background: $primary-1;
   }
 }
 
@@ -350,7 +350,7 @@ export default Vue.extend({
     }
     &.popover-open,
     &:hover {
-      background: $color-primary-1;
+      background: $primary-1;
     }
   }
   .search {
@@ -366,7 +366,7 @@ export default Vue.extend({
   .account {
     .avatar {
       margin: 20px 8px 20px 0;
-      color: $color-primary;
+      color: $primary-color;
       background: rgba(255, 255, 255, 0.85);
       vertical-align: middle;
     }
