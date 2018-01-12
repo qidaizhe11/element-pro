@@ -59,7 +59,7 @@ import logo from 'assets/logo.png'
 import SideMenu from './SideMenu.vue'
 
 import Avatar from 'components/Avatar/index.vue'
-import AntIcon from 'components/Icon/AntIcon.vue'
+import AntIcon from 'components/AntIcon/index.vue'
 import HeaderSearch from 'components/HeaderSearch/index.vue'
 import NoticeIcon from 'components/NoticeIcon/index.vue'
 
