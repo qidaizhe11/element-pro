@@ -20,12 +20,14 @@
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
+    "numeral": "^2.0.6",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.85",
     "@types/node": "^8.0.53",
+    "@types/numeral": "0.0.22",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",

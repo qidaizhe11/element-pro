@@ -11,6 +11,9 @@
           </div>
         </div>
       </div>
+      <div v-if="$slots.footer" class="footer">
+        <slot name="footer"></slot>
+      </div>
     </div>
   </ll-card>
 </template>
