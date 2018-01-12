@@ -41,7 +41,10 @@ export default Vue.extend({
   },
   props: {
     title: String,
-    total: Number || null,
+    total: {
+      type: [Number, String],
+      default: null
+    },
     contentHeight: String || null
   },
   computed: {

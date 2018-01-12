@@ -117,8 +117,8 @@ $ease-in-quint       : cubic-bezier(0.755, 0.05, 0.855, 0.06);
 $ease-in-out-quint   : cubic-bezier(0.86, 0, 0.07, 1);
 
 // Border color
-$border-color-base      : hsv(0, 0, 85%);  // base border outline a component
-$border-color-split     : hsv(0, 0, 91%);  // split border inside a component
+$border-color-base      : #d9d9d9;  // base border outline a component
+$border-color-split     : #e8e8e8;  // split border inside a component
 $border-width-base      : 1px;            // width of the border for a component
 $border-style-base      : solid;          // style of a components border
 
@@ -127,8 +127,8 @@ $outline-blur-size      : 0;
 $outline-width          : 2px;
 $outline-color          : $primary-color;
 
-$background-color-light : hsv(0, 0, 98%);  // background of header and selected item
-$background-color-base  : hsv(0, 0, 96%);  // Default grey background color
+$background-color-light : #fafafa;  // background of header and selected item
+$background-color-base  : #f5f5f5;  // Default grey background color
 
 // Disabled states
 $disabled-color         : transparentize(#000, 0.75);

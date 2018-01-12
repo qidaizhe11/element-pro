@@ -6,6 +6,12 @@
           <el-tooltip slot="action" content="指标说明" placement="top">
             <ant-icon type="infocirlceo"></ant-icon>
           </el-tooltip>
+          <trend flag="up" :style="{marginRight: 16 + 'px'}">
+            周同比<span class="trend-text">12%</span>
+          </trend>
+          <trend flag="down">
+            日环比<span class="trend-text">11%</span>
+          </trend>
           <field slot="footer" label="日均销售额" :value="yuan(12423)"></field>
         </chart-card>
       </el-col>
@@ -19,7 +25,7 @@ import { Row, Col, Tooltip } from 'element-ui'
 import * as numeral from 'numeral'
 
 import AntIcon from 'components/AntIcon/index.vue'
-import { yuan, ChartCard, Field } from 'components/Charts'
+import { yuan, ChartCard, Field, Trend } from 'components/Charts'
 
 Vue.use(Row)
 Vue.use(Col)
@@ -29,7 +35,8 @@ export default Vue.extend({
   components: {
     AntIcon,
     ChartCard,
-    Field
+    Field,
+    Trend
   },
   methods: {
     yuan(value: number) {
@@ -40,7 +47,12 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '~theme/theme.scss';
 
+.trend-text {
+  margin-left: 8px;
+  color: $heading-color;
+}
 </style>
 
 
