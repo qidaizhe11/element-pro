@@ -13,7 +13,7 @@ export default Vue.component('ant-icon', {
     return h('i', {
       'class': {
         'anticon': true,
-        [`anticon-${context.props.type}`]: true,
+        [`icon-${context.props.type}`]: true,
         [context.data.staticClass || '']: context.data.staticClass
       },
       on: context.data.on
