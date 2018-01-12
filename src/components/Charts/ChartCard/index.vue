@@ -41,20 +41,20 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import '~theme/theme.scss';
 
-.chartCard {
+.chart-card {
   position: relative;
-  .chartTop {
+  .chart-top {
     position: relative;
     overflow: hidden;
     width: 100%;
   }
-  .chartTopMargin {
+  .chart-top-margin {
     margin-bottom: 12px;
   }
-  .chartTopHasMargin {
+  .chart-top-has-margin {
     margin-bottom: 20px;
   }
-  .metaWrap {
+  .meta-wrap {
     float: left;
   }
   .avatar {
@@ -95,7 +95,7 @@ export default Vue.extend({
     position: relative;
     width: 100%;
   }
-  .contentFixed {
+  .content-fixed {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -109,13 +109,9 @@ export default Vue.extend({
       position: relative;
     }
   }
-  .footerMargin {
+  .footer-margin {
     margin-top: 20px;
   }
-}
-
-.spin .ant-spin-container {
-  overflow: visible;
 }
 
 </style>
