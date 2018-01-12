@@ -19,6 +19,7 @@ const navData = [
     name: '首页',
     component: BasicLayout,
     layout: 'BasicLayout',
+    redirect: '/dashboard/analysis',
     children: [
       {
         name: 'Dashboard',

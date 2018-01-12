@@ -23,6 +23,9 @@ function getPlainChildRoutes(nodeList: any[], parentPath = '') {
         component: item.component,
         name: item.name
       }
+      if (item.redirect) {
+        routeConfig.redirect = item.redirect
+      }
       arr.push(routeConfig)
     }
   })
@@ -44,6 +47,9 @@ function _getRouteData(navData: any, path: string): any {
     name: route.name,
     component: route.component,
     children: childRoutes
+  }
+  if (route.redirect) {
+    rootConfig.redirect = route.redirect
   }
   return rootConfig
 }
