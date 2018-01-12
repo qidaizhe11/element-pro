@@ -9,6 +9,7 @@
               <slot name="action"></slot>
             </span>
           </div>
+          <div v-if="total" class="total" v-html="total"></div>
         </div>
       </div>
       <div v-if="$slots.footer" class="footer">
@@ -31,7 +32,8 @@ export default Vue.extend({
     LlCard
   },
   props: {
-    title: ''
+    title: String,
+    total: null
   },
   data() {
     return {

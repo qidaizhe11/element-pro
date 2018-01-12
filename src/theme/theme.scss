@@ -63,12 +63,12 @@ $component-background   : #fff;
 $font-family-no-number  : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family            : "Helvetica Neue For Number", $font-family-no-number;
 $code-family            : Consolas, Menlo, Courier, monospace;
-$heading-color          : fade(#000, 85%);
-$text-color             : fade(#000, 65%);
-$text-color-secondary   : fade(#000, 45%);
-$heading-color-dark     : fade(#fff, 100%);
-$text-color-dark        : fade(#fff,85%);
-$text-color-secondary-dark: fade(#fff, 65%);
+$heading-color          : transparentize(#000, 0.15);
+$text-color             : transparentize(#000, 0.35);
+$text-color-secondary   : transparentize(#000, 0.55);
+$heading-color-dark     : transparentize(#fff, 0);
+$text-color-dark        : transparentize(#fff, 0.15);
+$text-color-secondary-dark: transparentize(#fff, 0.35);
 $font-size-base         : 14px;
 $font-size-lg           : $font-size-base + 2px;
 $font-size-sm           : 12px;
@@ -131,9 +131,9 @@ $background-color-light : hsv(0, 0, 98%);  // background of header and selected 
 $background-color-base  : hsv(0, 0, 96%);  // Default grey background color
 
 // Disabled states
-$disabled-color         : fade(#000, 25%);
+$disabled-color         : transparentize(#000, 0.75);
 $disabled-bg            : $background-color-base;
-$disabled-color-dark    : fade(#fff, 35%);
+$disabled-color-dark    : transparentize(#fff, 0.65);
 
 // Shadow
 $shadow-color           : rgba(0, 0, 0, .15);
