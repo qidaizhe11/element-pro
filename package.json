@@ -26,6 +26,7 @@
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
+    "@types/echarts": "0.0.9",
     "@types/lodash": "^4.14.85",
     "@types/node": "^8.0.53",
     "@types/numeral": "0.0.22",

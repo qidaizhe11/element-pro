@@ -23,6 +23,7 @@
           <el-tooltip slot="action" content="指标说明" placement="top">
             <ant-icon type="infocirlceo"></ant-icon>
           </el-tooltip>
+          <mini-area color="#975FE4"></mini-area>
           <field slot="footer" label="日访问量" :value="numeral(1234).format('0,0')"></field>
         </chart-card>
       </el-col>
@@ -62,7 +63,7 @@ import { Row, Col, Tooltip } from 'element-ui'
 import * as numeral from 'numeral'
 
 import AntIcon from 'components/AntIcon/index.vue'
-import { yuan, ChartCard, Field, Trend } from 'components/Charts'
+import { yuan, ChartCard, Field, Trend, MiniArea } from 'components/Charts'
 
 Vue.use(Row)
 Vue.use(Col)
@@ -73,7 +74,8 @@ export default Vue.extend({
     AntIcon,
     ChartCard,
     Field,
-    Trend
+    Trend,
+    MiniArea
   },
   data() {
     const topColResponsiveProps = {
