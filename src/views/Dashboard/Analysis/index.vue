@@ -23,7 +23,7 @@
           <el-tooltip slot="action" content="指标说明" placement="top">
             <ant-icon type="infocirlceo"></ant-icon>
           </el-tooltip>
-          <mini-area color="#975FE4"></mini-area>
+          <mini-area color="#975FE4" :data="visitData"></mini-area>
           <field slot="footer" label="日访问量" :value="numeral(1234).format('0,0')"></field>
         </chart-card>
       </el-col>
@@ -61,6 +61,7 @@
 import Vue from 'vue'
 import { Row, Col, Tooltip } from 'element-ui'
 import * as numeral from 'numeral'
+import * as moment from 'moment'
 
 import AntIcon from 'components/AntIcon/index.vue'
 import { yuan, ChartCard, Field, Trend, MiniArea } from 'components/Charts'
@@ -68,6 +69,20 @@ import { yuan, ChartCard, Field, Trend, MiniArea } from 'components/Charts'
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Tooltip)
+
+// mock data
+const visitData: any[] = []
+const beginDay = new Date().getTime()
+
+const fakeY = [7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5]
+for (let i = 0; i < fakeY.length; i += 1) {
+  visitData.push({
+    x: moment(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format(
+      'YYYY-MM-DD'
+    ),
+    y: fakeY[i]
+  })
+}
 
 export default Vue.extend({
   components: {
@@ -87,7 +102,8 @@ export default Vue.extend({
       style: { marginBottom: '24px' }
     }
     return {
-      topColResponsiveProps
+      topColResponsiveProps,
+      visitData
     }
   },
   methods: {

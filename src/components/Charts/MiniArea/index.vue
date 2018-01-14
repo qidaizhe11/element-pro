@@ -4,25 +4,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import * as moment from 'moment'
 
 import EChart from 'components/EChart/index.vue'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/tooltip'
-
-// mock data
-const visitData: any[] = []
-const beginDay = new Date().getTime()
-
-const fakeY = [7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5]
-for (let i = 0; i < fakeY.length; i += 1) {
-  visitData.push({
-    x: moment(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format(
-      'YYYY-MM-DD'
-    ),
-    y: fakeY[i]
-  })
-}
 
 export default Vue.extend({
   components: {
@@ -32,10 +17,16 @@ export default Vue.extend({
     color: {
       type: String,
       default: 'rgba(24, 144, 255, 0.2)'
+    },
+    data: {
+      type: Array,
+      default() {
+        return []
+      }
     }
   },
   data() {
-    const { color } = this
+    const { color, data } = this
     const options = {
       grid: {
         left: 0,
@@ -68,7 +59,7 @@ export default Vue.extend({
           axisPointer: {
             status: 'hide'
           },
-          data: visitData.map(item => {
+          data: data.map(item => {
             return item.x
           })
         }
@@ -87,7 +78,7 @@ export default Vue.extend({
           lineStyle: {
             normal: { width: 0 }
           },
-          data: visitData.map(item => {
+          data: data.map(item => {
             return [item.x, item.y]
           })
         }
