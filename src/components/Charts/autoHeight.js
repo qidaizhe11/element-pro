@@ -11,16 +11,16 @@ function getAutoHeight(n) {
     return 0
   }
 
-  let node = n.$el
+  let node = n
 
   console.log('getAutoHeight.')
 
-  let height = computeHeight(node)
+  let height = computeHeight(node.$el)
 
   while (!height) {
     node = node.$parent
     if (node) {
-      height = computeHeight(node)
+      height = computeHeight(node.$el)
     } else {
       break
     }

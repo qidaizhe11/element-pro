@@ -23,7 +23,8 @@
           <el-tooltip slot="action" content="指标说明" placement="top">
             <ant-icon type="infocirlceo"></ant-icon>
           </el-tooltip>
-          <mini-area color="#975FE4" :data="visitData"></mini-area>
+          <mini-area color="#975FE4" :data="visitData" height="46px">
+          </mini-area>
           <field slot="footer" label="日访问量" :value="numeral(1234).format('0,0')"></field>
         </chart-card>
       </el-col>
