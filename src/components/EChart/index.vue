@@ -1,5 +1,5 @@
 <template>
-  <div class="echarts"></div>
+  <div class="echarts" :style="style"></div>
 </template>
 
 <script lang="ts">
@@ -16,14 +16,27 @@ export default Vue.extend({
     initOptions: Object,
     group: String,
     autoResize: Boolean,
-    watchShallow: Boolean
+    watchShallow: Boolean,
+    width: {
+      type: String,
+      default: '100%'
+    },
+    height: {
+      type: String,
+      default: '100%'
+    }
   },
   data() {
     const chart: any = null
     const resizeHandler: any = null
+    const style = {
+      width: this.width,
+      height: this.height
+    }
     return {
       chart,
-      resizeHandler
+      resizeHandler,
+      style
     }
   },
   created() {
@@ -38,7 +51,7 @@ export default Vue.extend({
       },
       { deep: !this.watchShallow }
     )
-    let watched = ['theme', 'initOptions', 'autoResize', 'watchShallow']
+    let watched = ['theme', 'initOptions', 'autoResize', 'watchShallow', 'width', 'height']
     watched.forEach(prop => {
       this.$watch(
         prop,
@@ -129,11 +142,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style lang="scss">
-.echarts {
-  width: 600px;
-  height: 400px;
-}
-</style>
-

@@ -1,15 +1,19 @@
 <template>
-  <e-chart class="chart" :options="options" :auto-resize="true"></e-chart>
+  <e-chart class="chart" :options="options" :auto-resize="true"
+    :height="computeHeight + 'px'"></e-chart>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
 import EChart from 'components/EChart/index.vue'
+import autoHeight from '../autoHeight'
+
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/tooltip'
 
 export default Vue.extend({
+  mixins: [autoHeight],
   components: {
     EChart
   },
@@ -97,4 +101,3 @@ export default Vue.extend({
   height: 100%;
 }
 </style>
-

@@ -125,7 +125,6 @@ export default Vue.extend({
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 100%;
   }
   .footer {
     border-top: 1px solid $border-color-split;
