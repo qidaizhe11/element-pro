@@ -15,7 +15,7 @@ export default Vue.extend({
   props: {
     color: {
       type: String,
-      default: 'rgba(24, 144, 255, 0.2)'
+      default: '#1890ff'
     },
     data: {
       type: Array,
@@ -86,26 +86,13 @@ export default Vue.extend({
       },
       series: [
         {
-          type: 'line',
-          smooth: true,
+          type: 'bar',
           itemStyle: {
             normal: {
-              color: color,
-              shadowColor: color,
-              shadowBlur: 15,
-              borderWidth: 1,
-              borderColor: '#fff'
+              color: color
             }
           },
-          areaStyle: {
-            normal: { color: color, opacity: 1 }
-          },
-          showSymbol: false,
-          symbol: 'circle',
-          symbolSize: 2,
-          lineStyle: {
-            normal: { width: 0 }
-          },
+          barWidth: '50%',
           data: data.map(item => {
             return [item.x, item.y]
           })
@@ -118,10 +105,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style lang="scss" scoped>
-.chart {
-  width: 100%;
-  height: 100%;
-}
-</style>

@@ -34,6 +34,7 @@
           <el-tooltip slot="action" content="指标说明" placement="top">
             <ant-icon type="infocirlceo"></ant-icon>
           </el-tooltip>
+          <mini-bar :data="visitData" height="46px"></mini-bar>
           <field slot="footer" label="转化率" value="60%"></field>
         </chart-card>
       </el-col>
@@ -65,7 +66,14 @@ import * as numeral from 'numeral'
 import * as moment from 'moment'
 
 import AntIcon from 'components/AntIcon/index.vue'
-import { yuan, ChartCard, Field, Trend, MiniArea } from 'components/Charts'
+import {
+  yuan,
+  ChartCard,
+  Field,
+  Trend,
+  MiniArea,
+  MiniBar
+} from 'components/Charts'
 
 Vue.use(Row)
 Vue.use(Col)
@@ -91,7 +99,8 @@ export default Vue.extend({
     ChartCard,
     Field,
     Trend,
-    MiniArea
+    MiniArea,
+    MiniBar
   },
   data() {
     const topColResponsiveProps = {
