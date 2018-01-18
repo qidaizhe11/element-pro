@@ -1,6 +1,6 @@
 <template>
   <div class="mini-progress">
-    <el-tooltip :content="`目标值：${target}%`" placement="top">
+    <el-tooltip v-if="target" :content="`目标值：${target}%`" placement="top">
       <div class="target" :style="{left: (target ? `${target}%` : null)}">
         <span :style="{backgroundColor: color || null}"></span>
         <span :style="{backgroundColor: color || null}"></span>
