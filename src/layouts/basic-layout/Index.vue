@@ -268,6 +268,7 @@ export default Vue.extend({
 .app-container {
   position: relative;
   height: 100%;
+  background: $layout-body-background;
 }
 
 .header {

@@ -114,6 +114,9 @@ export default Vue.extend({
           collapse: this.collapse,
           'default-active': this.selectedKey,
           'default-openeds': this.openKeys
+        },
+        style: {
+          padding: '16px 0'
         }
       },
       this.getNavMenuItems(h, this.menus)

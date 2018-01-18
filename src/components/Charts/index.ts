@@ -5,6 +5,7 @@ import Field from './Field/index.vue'
 import Trend from './Trend/index.vue'
 import MiniArea from './MiniArea/index.vue'
 import MiniBar from './MiniBar/index.vue'
+import MiniProgress from './MiniProgress/index.vue'
 
 const yuan = (val: number) => `&yen; ${numeral(val).format('0,0')}`
 
@@ -14,5 +15,6 @@ export {
   Field,
   Trend,
   MiniArea,
-  MiniBar
+  MiniBar,
+  MiniProgress
 }

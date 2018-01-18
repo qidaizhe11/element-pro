@@ -43,6 +43,8 @@
           <el-tooltip slot="action" content="指标说明" placement="top">
             <ant-icon type="infocirlceo"></ant-icon>
           </el-tooltip>
+          <mini-progress :percent="78" :stroke-width="8" :target="80" color="#13c2c2">
+          </mini-progress>
           <div slot="footer" :style="{whiteSpace: 'nowrap', overflow: 'hidden'}">
             <trend flag="up" :style="{marginRight: 16 + 'px'}">
               周同比
@@ -72,7 +74,8 @@ import {
   Field,
   Trend,
   MiniArea,
-  MiniBar
+  MiniBar,
+  MiniProgress
 } from 'components/Charts'
 
 Vue.use(Row)
@@ -100,7 +103,8 @@ export default Vue.extend({
     Field,
     Trend,
     MiniArea,
-    MiniBar
+    MiniBar,
+    MiniProgress
   },
   data() {
     const topColResponsiveProps = {
