@@ -59,7 +59,7 @@
       </el-col>
     </el-row>
 
-    <el-card>
+    <el-card :body-style="{padding: 0}">
       <div class="sales-card">
         <el-tabs v-model="salesTabName">
           <el-tab-pane label="销售额" name="sales">
@@ -85,8 +85,19 @@
               </el-col>
             </el-row>
           </el-tab-pane>
-          <!-- <el-tab-pane label="访问量" name="views"></el-tab-pane> -->
+          <el-tab-pane label="访问量" name="views"></el-tab-pane>
         </el-tabs>
+        <div class="sales-extra-wrap">
+          <div class="sales-extra">
+            <a class="current-date">今日</a>
+            <a>本周</a>
+            <a>本月</a>
+            <a>全年</a>
+          </div>
+          <el-date-picker class="date-range" type="daterange" v-model="rangePickerValue"
+            range-separator="~">
+          </el-date-picker>
+        </div>
       </div>
     </el-card>
   </div>
@@ -94,7 +105,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Row, Col, Tooltip, Card, Tabs, TabPane } from 'element-ui'
+import { Row, Col, Tooltip, Card, Tabs, TabPane, DatePicker } from 'element-ui'
 import * as numeral from 'numeral'
 import * as moment from 'moment'
 
@@ -109,12 +120,15 @@ import {
   MiniProgress
 } from 'components/Charts'
 
+import { getTimeDistance } from 'utils/utils'
+
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Tooltip)
 Vue.use(Card)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(DatePicker)
 
 // mock data
 
@@ -171,7 +185,9 @@ export default Vue.extend({
       rankingListData,
       visitData,
       salesData,
-      salesTabName: 'sales'
+      salesTabName: 'sales',
+      salesType: 'all',
+      rangePickerValue: getTimeDistance('year')
     }
   },
   methods: {
@@ -191,6 +207,53 @@ export default Vue.extend({
 .trend-text {
   margin-left: 8px;
   color: $heading-color;
+}
+
+.sales-extra-wrap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 40px;
+  line-height: 55px;
+  margin-bottom: -1px;
+  padding-right: 24px;
+
+  .sales-extra {
+    display: inline-block;
+    margin-right: 24px;
+    a {
+      color: $text-color;
+      margin-left: 24px;
+      cursor: pointer;
+      &:hover {
+        color: $primary-color;
+      }
+      &.current-date {
+        color: $primary-color;
+      }
+    }
+  }
+
+  .date-range {
+    width: 256px;
+  }
+}
+
+.sales-card {
+  position: relative;
+
+  /deep/ .el-tabs {
+    &__nav-wrap {
+      padding-left: 16px;
+    }
+
+    &__item {
+      // padding: 16px 0;
+      height: 54px;
+      line-height: 60px;
+      font-size: 16px;
+    }
+  }
 }
 </style>
 
