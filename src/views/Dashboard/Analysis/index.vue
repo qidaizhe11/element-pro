@@ -235,7 +235,21 @@ export default Vue.extend({
   }
 
   .date-range {
-    width: 256px;
+    width: 288px;
+    // width: 256px;
+
+    // /deep/ .el-input__icon {
+    //   width: 14px;
+    // }
+
+    // /deep/ .el-range-separator {
+    //   width: 10px;
+    //   padding: 0;
+    // }
+
+    // /deep/ .el-range-input {
+    //   width: 42%;
+    // }
   }
 }
 
@@ -248,7 +262,6 @@ export default Vue.extend({
     }
 
     &__item {
-      // padding: 16px 0;
       height: 54px;
       line-height: 60px;
       font-size: 16px;
