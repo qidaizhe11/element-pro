@@ -58,12 +58,43 @@
         </chart-card>
       </el-col>
     </el-row>
+
+    <el-card>
+      <div class="sales-card">
+        <el-tabs v-model="salesTabName">
+          <el-tab-pane label="销售额" name="sales">
+            <el-row>
+              <el-col :lg="16" :md="12" :sm="12" :xs="24">
+                <div class="sales-bar">
+
+                </div>
+              </el-col>
+              <el-col :lg="8" :md="12" :sm="12" :xs="24">
+                <div class="sales-rank">
+                  <h4 class="ranking-title">门店销售额排名</h4>
+                  <ul class="ranking-list">
+                    <template v-for="(item, i ) in rankingListData">
+                      <li :key="item.title">
+                        <span :class="{active: i < 3}">{{i + 1}}</span>
+                        <span>{{item.title}}</span>
+                        <span>{{numeral(item.total).format('0,0')}}</span>
+                      </li>
+                    </template>
+                  </ul>
+                </div>
+              </el-col>
+            </el-row>
+          </el-tab-pane>
+          <!-- <el-tab-pane label="访问量" name="views"></el-tab-pane> -->
+        </el-tabs>
+      </div>
+    </el-card>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Row, Col, Tooltip } from 'element-ui'
+import { Row, Col, Tooltip, Card, Tabs, TabPane } from 'element-ui'
 import * as numeral from 'numeral'
 import * as moment from 'moment'
 
@@ -81,9 +112,21 @@ import {
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Tooltip)
+Vue.use(Card)
+Vue.use(Tabs)
+Vue.use(TabPane)
 
 // mock data
-const visitData: any[] = []
+
+const rankingListData: object[] = []
+for (let i = 0; i < 7; i += 1) {
+  rankingListData.push({
+    title: `工专路 ${i} 号店`,
+    total: 323234
+  })
+}
+
+const visitData: object[] = []
 const beginDay = new Date().getTime()
 
 const fakeY = [7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5]
@@ -93,6 +136,14 @@ for (let i = 0; i < fakeY.length; i += 1) {
       'YYYY-MM-DD'
     ),
     y: fakeY[i]
+  })
+}
+
+const salesData: object[] = []
+for (let i = 0; i < 12; i += 1) {
+  salesData.push({
+    x: `${i + 1}月`,
+    y: Math.floor(Math.random() * 1000) + 200
   })
 }
 
@@ -117,7 +168,10 @@ export default Vue.extend({
     }
     return {
       topColResponsiveProps,
-      visitData
+      rankingListData,
+      visitData,
+      salesData,
+      salesTabName: 'sales'
     }
   },
   methods: {
