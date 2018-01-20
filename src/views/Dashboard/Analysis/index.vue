@@ -236,20 +236,6 @@ export default Vue.extend({
 
   .date-range {
     width: 288px;
-    // width: 256px;
-
-    // /deep/ .el-input__icon {
-    //   width: 14px;
-    // }
-
-    // /deep/ .el-range-separator {
-    //   width: 10px;
-    //   padding: 0;
-    // }
-
-    // /deep/ .el-range-input {
-    //   width: 42%;
-    // }
   }
 }
 
