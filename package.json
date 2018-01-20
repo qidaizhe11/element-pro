@@ -16,7 +16,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "bootstrap": "^4.0.0",
-    "echarts": "^3.8.5",
+    "echarts": "^4.0.2",
     "element-ui": "^2.0.11",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
