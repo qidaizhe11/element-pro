@@ -63,7 +63,6 @@ export default Vue.extend({
       xAxis: [
         {
           type: 'category',
-          boundaryGap: false,
           axisLabel: {
             show: false
           },
