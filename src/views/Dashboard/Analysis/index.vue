@@ -66,7 +66,7 @@
             <el-row>
               <el-col :lg="16" :md="12" :sm="12" :xs="24">
                 <div class="sales-bar">
-
+                  <bar height="292px" title="访问量趋势" :data="salesData"></bar>
                 </div>
               </el-col>
               <el-col :lg="8" :md="12" :sm="12" :xs="24">
@@ -117,7 +117,8 @@ import {
   Trend,
   MiniArea,
   MiniBar,
-  MiniProgress
+  MiniProgress,
+  Bar
 } from 'components/Charts'
 
 import { getTimeDistance } from 'utils/utils'
@@ -169,7 +170,8 @@ export default Vue.extend({
     Trend,
     MiniArea,
     MiniBar,
-    MiniProgress
+    MiniProgress,
+    Bar
   },
   data() {
     const topColResponsiveProps = {
