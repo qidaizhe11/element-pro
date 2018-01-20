@@ -280,6 +280,10 @@ export default Vue.extend({
 .sales-card {
   position: relative;
 
+  .sales-bar {
+    padding: 0 0 32px 32px;
+  }
+
   .sales-rank {
     padding: 0 32px 32px 72px;
   }

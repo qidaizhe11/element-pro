@@ -31,12 +31,12 @@ export default Vue.extend({
   data() {
     const { color, data } = this
     const options = {
-      // grid: {
-      //   left: 0,
-      //   right: 0,
-      //   top: '10%',
-      //   bottom: 0
-      // },
+      grid: {
+        left: '8%',
+        right: '0',
+        top: '10%',
+        bottom: '10%'
+      },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -67,16 +67,14 @@ export default Vue.extend({
             show: true
           },
           axisTick: {
-            show: false
+            show: true,
+            alignWithLabel: true
           },
           axisLine: {
             show: true
           },
           axisPointer: {
             status: 'hide'
-          },
-          splitLine: {
-            show: true
           },
           data: data.map(item => {
             return item.x
@@ -90,6 +88,12 @@ export default Vue.extend({
         },
         axisLine: {
           show: false
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            type: 'dotted'
+          }
         }
       },
       series: [
@@ -100,7 +104,7 @@ export default Vue.extend({
               color: color
             }
           },
-          // barWidth: '50%',
+          barWidth: '50%',
           data: data.map(item => {
             return [item.x, item.y]
           })
