@@ -203,10 +203,46 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '~theme/theme.scss';
+@import '~utils/utils.scss';
 
 .trend-text {
   margin-left: 8px;
   color: $heading-color;
+}
+
+.ranking-list {
+  margin: 25px 0 0;
+  padding: 0;
+  list-style: none;
+  li {
+    @extend %clearfix;
+    margin-top: 16px;
+    span {
+      color: $text-color;
+      font-size: 14px;
+      line-height: 22px;
+    }
+    span:first-child {
+      background-color: $background-color-base;
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 24px;
+      height: 20px;
+      line-height: 20px;
+      width: 20px;
+      text-align: center;
+    }
+    span.active {
+      //background-color: @primary-color;
+      background-color: #314659;
+      color: #fff;
+    }
+    span:last-child {
+      float: right;
+    }
+  }
 }
 
 .sales-extra-wrap {
@@ -241,6 +277,10 @@ export default Vue.extend({
 
 .sales-card {
   position: relative;
+
+  .sales-rank {
+    padding: 0 32px 32px 72px;
+  }
 
   /deep/ .el-tabs {
     &__nav-wrap {
