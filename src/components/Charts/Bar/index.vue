@@ -1,14 +1,14 @@
 <template>
-  <div class="chart">
+  <div class="chart" ref="chart">
     <h4 v-if="title" :style="{marginBottom: '20px'}">{{title}}</h4>
     <e-chart :options="options" :auto-resize="true" :height="title ? `calc(${height} - 41px)` : height">
     </e-chart>
   </div>
-
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { debounce } from 'lodash'
 
 import EChart from 'components/EChart/index.vue'
 
@@ -31,7 +31,11 @@ export default Vue.extend({
       type: String,
       default: '100%'
     },
-    title: String
+    title: String,
+    autoLabel: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     const { color, data } = this
@@ -126,7 +130,35 @@ export default Vue.extend({
       ]
     }
     return {
-      options
+      options,
+      autoHideXLabels: false
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', debounce(this.resize, 400))
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', debounce(this.resize, 400))
+  },
+  methods: {
+    resize() {
+      const chartRef: any = this.$refs.chart
+      if (!chartRef) {
+        return
+      }
+
+      const canvasWidth = chartRef.clientWidth
+      if (!this.autoLabel) {
+        return
+      }
+      const minWidth = this.data.length * 30
+      if (canvasWidth <= minWidth) {
+        if (!this.autoHideXLabels) {
+          this.autoHideXLabels = true
+        }
+      } else if (this.autoHideXLabels) {
+        this.autoHideXLabels = false
+      }
     }
   }
 })
