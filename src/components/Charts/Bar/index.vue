@@ -19,7 +19,7 @@ export default Vue.extend({
   props: {
     color: {
       type: String,
-      default: '#1890ff'
+      default: 'rgba(24, 144, 255, 0.85)'
     },
     data: {
       type: Array,
