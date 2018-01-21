@@ -1,6 +1,10 @@
 <template>
-  <e-chart class="chart" :options="options" :auto-resize="true"
-    :height="height"></e-chart>
+  <div class="chart">
+    <h4 v-if="title" :style="{marginBottom: '20px'}">{{title}}</h4>
+    <e-chart :options="options" :auto-resize="true" :height="title ? `calc(${height} - 41px)` : height">
+    </e-chart>
+  </div>
+
 </template>
 
 <script lang="ts">
@@ -26,16 +30,18 @@ export default Vue.extend({
     height: {
       type: String,
       default: '100%'
-    }
+    },
+    title: String
   },
   data() {
     const { color, data } = this
     const options = {
       grid: {
-        left: '8%',
-        right: '0',
-        top: '10%',
-        bottom: '10%'
+        left: 0,
+        right: 0,
+        top: 10,
+        bottom: 5,
+        containLabel: true
       },
       tooltip: {
         trigger: 'axis',
@@ -64,14 +70,19 @@ export default Vue.extend({
         {
           type: 'category',
           axisLabel: {
-            show: true
+            show: true,
+            color: '#797979',
+            margin: 12
           },
           axisTick: {
             show: true,
             alignWithLabel: true
           },
           axisLine: {
-            show: true
+            show: true,
+            lineStyle: {
+              color: '#bebebe'
+            }
           },
           axisPointer: {
             status: 'hide'
@@ -83,6 +94,9 @@ export default Vue.extend({
       ],
       yAxis: {
         show: true,
+        axisLabel: {
+          color: '#797979'
+        },
         axisTick: {
           show: false
         },
