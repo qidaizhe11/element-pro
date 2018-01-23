@@ -300,6 +300,42 @@ export default Vue.extend({
     }
   }
 }
+
+@media screen and (max-width: $screen-lg) {
+  .sales-extra-wrap {
+    .sales-extra {
+      display: none;
+    }
+  }
+
+  .ranking-list {
+    li {
+      span:first-child {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .ranking-title {
+    margin-top: 16px;
+  }
+
+  .sales-card .sales-bar {
+    padding: 16px;
+  }
+}
+
+@media screen and (max-width: $screen-sm) {
+  .sales-extra-wrap {
+    display: none;
+  }
+
+  .sales-card {
+    /deep/ .el-tabs__content {
+      padding-top: 30px;
+    }
+  }
+}
 </style>
-
-
