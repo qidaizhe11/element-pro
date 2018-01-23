@@ -1,2 +1,2 @@
-scr/assets/anticon/* linguist-vendored=false
-src/theme/* linguist-vendored=false
+scr/assets/* linguist-vendored=true
+src/theme/* linguist-vendored=true
