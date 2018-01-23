@@ -1,2 +1,4 @@
 scr/assets/* linguist-vendored=true
 src/theme/* linguist-vendored=true
+*.scss linguist-vendored=true
+*.css linguist-vendored=true
