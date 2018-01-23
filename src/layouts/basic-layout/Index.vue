@@ -251,7 +251,7 @@ export default Vue.extend({
     },
     toggle() {
       this.collapse = !this.collapse
-      debounce(this.triggerResizeEvent, 600)
+      debounce(this.triggerResizeEvent, 600)()
     },
     triggerResizeEvent() {
       const event = document.createEvent('HTMLEvents')

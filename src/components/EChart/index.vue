@@ -101,8 +101,6 @@ export default Vue.extend({
         return
       }
 
-      console.log('EChart, init.')
-
       let chart = echarts.init(
         this.$el as HTMLDivElement,
         this.theme,
