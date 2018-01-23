@@ -122,6 +122,24 @@
         </div>
       </div>
     </el-card>
+
+    <el-row :gutter="24">
+      <el-col :lg="12" :md="24" :sm="24" :xs="24">
+        <el-card :style="{marginTop: '24px'}">
+          <div slot="header">
+            <span>线上热门搜索</span>
+          </div>
+          <el-row :gutter="68">
+            <el-col :sm="12" :xs="24" :style="{marginBottom: '24px'}">
+              <mini-area line height="45px" :data="visitData2"></mini-area>
+            </el-col>
+            <el-col :sm="12" :xs="24" :style="{marginBottom: '24px'}">
+              <mini-area line height="45px" :data="visitData2"></mini-area>
+            </el-col>
+          </el-row>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -176,6 +194,17 @@ for (let i = 0; i < fakeY.length; i += 1) {
   })
 }
 
+const visitData2: object[] = []
+const fakeY2 = [1, 6, 4, 8, 3, 7, 2]
+for (let i = 0; i < fakeY2.length; i += 1) {
+  visitData2.push({
+    x: moment(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format(
+      'YYYY-MM-DD'
+    ),
+    y: fakeY2[i]
+  })
+}
+
 const salesData: object[] = []
 for (let i = 0; i < 12; i += 1) {
   salesData.push({
@@ -208,6 +237,7 @@ export default Vue.extend({
       topColResponsiveProps,
       rankingListData,
       visitData,
+      visitData2,
       salesData,
       salesTabName: 'sales',
       salesType: 'all',
@@ -313,6 +343,9 @@ export default Vue.extend({
   /deep/ .el-tabs {
     &__nav-wrap {
       padding-left: 16px;
+      &::after {
+        height: 1px;
+      }
     }
 
     &__item {
