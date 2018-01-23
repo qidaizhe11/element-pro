@@ -26,94 +26,104 @@ export default Vue.extend({
     height: {
       type: String,
       default: '100%'
+    },
+    line: Boolean,
+    borderColor: {
+      type: String,
+      default: '#1089ff'
+    },
+    borderWidth: {
+      type: Number,
+      default: 2
     }
   },
-  data() {
-    const { color, data } = this
-    const options = {
-      grid: {
-        left: 0,
-        right: 0,
-        top: '10%',
-        bottom: 0
-      },
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'line',
-          lineStyle: {
-            width: 0
-          }
+  computed: {
+    options(): any {
+      const { color, data, line, borderColor, borderWidth } = this
+      return {
+        grid: {
+          left: 0,
+          right: 0,
+          top: '10%',
+          bottom: 0
         },
-        formatter: (paramsList: any) => {
-          const colorSpan = (color: string) => {
-            return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:8px;height:8px;background-color:${color};border: 1px solid #fff;"></span>`
-          }
-          return paramsList.map((item: any) => {
-            console.log('echarts, formatter, item:', item)
-            return `${colorSpan(item.color)}${item.value[0]}: ${item.value[1]}`
-          })
-        },
-        confine: true,
-        textStyle: {
-          fontSize: 12
-        },
-        padding: [10, 5]
-      },
-      xAxis: [
-        {
-          type: 'category',
-          boundaryGap: false,
-          axisLabel: {
-            show: false
-          },
-          axisTick: {
-            show: false
-          },
-          axisLine: {
-            show: false
-          },
+        tooltip: {
+          trigger: 'axis',
           axisPointer: {
-            status: 'hide'
+            type: 'line',
+            lineStyle: {
+              width: 0
+            }
           },
-          data: data.map(item => {
-            return item.x
-          })
-        }
-      ],
-      yAxis: {
-        show: false
-      },
-      series: [
-        {
-          type: 'line',
-          smooth: true,
-          itemStyle: {
-            normal: {
+          formatter: (paramsList: any) => {
+            const colorSpan = (color: string) => {
+              return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:8px;height:8px;background-color:${color};border: 1px solid #fff;"></span>`
+            }
+            return paramsList.map((item: any) => {
+              console.log('echarts, formatter, item:', item)
+              return `${colorSpan(item.color)}${item.value[0]}: ${
+                item.value[1]
+              }`
+            })
+          },
+          confine: true,
+          textStyle: {
+            fontSize: 12
+          },
+          padding: [10, 5]
+        },
+        xAxis: [
+          {
+            type: 'category',
+            boundaryGap: false,
+            axisLabel: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: false
+            },
+            axisPointer: {
+              status: 'hide'
+            },
+            data: data.map(item => {
+              return item.x
+            })
+          }
+        ],
+        yAxis: {
+          show: false
+        },
+        series: [
+          {
+            type: 'line',
+            smooth: true,
+            itemStyle: {
               color: color,
               shadowColor: color,
               shadowBlur: 15,
               borderWidth: 1,
               borderColor: '#fff'
-            }
-          },
-          areaStyle: {
-            normal: { color: color, opacity: 1 }
-          },
-          showSymbol: false,
-          symbol: 'circle',
-          symbolSize: 2,
-          lineStyle: {
-            normal: { width: 0 }
-          },
-          data: data.map(item => {
-            return [item.x, item.y]
-          })
-        }
-      ]
-    }
-    return {
-      options
+            },
+            areaStyle: {
+              color: color,
+              opacity: 1
+            },
+            showSymbol: false,
+            symbol: 'circle',
+            symbolSize: 2,
+            lineStyle: {
+              width: line ? borderWidth : 0,
+              color: borderColor
+            },
+            data: data.map(item => {
+              return [item.x, item.y]
+            })
+          }
+        ]
+      }
     }
   }
 })
