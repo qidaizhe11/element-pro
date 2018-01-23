@@ -80,6 +80,9 @@ export default Vue.extend({
     this.destroy()
   },
   methods: {
+    resize() {
+      this.delegateMethod('resize', this.options)
+    },
     clear() {
       this.delegateMethod('clear')
     },

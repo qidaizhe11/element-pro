@@ -65,8 +65,8 @@
           <el-tab-pane label="销售额" name="sales">
             <el-row>
               <el-col :lg="16" :md="12" :sm="12" :xs="24">
-                <div class="sales-bar">
-                  <bar height="292px" title="访问量趋势" :data="salesData"></bar>
+                <div class="sales-bar" v-if="salesTabName === 'sales'">
+                  <bar height="292px" title="销售额趋势" :data="salesData"></bar>
                 </div>
               </el-col>
               <el-col :lg="8" :md="12" :sm="12" :xs="24">
@@ -85,7 +85,29 @@
               </el-col>
             </el-row>
           </el-tab-pane>
-          <el-tab-pane label="访问量" name="views"></el-tab-pane>
+          <el-tab-pane label="访问量" name="views">
+            <el-row>
+              <el-col :lg="16" :md="12" :sm="12" :xs="24">
+                <div class="sales-bar" v-if="salesTabName === 'views'">
+                  <bar height="292px" title="访问量趋势" :data="salesData"></bar>
+                </div>
+              </el-col>
+              <el-col :lg="8" :md="12" :sm="12" :xs="24">
+                <div class="sales-rank">
+                  <h4 class="ranking-title">门店访问量排名</h4>
+                  <ul class="ranking-list">
+                    <template v-for="(item, i ) in rankingListData">
+                      <li :key="item.title">
+                        <span :class="{active: i < 3}">{{i + 1}}</span>
+                        <span>{{item.title}}</span>
+                        <span>{{numeral(item.total).format('0,0')}}</span>
+                      </li>
+                    </template>
+                  </ul>
+                </div>
+              </el-col>
+            </el-row>
+          </el-tab-pane>
         </el-tabs>
         <div class="sales-extra-wrap">
           <div class="sales-extra">
