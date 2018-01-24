@@ -131,9 +131,21 @@
           </div>
           <el-row :gutter="68">
             <el-col :sm="12" :xs="24" :style="{marginBottom: '24px'}">
+              <number-info :gap="8" :total="numeral(12321).format('0,0')" status="up"
+                :sub-total="17.1">
+                <span slot="subTitle">
+                  搜索用户数
+                  <el-tooltip content="指标文案" placement="top">
+                    <ant-icon :style="{marginLeft: '8px'}" type="infocirlceo"></ant-icon>
+                  </el-tooltip>
+                </span>
+              </number-info>
               <mini-area line height="45px" :data="visitData2"></mini-area>
             </el-col>
             <el-col :sm="12" :xs="24" :style="{marginBottom: '24px'}">
+              <number-info :gap="8" :total="2.7" status="down" sub-title="人均搜索次数"
+                :sub-total="17.1">
+              </number-info>
               <mini-area line height="45px" :data="visitData2"></mini-area>
             </el-col>
           </el-row>
@@ -160,6 +172,7 @@ import {
   MiniProgress,
   Bar
 } from 'components/Charts'
+import NumberInfo from 'components/NumberInfo/index.vue'
 
 import { getTimeDistance } from 'utils/utils'
 
@@ -222,7 +235,8 @@ export default Vue.extend({
     MiniArea,
     MiniBar,
     MiniProgress,
-    Bar
+    Bar,
+    NumberInfo
   },
   data() {
     const topColResponsiveProps = {
