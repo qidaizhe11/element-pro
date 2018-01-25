@@ -299,7 +299,8 @@ export default Vue.extend({
       }
     ]
     const pagination = {
-      pageSize: 5
+      pageSize: 5,
+      small: true
     }
     return {
       topColResponsiveProps,
