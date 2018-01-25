@@ -149,6 +149,8 @@
               <mini-area line height="45px" :data="visitData2"></mini-area>
             </el-col>
           </el-row>
+          <el-table-wrapper size="small" :data="searchData" :columns="columns" :pagination="pagination">
+          </el-table-wrapper>
         </el-card>
       </el-col>
     </el-row>
@@ -157,9 +159,21 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Row, Col, Tooltip, Card, Tabs, TabPane, DatePicker } from 'element-ui'
+import {
+  Row,
+  Col,
+  Tooltip,
+  Card,
+  Tabs,
+  TabPane,
+  DatePicker,
+  Table,
+  TableColumn,
+  Pagination
+} from 'element-ui'
 import * as numeral from 'numeral'
 import * as moment from 'moment'
+import ElTableWrapper from 'el-table-wrapper'
 
 import AntIcon from 'components/AntIcon/index.vue'
 import {
@@ -183,6 +197,10 @@ Vue.use(Card)
 Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(DatePicker)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Pagination)
+Vue.use(ElTableWrapper)
 
 // mock data
 
@@ -226,6 +244,17 @@ for (let i = 0; i < 12; i += 1) {
   })
 }
 
+const searchData: object[] = []
+for (let i = 0; i < 50; i += 1) {
+  searchData.push({
+    index: i + 1,
+    keyword: `搜索关键词-${i}`,
+    count: Math.floor(Math.random() * 1000),
+    range: Math.floor(Math.random() * 100),
+    status: Math.floor((Math.random() * 10) % 2)
+  })
+}
+
 export default Vue.extend({
   components: {
     AntIcon,
@@ -247,15 +276,43 @@ export default Vue.extend({
       xl: 6,
       style: { marginBottom: '24px' }
     }
+    const columns = [
+      {
+        prop: 'index',
+        label: '排名'
+      },
+      {
+        prop: 'keyword',
+        label: '搜索关键词'
+      },
+      {
+        prop: 'count',
+        label: '用户数',
+        sortable: true,
+        align: 'right'
+      },
+      {
+        prop: 'range',
+        label: '周涨幅',
+        sortable: true,
+        align: 'right'
+      }
+    ]
+    const pagination = {
+      pageSize: 5
+    }
     return {
       topColResponsiveProps,
       rankingListData,
       visitData,
       visitData2,
       salesData,
+      searchData,
       salesTabName: 'sales',
       salesType: 'all',
-      rangePickerValue: getTimeDistance('year')
+      rangePickerValue: getTimeDistance('year'),
+      columns,
+      pagination
     }
   },
   methods: {
