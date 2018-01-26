@@ -49,7 +49,7 @@ export default Vue.extend({
     title: String,
     subTitle: String,
     theme: String,
-    total: String,
+    total: [Number, String],
     status: String,
     subTotal: Number,
     gap: Number,

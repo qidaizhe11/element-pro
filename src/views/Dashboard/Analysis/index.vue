@@ -149,7 +149,16 @@
               <mini-area line height="45px" :data="visitData2"></mini-area>
             </el-col>
           </el-row>
-          <el-table-wrapper size="small" :data="searchData" :columns="columns" :pagination="pagination">
+          <el-table-wrapper size="small" :data="searchData" :columns="columns"
+            :pagination="pagination">
+            <template slot-scope="scope" slot="keyword-slot">
+              <a href="/">{{scope.row.keyword}}</a>
+            </template>
+            <template slot-scope="scope" slot="range-slot">
+              <trend :flag="scope.row.status === 1 ? 'down' : 'up'">
+                <span :style="{marginRight: '4px'}">{{scope.row.range}}%</span>
+              </trend>
+            </template>
           </el-table-wrapper>
         </el-card>
       </el-col>
@@ -283,19 +292,20 @@ export default Vue.extend({
       },
       {
         prop: 'keyword',
-        label: '搜索关键词'
+        label: '搜索关键词',
+        scopedSlot: 'keyword-slot'
       },
       {
         prop: 'count',
         label: '用户数',
-        sortable: true,
-        align: 'right'
+        sortable: true
       },
       {
         prop: 'range',
         label: '周涨幅',
         sortable: true,
-        align: 'right'
+        align: 'right',
+        scopedSlot: 'range-slot'
       }
     ]
     const pagination = {
