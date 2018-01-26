@@ -136,7 +136,8 @@
                 <span slot="subTitle">
                   搜索用户数
                   <el-tooltip content="指标文案" placement="top">
-                    <ant-icon :style="{marginLeft: '8px'}" type="infocirlceo"></ant-icon>
+                    <ant-icon :style="{marginLeft: '8px'}" type="infocirlceo">
+                    </ant-icon>
                   </el-tooltip>
                 </span>
               </number-info>
@@ -162,6 +163,32 @@
           </el-table-wrapper>
         </el-card>
       </el-col>
+      <el-col :lg="12" :md="24" :sm="24" :xs="24">
+        <el-card class="sales-card" :style="{marginTop: '24px', minHeight: '509px'}"
+          :body-style="{padding: '24px'}">
+          <div slot="header" class="sales-type-header">
+            <div class="top">
+              <span class="title">销售额类别占比</span>
+              <span class="icon-group">
+                <el-dropdown placement="bottom-end">
+                  <ant-icon type="ellipsis1"></ant-icon>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>操作一</el-dropdown-item>
+                    <el-dropdown-item>操作二</el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </span>
+            </div>
+            <div class="sales-type-radio">
+              <el-radio-group v-model="salesType">
+                <el-radio-button label="all">全部渠道</el-radio-button>
+                <el-radio-button label="online">线上</el-radio-button>
+                <el-radio-button label="offline">门店</el-radio-button>
+              </el-radio-group>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -178,7 +205,12 @@ import {
   DatePicker,
   Table,
   TableColumn,
-  Pagination
+  Pagination,
+  RadioGroup,
+  RadioButton,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu
 } from 'element-ui'
 import * as numeral from 'numeral'
 import * as moment from 'moment'
@@ -209,6 +241,11 @@ Vue.use(DatePicker)
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Pagination)
+Vue.use(RadioGroup)
+Vue.use(RadioButton)
+Vue.use(Dropdown)
+Vue.use(DropdownItem)
+Vue.use(DropdownMenu)
 Vue.use(ElTableWrapper)
 
 // mock data
@@ -435,6 +472,31 @@ export default Vue.extend({
       line-height: 60px;
       font-size: 16px;
     }
+  }
+}
+
+.sales-type-header {
+  .top {
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      font-size: 16px;
+    }
+
+    .icon-group {
+      i {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.sales-type-radio {
+  margin-top: 15px;
+
+  /deep/ label {
+    margin-bottom: 0;
   }
 }
 
