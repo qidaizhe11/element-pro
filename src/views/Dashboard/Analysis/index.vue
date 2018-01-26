@@ -127,7 +127,7 @@
       <el-col :lg="12" :md="24" :sm="24" :xs="24">
         <el-card :style="{marginTop: '24px'}">
           <div slot="header">
-            <span>线上热门搜索</span>
+            <span :style="{fontSize: '16px'}">线上热门搜索</span>
           </div>
           <el-row :gutter="68">
             <el-col :sm="12" :xs="24" :style="{marginBottom: '24px'}">
@@ -164,7 +164,7 @@
         </el-card>
       </el-col>
       <el-col :lg="12" :md="24" :sm="24" :xs="24">
-        <el-card class="sales-card" :style="{marginTop: '24px', minHeight: '509px'}"
+        <el-card class="sales-card" :style="{marginTop: '24px', minHeight: '538px'}"
           :body-style="{padding: '24px'}">
           <div slot="header" class="sales-type-header">
             <div class="top">
@@ -187,6 +187,7 @@
               </el-radio-group>
             </div>
           </div>
+          <h4 :style="{marginTop: '8px', marginBottom: '32px'}">销售额</h4>
         </el-card>
       </el-col>
     </el-row>
@@ -301,6 +302,83 @@ for (let i = 0; i < 50; i += 1) {
   })
 }
 
+const salesTypeData = [
+  {
+    x: '家用电器',
+    y: 4544
+  },
+  {
+    x: '食用酒水',
+    y: 3321
+  },
+  {
+    x: '个护健康',
+    y: 3113
+  },
+  {
+    x: '服饰箱包',
+    y: 2341
+  },
+  {
+    x: '母婴产品',
+    y: 1231
+  },
+  {
+    x: '其他',
+    y: 1231
+  }
+]
+
+const salesTypeDataOnline = [
+  {
+    x: '家用电器',
+    y: 244
+  },
+  {
+    x: '食用酒水',
+    y: 321
+  },
+  {
+    x: '个护健康',
+    y: 311
+  },
+  {
+    x: '服饰箱包',
+    y: 41
+  },
+  {
+    x: '母婴产品',
+    y: 121
+  },
+  {
+    x: '其他',
+    y: 111
+  }
+]
+
+const salesTypeDataOffline = [
+  {
+    x: '家用电器',
+    y: 99
+  },
+  {
+    x: '个护健康',
+    y: 188
+  },
+  {
+    x: '服饰箱包',
+    y: 344
+  },
+  {
+    x: '母婴产品',
+    y: 255
+  },
+  {
+    x: '其他',
+    y: 65
+  }
+]
+
 export default Vue.extend({
   components: {
     AntIcon,
@@ -361,6 +439,16 @@ export default Vue.extend({
       rangePickerValue: getTimeDistance('year'),
       columns,
       pagination
+    }
+  },
+  computed: {
+    salesPieData() {
+      const { salesType } = this
+      switch (salesType) {
+        case 'all': return salesTypeData
+        case 'online': return salesTypeDataOnline
+        default: return salesTypeDataOffline
+      }
     }
   },
   methods: {
