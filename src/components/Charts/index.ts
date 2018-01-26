@@ -7,6 +7,7 @@ import MiniArea from './MiniArea/index.vue'
 import MiniBar from './MiniBar/index.vue'
 import MiniProgress from './MiniProgress/index.vue'
 import Bar from './Bar/index.vue'
+import Pie from './Pie/index.vue'
 
 const yuan = (val: number) => `&yen; ${numeral(val).format('0,0')}`
 
@@ -18,5 +19,6 @@ export {
   MiniArea,
   MiniBar,
   MiniProgress,
-  Bar
+  Bar,
+  Pie
 }

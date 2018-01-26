@@ -188,6 +188,7 @@
             </div>
           </div>
           <h4 :style="{marginTop: '8px', marginBottom: '32px'}">销售额</h4>
+          <pie :data="salesPieData" height="248px"></pie>
         </el-card>
       </el-col>
     </el-row>
@@ -226,7 +227,8 @@ import {
   MiniArea,
   MiniBar,
   MiniProgress,
-  Bar
+  Bar,
+  Pie
 } from 'components/Charts'
 import NumberInfo from 'components/NumberInfo/index.vue'
 
@@ -389,7 +391,8 @@ export default Vue.extend({
     MiniBar,
     MiniProgress,
     Bar,
-    NumberInfo
+    NumberInfo,
+    Pie
   },
   data() {
     const topColResponsiveProps = {
