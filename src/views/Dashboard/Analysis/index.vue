@@ -188,7 +188,10 @@
             </div>
           </div>
           <h4 :style="{marginTop: '8px', marginBottom: '32px'}">销售额</h4>
-          <pie :data="salesPieData" height="248px"></pie>
+          <pie :data="salesPieData" height="248px" :line-height="4"
+            :total="yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))">
+            <span slot="subTitle">销售额</span>
+          </pie>
         </el-card>
       </el-col>
     </el-row>
@@ -448,9 +451,12 @@ export default Vue.extend({
     salesPieData() {
       const { salesType } = this
       switch (salesType) {
-        case 'all': return salesTypeData
-        case 'online': return salesTypeDataOnline
-        default: return salesTypeDataOffline
+        case 'all':
+          return salesTypeData
+        case 'online':
+          return salesTypeDataOnline
+        default:
+          return salesTypeDataOffline
       }
     }
   },
@@ -541,6 +547,7 @@ export default Vue.extend({
 
 .sales-card {
   position: relative;
+  color: rgba(0, 0, 0, 0.65);
 
   .sales-bar {
     padding: 0 0 32px 32px;

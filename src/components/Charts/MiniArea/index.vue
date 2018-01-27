@@ -60,7 +60,6 @@ export default Vue.extend({
               return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:8px;height:8px;background-color:${color};border: 1px solid #fff;"></span>`
             }
             return paramsList.map((item: any) => {
-              console.log('echarts, formatter, item:', item)
               return `${colorSpan(item.color)}${item.value[0]}: ${
                 item.value[1]
               }`
