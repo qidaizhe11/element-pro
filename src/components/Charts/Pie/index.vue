@@ -13,6 +13,8 @@ import { debounce } from 'lodash'
 
 import EChart from 'components/EChart/index.vue'
 
+import { theme, defaultOptions, colorSpan } from 'components/Charts/default'
+
 export default Vue.extend({
   components: {
     EChart
@@ -39,24 +41,15 @@ export default Vue.extend({
     options(): any {
       const { data } = this
       return {
-        grid: {
-          left: 0,
-          right: 0,
-          top: 10,
-          bottom: 5,
-          containLabel: true
-        },
+        color: data.length > 8 ? theme.colorsPie16 : theme.colorsPie,
+        grid: defaultOptions.grid,
         tooltip: {
+          ...defaultOptions.tooltip,
           formatter: (params: any) => {
-            const colorSpan = (color: string) => {
-              return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:8px;height:8px;background-color:${color};border: 1px solid #fff;"></span>`
-            }
-            return `${colorSpan(params.color)}${params.data.label}: ${params.percent}%`
-          },
-          textStyle: {
-            fontSize: 12
-          },
-          padding: [10, 5]
+            return `${colorSpan(params.color)}${params.data.label}: ${
+              params.percent
+            }%`
+          }
         },
         series: [
           {
