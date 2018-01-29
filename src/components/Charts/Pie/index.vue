@@ -1,16 +1,32 @@
 <template>
   <div class="pie">
     <div class="chart" ref="chart">
-      <e-chart :options="options" :auto-resize="true" :height="height">
+      <e-chart ref="echart" :options="options" :auto-resize="true"
+        :height="height">
       </e-chart>
+      <div class="total" v-if="subTitle || $slots.subTitle || total">
+        <h4 class="pie-sub-title" v-if="subTitle || $slots.subTitle">
+          {{ subTitle && subTitle}}
+          <slot v-if="$slots.subTitle" name="subTitle"></slot>
+        </h4>
+        <div class="pei-stat" v-html="total"></div>
+      </div>
     </div>
-    <div class="total" v-if="subTitle || $slots.subTitle || total">
-      <h4 class="pie-sub-title" v-if="subTitle || $slots.subTitle">
-        {{ subTitle && subTitle}}
-        <slot v-if="$slots.subTitle" name="subTitle"></slot>
-      </h4>
-      <div class="pei-stat" v-html="total"></div>
-    </div>
+    <template v-if="hasLegend">
+      <ul class="legend">
+        <template v-for="item in legendData">
+          <li :key="item.x">
+            <span class="dot" :style="{backgroundColor: !item.checked ? '#aaa' : item.color}">
+            </span>
+            <span class="legend-title">{{item.x}}</span>
+            <span class="percent">
+              {{`${(isNan(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}}
+            </span>
+            <span class="value" v-html="item.y"></span>
+          </li>
+        </template>
+      </ul>
+    </template>
   </div>
 </template>
 
@@ -38,7 +54,20 @@ export default Vue.extend({
       default: '100%'
     },
     subTitle: String,
-    total: String
+    total: String,
+    hasLegend: {
+      type: Boolean,
+      default: false
+    },
+    inner: {
+      type: String,
+      default: '75%'
+    },
+    colors: Array,
+    lineWidth: {
+      type: Number,
+      default: 1
+    }
   },
   data() {
     return {
@@ -48,9 +77,11 @@ export default Vue.extend({
   },
   computed: {
     options(): any {
-      const { data } = this
+      const { data, inner, colors, lineWidth } = this
+      const defaultColors =
+        data.length > 8 ? theme.colorsPie16 : theme.colorsPie
       return {
-        color: data.length > 8 ? theme.colorsPie16 : theme.colorsPie,
+        color: colors || defaultColors,
         grid: defaultOptions.grid,
         tooltip: {
           ...defaultOptions.tooltip,
@@ -63,9 +94,13 @@ export default Vue.extend({
         series: [
           {
             type: 'pie',
-            radius: ['50%', '70%'],
+            radius: [inner, '100%'],
             label: {
               show: false
+            },
+            itemStyle: {
+              borderColor: '#fff',
+              borderWidth: lineWidth
             },
             data: data.map(item => {
               return {
@@ -75,6 +110,16 @@ export default Vue.extend({
             })
           }
         ]
+      }
+    }
+  },
+  watch: {
+    data: {
+      immediate: true,
+      handler: function(val) {
+        this.$nextTick(() => {
+          this.getLegendData()
+        })
       }
     }
   },
@@ -103,6 +148,9 @@ export default Vue.extend({
       // } else if (this.autoHideXLabels) {
       //   this.autoHideXLabels = false
       // }
+    },
+    getLegendData() {
+      const echartRef = this.$refs.echart
     }
   }
 })

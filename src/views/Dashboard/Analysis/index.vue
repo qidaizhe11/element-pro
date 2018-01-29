@@ -188,7 +188,7 @@
             </div>
           </div>
           <h4 :style="{marginTop: '8px', marginBottom: '32px'}">销售额</h4>
-          <pie :data="salesPieData" height="248px" :line-height="4"
+          <pie :data="salesPieData" height="248px" :line-width="4"
             :total="yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))">
             <span slot="subTitle">销售额</span>
           </pie>
