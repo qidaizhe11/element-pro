@@ -1,5 +1,5 @@
 <template>
-  <div class="pie">
+  <div class="pie" :class="{'has-legend': hasLegend}">
     <div class="chart" ref="chart">
       <e-chart ref="echart" :options="options" :auto-resize="true"
         :height="height">
@@ -9,7 +9,7 @@
           {{ subTitle && subTitle}}
           <slot v-if="$slots.subTitle" name="subTitle"></slot>
         </h4>
-        <div class="pei-stat" v-html="total"></div>
+        <div class="pie-stat" v-html="total"></div>
       </div>
     </div>
     <template v-if="hasLegend">
@@ -19,10 +19,11 @@
             <span class="dot" :style="{backgroundColor: !item.checked ? '#aaa' : item.color}">
             </span>
             <span class="legend-title">{{item.x}}</span>
+            <div class="divider divider-vertical"></div>
             <span class="percent">
-              {{`${(isNan(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}}
+              {{`${(isNaN(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}}
             </span>
-            <span class="value" v-html="item.y"></span>
+            <span class="value" v-html="valueFormat ? valueFormat(item.y) : item.y"></span>
           </li>
         </template>
       </ul>
@@ -67,11 +68,11 @@ export default Vue.extend({
     lineWidth: {
       type: Number,
       default: 1
-    }
+    },
+    valueFormat: Function
   },
   data() {
     return {
-      legendData: [],
       legendBlock: false
     }
   },
@@ -85,6 +86,7 @@ export default Vue.extend({
         grid: defaultOptions.grid,
         tooltip: {
           ...defaultOptions.tooltip,
+          confine: true,
           formatter: (params: any) => {
             return `${colorSpan(params.color)}${params.data.label}: ${
               params.percent
@@ -111,6 +113,26 @@ export default Vue.extend({
           }
         ]
       }
+    },
+    totalCount(): number {
+      return this.data.reduce((pre, now) => now.y + pre, 0)
+    },
+    legendData(): object[] {
+      if (!this.hasLegend) {
+        return []
+      }
+      const defaultColors =
+        this.data.length > 8 ? theme.colorsPie16 : theme.colorsPie
+      const colors = this.colors || defaultColors
+      return this.data.map((item, i) => {
+        const colorIndex = i % colors.length
+        return {
+          ...item,
+          color: colors[colorIndex],
+          checked: true,
+          percent: item.y / this.totalCount
+        }
+      })
     }
   },
   watch: {
@@ -164,7 +186,7 @@ export default Vue.extend({
   .chart {
     position: relative;
   }
-  &.hasLegend .chart {
+  &.has-legend .chart {
     width: calc(100% - 240px);
   }
   .legend {
@@ -249,6 +271,28 @@ export default Vue.extend({
   .legend {
     position: relative;
     transform: none;
+  }
+}
+
+.divider {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #e8e8e8;
+
+  &-vertical {
+    margin: 0 8px;
+    display: inline-block;
+    height: 0.9em;
+    width: 1px;
+    vertical-align: middle;
+    position: relative;
+    top: -0.06em;
   }
 }
 </style>
