@@ -14,8 +14,8 @@
     </div>
     <template v-if="hasLegend">
       <ul class="legend">
-        <template v-for="item in legendData">
-          <li :key="item.x">
+        <template v-for="(item, i) in legendData">
+          <li :key="item.x" @click="handleLegendClick(item, i)">
             <span class="dot" :style="{backgroundColor: !item.checked ? '#aaa' : item.color}">
             </span>
             <span class="legend-title">{{item.x}}</span>
@@ -72,13 +72,33 @@ export default Vue.extend({
     valueFormat: Function
   },
   data() {
+    const legendData: any[] = []
     return {
+      legendData,
       legendBlock: false
     }
   },
+  watch: {
+    data: {
+      immediate: true,
+      handler: function(val) {
+        this.$nextTick(() => {
+          this.getLegendData()
+        })
+      }
+    }
+  },
   computed: {
+    filteredData(): any[] {
+      const filteredLegendData = this.legendData
+        .filter(l => l.checked)
+        .map(l => l.x)
+      return this.data.filter(item => {
+        return filteredLegendData.indexOf(item.x) > -1
+      })
+    },
     options(): any {
-      const { data, inner, colors, lineWidth } = this
+      const { data, filteredData, inner, colors, lineWidth } = this
       const defaultColors =
         data.length > 8 ? theme.colorsPie16 : theme.colorsPie
       return {
@@ -104,7 +124,7 @@ export default Vue.extend({
               borderColor: '#fff',
               borderWidth: lineWidth
             },
-            data: data.map(item => {
+            data: filteredData.map(item => {
               return {
                 value: item.y,
                 label: item.x
@@ -116,36 +136,11 @@ export default Vue.extend({
     },
     totalCount(): number {
       return this.data.reduce((pre, now) => now.y + pre, 0)
-    },
-    legendData(): object[] {
-      if (!this.hasLegend) {
-        return []
-      }
-      const defaultColors =
-        this.data.length > 8 ? theme.colorsPie16 : theme.colorsPie
-      const colors = this.colors || defaultColors
-      return this.data.map((item, i) => {
-        const colorIndex = i % colors.length
-        return {
-          ...item,
-          color: colors[colorIndex],
-          checked: true,
-          percent: item.y / this.totalCount
-        }
-      })
-    }
-  },
-  watch: {
-    data: {
-      immediate: true,
-      handler: function(val) {
-        this.$nextTick(() => {
-          this.getLegendData()
-        })
-      }
     }
   },
   mounted() {
+    this.getLegendData()
+    this.resize()
     window.addEventListener('resize', debounce(this.resize, 300))
   },
   beforeDestroy() {
@@ -168,7 +163,27 @@ export default Vue.extend({
       }
     },
     getLegendData() {
-      const echartRef = this.$refs.echart
+      if (!this.hasLegend) {
+        return []
+      }
+      const defaultColors =
+        this.data.length > 8 ? theme.colorsPie16 : theme.colorsPie
+      const colors = this.colors || defaultColors
+
+      const legendData = this.data.map((item, i) => {
+        const colorIndex = i % colors.length
+        return {
+          ...item,
+          color: colors[colorIndex],
+          checked: true,
+          percent: item.y / this.totalCount
+        }
+      })
+
+      this.legendData = legendData
+    },
+    handleLegendClick(item: any, i: number) {
+      item.checked = !item.checked
     }
   }
 })
