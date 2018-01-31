@@ -1,5 +1,5 @@
 <template>
-  <div class="pie" :class="{'has-legend': hasLegend}">
+  <div class="pie" ref="root" :class="{'has-legend': hasLegend, 'legend-block': legendBlock}">
     <div class="chart" ref="chart">
       <e-chart ref="echart" :options="options" :auto-resize="true"
         :height="height">
@@ -146,30 +146,26 @@ export default Vue.extend({
     }
   },
   mounted() {
-    window.addEventListener('resize', debounce(this.resize, 400))
+    window.addEventListener('resize', debounce(this.resize, 300))
   },
   beforeDestroy() {
-    window.removeEventListener('resize', debounce(this.resize, 400))
+    window.removeEventListener('resize', debounce(this.resize, 300))
   },
   methods: {
     resize() {
-      const chartRef: any = this.$refs.chart
-      if (!chartRef) {
+      const rootRef: any = this.$refs.root
+      if (!this.hasLegend || !rootRef) {
+        window.removeEventListener('resize', debounce(this.resize, 300))
         return
       }
 
-      // const canvasWidth = chartRef.clientWidth
-      // if (!this.autoLabel) {
-      //   return
-      // }
-      // const minWidth = this.data.length * 30
-      // if (canvasWidth <= minWidth) {
-      //   if (!this.autoHideXLabels) {
-      //     this.autoHideXLabels = true
-      //   }
-      // } else if (this.autoHideXLabels) {
-      //   this.autoHideXLabels = false
-      // }
+      if (rootRef.clientWidth <= 300) {
+        if (!this.legendBlock) {
+          this.legendBlock = true
+        }
+      } else if (this.legendBlock) {
+        this.legendBlock = false
+      }
     },
     getLegendData() {
       const echartRef = this.$refs.echart
@@ -224,7 +220,7 @@ export default Vue.extend({
     width: 1px;
     height: 16px;
   }
-  .legendTitle {
+  .legend-title {
     color: $text-color;
   }
   .percent {
@@ -263,8 +259,8 @@ export default Vue.extend({
   }
 }
 
-.legendBlock {
-  &.hasLegend .chart {
+.legend-block {
+  &.has-legend .chart {
     width: 100%;
     margin: 0 0 32px 0;
   }
