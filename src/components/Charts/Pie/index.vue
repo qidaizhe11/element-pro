@@ -21,7 +21,7 @@
             <span class="legend-title">{{item.x}}</span>
             <div class="divider divider-vertical"></div>
             <span class="percent">
-              {{`${(isNaN(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}}
+              {{item.percent}}
             </span>
             <span class="value" v-html="valueFormat ? valueFormat(item.y) : item.y"></span>
           </li>
@@ -89,29 +89,24 @@ export default Vue.extend({
     }
   },
   computed: {
-    filteredData(): any[] {
-      const filteredLegendData = this.legendData
-        .filter(l => l.checked)
-        .map(l => l.x)
-      return this.data.filter(item => {
-        return filteredLegendData.indexOf(item.x) > -1
-      })
+    filteredLegendData(): any[] {
+      return this.legendData.filter(l => l.checked)
     },
     options(): any {
-      const { data, filteredData, inner, colors, lineWidth } = this
-      const defaultColors =
-        data.length > 8 ? theme.colorsPie16 : theme.colorsPie
+      const { filteredLegendData, inner, colors, lineWidth } = this
       return {
-        color: colors || defaultColors,
         grid: defaultOptions.grid,
         tooltip: {
           ...defaultOptions.tooltip,
           confine: true,
           formatter: (params: any) => {
-            return `${colorSpan(params.color)}${params.data.label}: ${
-              params.percent
-            }%`
+            return `${colorSpan(params.color)}${params.data.x}: ${
+              params.data.percent
+            }`
           }
+        },
+        dataset: {
+          source: filteredLegendData
         },
         series: [
           {
@@ -120,16 +115,20 @@ export default Vue.extend({
             label: {
               show: false
             },
+            selectedMode: 'single',
+            hoverOffset: 5,
+            selectedOffset: 6,
+            encode: {
+              value: 'y',
+              itemName: 'x'
+            },
             itemStyle: {
               borderColor: '#fff',
-              borderWidth: lineWidth
-            },
-            data: filteredData.map(item => {
-              return {
-                value: item.y,
-                label: item.x
+              borderWidth: lineWidth,
+              color: (params: any) => {
+                return params.data.color
               }
-            })
+            }
           }
         ]
       }
@@ -172,11 +171,13 @@ export default Vue.extend({
 
       const legendData = this.data.map((item, i) => {
         const colorIndex = i % colors.length
+        const percent = item.y / this.totalCount
         return {
           ...item,
           color: colors[colorIndex],
           checked: true,
-          percent: item.y / this.totalCount
+          // percent: item.y / this.totalCount
+          percent: `${(isNaN(percent) ? 0 : percent * 100).toFixed(2)}%`
         }
       })
 
