@@ -195,6 +195,23 @@
         </el-card>
       </el-col>
     </el-row>
+
+    <el-card class="offline-card" :body-style="{padding: '0 0 32px 0'}"
+      :style="{marginTop: '32px'}">
+      <el-tabs v-model="currentTabKey">
+        <!-- <el-tab-pane ></el-tab-pane> -->
+        <template v-for="shop in offlineData">
+          <el-tab-pane :key="shop.name" :name="shop.name">
+            <el-row slot="label" :gutter="8" :style="{width: '138px', margin: '8px 0'}">
+              <el-col :span="12">
+                <number-info :title="shop.name" sub-title="转化率" :gap="2" :total="`${shop.cvr * 100}%`">
+                </number-info>
+              </el-col>
+            </el-row>
+          </el-tab-pane>
+        </template>
+      </el-tabs>
+    </el-card>
   </div>
 </template>
 
@@ -384,6 +401,22 @@ const salesTypeDataOffline = [
   }
 ]
 
+const offlineData: any[] = []
+for (let i = 0; i < 10; i += 1) {
+  offlineData.push({
+    name: `门店${i}`,
+    cvr: Math.ceil(Math.random() * 9) / 10
+  })
+}
+const offlineChartData: any[] = []
+for (let i = 0; i < 20; i += 1) {
+  offlineChartData.push({
+    x: new Date().getTime() + 1000 * 60 * 30 * i,
+    y1: Math.floor(Math.random() * 100) + 10,
+    y2: Math.floor(Math.random() * 100) + 10
+  })
+}
+
 export default Vue.extend({
   components: {
     AntIcon,
@@ -440,11 +473,14 @@ export default Vue.extend({
       visitData2,
       salesData,
       searchData,
+      offlineData,
+      offlineChartData,
       salesTabName: 'sales',
       salesType: 'all',
       rangePickerValue: getTimeDistance('year'),
       columns,
-      pagination
+      pagination,
+      currentTabKey: offlineData[0] && offlineData[0].name
     }
   },
   computed: {
@@ -459,6 +495,10 @@ export default Vue.extend({
           return salesTypeDataOffline
       }
     }
+    // activeKey(): any {
+    //   const { currentTabKey, offlineData } = this
+    //   return currentTabKey || (offlineData[0] && offlineData[0].name)
+    // }
   },
   methods: {
     yuan(value: number) {
@@ -595,6 +635,24 @@ export default Vue.extend({
 
   /deep/ label {
     margin-bottom: 0;
+  }
+}
+
+.offline-card {
+  /deep/ .el-tabs {
+    &__active-bar {
+      top: 0;
+      bottom: auto;
+    }
+    &__item {
+      height: 100%;
+      line-height: inherit;
+    }
+    &__nav-prev, &__nav-next {
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
   }
 }
 
