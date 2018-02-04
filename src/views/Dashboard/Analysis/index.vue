@@ -202,7 +202,7 @@
         <!-- <el-tab-pane ></el-tab-pane> -->
         <template v-for="shop in offlineData">
           <el-tab-pane :key="shop.name" :name="shop.name">
-            <el-row slot="label" :gutter="8" :style="{width: '138px', margin: '8px 0'}">
+            <el-row slot="label" :style="{width: '138px', margin: '8px 0'}">
               <el-col :span="12">
                 <number-info :title="shop.name" sub-title="转化率" :gap="2" :total="`${shop.cvr * 100}%`">
                 </number-info>
@@ -652,11 +652,21 @@ export default Vue.extend({
       height: 100%;
       line-height: inherit;
     }
+    &__nav-wrap.is-scrollable {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
     &__nav-prev,
     &__nav-next {
       position: absolute;
       top: 50%;
       transform: translate(0, -50%);
+    }
+    &__nav-prev {
+      left: 14px;
+    }
+    &__nav-next {
+      right: 14px;
     }
   }
 }
