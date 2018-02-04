@@ -208,10 +208,13 @@
                 </number-info>
               </el-col>
               <el-col :span="12" :style="{paddingTop: '36px'}">
-                <pie :color="currentTabKey !== shop.name ? '#bde4ff' : null" inner="55%"
-                  :percent="shop.cvr * 100" height="64px"></pie>
+                <pie :color="currentTabKey !== shop.name ? '#bde4ff' : null"
+                  inner="55%" :percent="shop.cvr * 100" height="64px"></pie>
               </el-col>
             </el-row>
+            <div :style="{padding: '0 24px'}">
+              <timeline-chart height="400px" :data="offlineChartData" :title-map="{y1: '客流量', y2: '支付笔数'}"></timeline-chart>
+            </div>
           </el-tab-pane>
         </template>
       </el-tabs>
@@ -252,7 +255,8 @@ import {
   MiniBar,
   MiniProgress,
   Bar,
-  Pie
+  Pie,
+  TimelineChart
 } from 'components/Charts'
 import NumberInfo from 'components/NumberInfo/index.vue'
 
@@ -432,7 +436,8 @@ export default Vue.extend({
     MiniProgress,
     Bar,
     NumberInfo,
-    Pie
+    Pie,
+    TimelineChart
   },
   data() {
     const topColResponsiveProps = {
