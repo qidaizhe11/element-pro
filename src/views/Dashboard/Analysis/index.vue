@@ -207,6 +207,10 @@
                 <number-info :title="shop.name" sub-title="转化率" :gap="2" :total="`${shop.cvr * 100}%`">
                 </number-info>
               </el-col>
+              <el-col :span="12" :style="{paddingTop: '36px'}">
+                <pie :color="currentTabKey !== shop.name ? '#bde4ff' : null" inner="55%"
+                  :percent="shop.cvr * 100" height="64px"></pie>
+              </el-col>
             </el-row>
           </el-tab-pane>
         </template>
@@ -648,7 +652,8 @@ export default Vue.extend({
       height: 100%;
       line-height: inherit;
     }
-    &__nav-prev, &__nav-next {
+    &__nav-prev,
+    &__nav-next {
       position: absolute;
       top: 50%;
       transform: translate(0, -50%);

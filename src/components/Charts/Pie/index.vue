@@ -69,7 +69,16 @@ export default Vue.extend({
       type: Number,
       default: 1
     },
-    valueFormat: Function
+    valueFormat: Function,
+    percent: {
+      type: Number,
+      default: 0
+    },
+    color: String,
+    tooltip: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     const legendData: any[] = []
@@ -93,20 +102,24 @@ export default Vue.extend({
       return this.legendData.filter(l => l.checked)
     },
     options(): any {
-      const { filteredLegendData, inner, colors, lineWidth } = this
+      const { filteredLegendData, percent, inner, lineWidth, tooltip } = this
       return {
-        grid: defaultOptions.grid,
         tooltip: {
           ...defaultOptions.tooltip,
+          show: percent ? false : tooltip,
           confine: true,
           formatter: (params: any) => {
-            return `${colorSpan(params.color)}${params.data.x}: ${
-              params.data.percent
+            return `${colorSpan(params.color)}${params.data[0]}: ${
+              params.data[3]
             }`
           }
         },
         dataset: {
-          source: filteredLegendData
+          sourceHeader: true,
+          // source: filteredLegendData
+          source: [['x', 'y', 'color', 'percent']].concat(filteredLegendData.map(item => {
+            return [item.x, item.y, item.color, item.percent]
+          }))
         },
         series: [
           {
@@ -115,7 +128,8 @@ export default Vue.extend({
             label: {
               show: false
             },
-            selectedMode: 'single',
+            selectedMode: percent ? false : 'single',
+            hoverAnimation: !percent,
             hoverOffset: 5,
             selectedOffset: 6,
             encode: {
@@ -126,7 +140,7 @@ export default Vue.extend({
               borderColor: '#fff',
               borderWidth: lineWidth,
               color: (params: any) => {
-                return params.data.color
+                return params.data[2]
               }
             }
           }
@@ -161,30 +175,57 @@ export default Vue.extend({
         this.legendBlock = false
       }
     },
+    handleLegendClick(item: any, i: number) {
+      item.checked = !item.checked
+    },
     getLegendData() {
-      if (!this.hasLegend) {
+      if (!this.hasLegend && !this.percent) {
         return []
       }
       const defaultColors =
         this.data.length > 8 ? theme.colorsPie16 : theme.colorsPie
       const colors = this.colors || defaultColors
 
-      const legendData = this.data.map((item, i) => {
-        const colorIndex = i % colors.length
-        const percent = item.y / this.totalCount
-        return {
-          ...item,
-          color: colors[colorIndex],
-          checked: true,
-          // percent: item.y / this.totalCount
-          percent: `${(isNaN(percent) ? 0 : percent * 100).toFixed(2)}%`
-        }
-      })
+      let legendData: any[] = []
+      if (this.percent) {
+        legendData = this.getLegendDataOfPercent(this.percent)
+      } else {
+        legendData = this.data.map((item, i) => {
+          const colorIndex = i % colors.length
+          const percent = item.y / this.totalCount
+          return {
+            ...item,
+            color: colors[colorIndex],
+            checked: true,
+            // percent: item.y / this.totalCount
+            percent: `${(isNaN(percent) ? 0 : percent * 100).toFixed(2)}%`
+          }
+        })
+      }
 
       this.legendData = legendData
     },
-    handleLegendClick(item: any, i: number) {
-      item.checked = !item.checked
+    getLegendDataOfPercent(percent: number) {
+      if (!percent) {
+        return []
+      }
+      const { color } = this
+      return [
+        {
+          x: '占比',
+          y: percent,
+          color: color || 'rgba(24, 144, 255, 0.85)',
+          percent: `${percent.toFixed(2)}%`,
+          checked: true
+        },
+        {
+          x: '反比',
+          y: 100 - percent,
+          color: '#f0f2f5',
+          percent: `${(100 - percent).toFixed(2)}%`,
+          checked: true
+        }
+      ]
     }
   }
 })
