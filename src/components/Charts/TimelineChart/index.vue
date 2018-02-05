@@ -58,8 +58,10 @@ export default Vue.extend({
       return {
         color: defaultColors,
         grid: {
-          // ...defaultOptions.grid,
-          containLabel: false
+          top: 60,
+          right: 20,
+          bottom: 40 + 30,
+          left: 40
         },
         tooltip: {
           ...defaultOptions.tooltip,
@@ -76,13 +78,15 @@ export default Vue.extend({
             }, moment(paramsList[0].axisValue).format('HH:mm'))
           }
         },
+        legend: {
+          show: true
+        },
         dataset: {
           source: this.data
         },
         xAxis: {
           // type: 'category'
           type: 'time',
-          splitNumber: data.length,
           splitLine: {
             show: false
           },

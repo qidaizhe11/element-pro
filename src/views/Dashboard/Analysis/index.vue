@@ -212,8 +212,9 @@
                   inner="55%" :percent="shop.cvr * 100" height="64px"></pie>
               </el-col>
             </el-row>
-            <div :style="{padding: '0 24px'}">
-              <timeline-chart height="400px" :data="offlineChartData" :title-map="{y1: '客流量', y2: '支付笔数'}"></timeline-chart>
+            <div v-if="currentTabKey === shop.name" :style="{padding: '0 24px'}">
+              <timeline-chart height="400px" :data="offlineChartData" :title-map="{y1: '客流量', y2: '支付笔数'}">
+              </timeline-chart>
             </div>
           </el-tab-pane>
         </template>
@@ -656,6 +657,9 @@ export default Vue.extend({
     &__item {
       height: 100%;
       line-height: inherit;
+    }
+    &__nav-wrap::after {
+      display: none;
     }
     &__nav-wrap.is-scrollable {
       padding-left: 40px;
