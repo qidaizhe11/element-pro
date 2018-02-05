@@ -85,57 +85,24 @@ export default Vue.extend({
           source: this.data
         },
         xAxis: {
+          ...defaultOptions.xAxis,
           // type: 'category'
           type: 'time',
-          splitLine: {
-            show: false
-          },
           axisLabel: {
-            color: '#797979',
-            margin: 12,
+            ...defaultOptions.xAxis.axisLabel,
             formatter: (value: any) => {
               return moment(value).format('HH:mm')
             }
-          },
-          axisTick: {
-            show: true,
-            alignWithLabel: true
-          },
-          axisLine: {
-            show: true,
-            lineStyle: {
-              color: '#bebebe'
-            }
-          },
-          axisPointer: {
-            status: 'hide'
           }
         },
         yAxis: {
-          type: 'value',
-          show: true,
-          axisLabel: {
-            color: '#797979'
-          },
-          axisTick: {
-            show: false
-          },
-          axisLine: {
-            show: false
-          },
-          splitLine: {
-            show: true,
-            lineStyle: {
-              type: 'dotted'
-            }
-          }
+          ...defaultOptions.yAxis,
+          type: 'value'
         },
-        dataZoom: [
-          {
-            show: true,
-            realtime: true
-          }
-        ],
+        dataZoom: {
+          show: true,
+          realtime: true
+        },
         series: [
           {
             name: titleMap.y1,

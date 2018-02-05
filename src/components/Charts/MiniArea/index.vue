@@ -8,6 +8,8 @@ import Vue from 'vue'
 
 import EChart from 'components/EChart/index.vue'
 
+import { defaultOptions, colorSpan } from 'components/Charts/default'
+
 export default Vue.extend({
   components: {
     EChart
@@ -48,6 +50,7 @@ export default Vue.extend({
           bottom: 0
         },
         tooltip: {
+          ...defaultOptions.tooltip,
           trigger: 'axis',
           axisPointer: {
             type: 'line',
@@ -56,42 +59,22 @@ export default Vue.extend({
             }
           },
           formatter: (paramsList: any) => {
-            const colorSpan = (color: string) => {
-              return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:8px;height:8px;background-color:${color};border: 1px solid #fff;"></span>`
-            }
             return paramsList.map((item: any) => {
               return `${colorSpan(item.color)}${item.value[0]}: ${
                 item.value[1]
               }`
             })
           },
-          confine: true,
-          textStyle: {
-            fontSize: 12
-          },
-          padding: [10, 5]
+          confine: true
         },
-        xAxis: [
-          {
-            type: 'category',
-            boundaryGap: false,
-            axisLabel: {
-              show: false
-            },
-            axisTick: {
-              show: false
-            },
-            axisLine: {
-              show: false
-            },
-            axisPointer: {
-              status: 'hide'
-            },
-            data: data.map(item => {
-              return item.x
-            })
-          }
-        ],
+        xAxis: {
+          ...defaultOptions.miniXAxis,
+          type: 'category',
+          boundaryGap: false,
+          data: data.map(item => {
+            return item.x
+          })
+        },
         yAxis: {
           show: false
         },

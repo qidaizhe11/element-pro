@@ -93,6 +93,7 @@ export const colorSpan = (color: string) => {
 }
 
 export const defaultOptions = {
+  color: COLOR_PLATE_8,
   tooltip: {
     textStyle: {
       fontSize: 12
@@ -105,5 +106,58 @@ export const defaultOptions = {
     top: 10,
     bottom: 5,
     containLabel: true
+  },
+  xAxis: {
+    splitLine: {
+      show: false
+    },
+    axisLabel: {
+      color: '#797979',
+      margin: 12
+    },
+    axisTick: {
+      show: true,
+      alignWithLabel: true
+    },
+    axisLine: {
+      show: true,
+      lineStyle: {
+        color: '#bebebe'
+      }
+    },
+    axisPointer: {
+      status: 'hide'
+    }
+  },
+  miniXAxis: {
+    axisLabel: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLine: {
+      show: false
+    },
+    axisPointer: {
+      status: 'hide'
+    }
+  },
+  yAxis: {
+    axisLabel: {
+      color: '#797979'
+    },
+    axisTick: {
+      show: false
+    },
+    axisLine: {
+      show: false
+    },
+    splitLine: {
+      show: true,
+      lineStyle: {
+        type: 'dotted'
+      }
+    }
   }
 }
