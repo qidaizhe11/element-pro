@@ -105,23 +105,24 @@ export default Vue.extend({
         },
         series: [
           {
+            ...defaultOptions.series.line,
+            itemStyle: defaultOptions.series.line.getItemStyle(defaultColors[0]),
             name: titleMap.y1,
             type: 'line',
             encode: {
               x: 'x',
-              y: 'y1',
-              tooltip: ['y1']
-            },
-            showSymbol: false
+              y: 'y1'
+            }
           },
           {
+            ...defaultOptions.series.line,
+            itemStyle: defaultOptions.series.line.getItemStyle(defaultColors[1]),
             name: titleMap.y2,
             type: 'line',
             encode: {
               x: 'x',
               y: 'y2'
-            },
-            showSymbol: false
+            }
           }
         ]
       }

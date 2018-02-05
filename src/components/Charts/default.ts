@@ -159,5 +159,26 @@ export const defaultOptions = {
         type: 'dotted'
       }
     }
+  },
+  series: {
+    line: {
+      itemStyle: {
+        shadowBlur: 15,
+        borderWidth: 1,
+        borderColor: '#fff'
+      },
+      getItemStyle: (color: string) => {
+        return {
+          color: color,
+          shadowColor: color,
+          shadowBlur: 15,
+          borderWidth: 1,
+          borderColor: '#fff'
+        }
+      },
+      showSymbol: false,
+      symbol: 'circle',
+      symbolSize: 2
+    }
   }
 }
