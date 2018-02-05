@@ -12,6 +12,8 @@ import { debounce } from 'lodash'
 
 import EChart from 'components/EChart/index.vue'
 
+import { defaultOptions, colorSpan } from 'components/Charts/default'
+
 export default Vue.extend({
   components: {
     EChart
@@ -54,6 +56,7 @@ export default Vue.extend({
           containLabel: true
         },
         tooltip: {
+          ...defaultOptions.tooltip,
           trigger: 'axis',
           axisPointer: {
             type: 'line',
@@ -62,65 +65,39 @@ export default Vue.extend({
             }
           },
           formatter: (paramsList: any) => {
-            const colorSpan = (color: string) => {
-              return `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:8px;height:8px;background-color:${color};border: 1px solid #fff;"></span>`
-            }
             return paramsList.map((item: any) => {
-              console.log('echarts, formatter, item:', item)
               return `${colorSpan(item.color)}${item.value[0]}: ${
                 item.value[1]
               }`
             })
           },
-          confine: true,
-          textStyle: {
-            fontSize: 12
-          },
-          padding: [10, 5]
+          confine: true
         },
-        xAxis: [
-          {
-            type: 'category',
-            axisLabel: {
-              show: !autoHideXLabels,
-              color: '#797979',
-              margin: 12
-            },
-            axisTick: {
-              show: !autoHideXLabels,
-              alignWithLabel: true
-            },
-            axisLine: {
-              show: !autoHideXLabels,
-              lineStyle: {
-                color: '#bebebe'
-              }
-            },
-            axisPointer: {
-              status: 'hide'
-            },
-            data: data.map(item => {
-              return item.x
-            })
-          }
-        ],
-        yAxis: {
-          show: true,
+        xAxis: {
+          ...defaultOptions.xAxis,
+          type: 'category',
           axisLabel: {
-            color: '#797979'
+            ...defaultOptions.xAxis.axisLabel,
+            show: !autoHideXLabels
           },
           axisTick: {
-            show: false
+            ...defaultOptions.xAxis.axisTick,
+            show: !autoHideXLabels
           },
           axisLine: {
-            show: false
+            ...defaultOptions.xAxis.axisLine,
+            show: !autoHideXLabels
           },
-          splitLine: {
-            show: true,
-            lineStyle: {
-              type: 'dotted'
-            }
-          }
+          axisPointer: {
+            status: 'hide'
+          },
+          data: data.map(item => {
+            return item.x
+          })
+        },
+        yAxis: {
+          ...defaultOptions.yAxis,
+          show: true
         },
         series: [
           {
