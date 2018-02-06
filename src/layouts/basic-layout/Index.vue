@@ -1,29 +1,40 @@
 <template>
   <el-container class="app-container">
-    <el-aside :width="siderWidth" :class="{'sider': true, 'collapse': collapse}">
+    <el-aside :width="siderWidth"
+              :class="{'sider': true, 'collapse': collapse}">
       <div class="logo">
         <router-link to="/">
-          <img :src="logo" alt="logo" />
+          <img :src="logo"
+               alt="logo" />
           <h1>Element UI Pro</h1>
         </router-link>
       </div>
-      <side-menu :menus="menus" :selected-key="selectedKey" :open-keys="openKeys"
-        :collapse="collapse"></side-menu>
+      <side-menu :menus="menus"
+                 :selected-key="selectedKey"
+                 :open-keys="openKeys"
+                 :collapse="collapse"></side-menu>
     </el-aside>
     <el-container>
-      <el-header height="64px" class="header">
-        <ant-icon :type="collapse ? 'menuunfold' : 'menufold'" class="trigger"
-          @click="toggle" />
+      <el-header height="64px"
+                 class="header">
+        <ant-icon :type="collapse ? 'menuunfold' : 'menufold'"
+                  class="trigger"
+                  @click="toggle" />
         <div class="right">
-          <header-search class="action search" placeholder="站内搜索" v-model="searchValue"
-            :data="suggestionData" @select="onSearchSelect">
+          <header-search class="action search"
+                         placeholder="站内搜索"
+                         v-model="searchValue"
+                         :data="suggestionData"
+                         @select="onSearchSelect">
           </header-search>
-          <notice-icon class="action notice" :tabs="noticeTabs">
+          <notice-icon class="action notice"
+                       :tabs="noticeTabs">
           </notice-icon>
           <el-dropdown class="action">
             <span class="account">
-              <avatar class="avatar" size="small" :src="currentUser.avatar"
-              /> {{currentUser.name}}
+              <avatar class="avatar"
+                      size="small"
+                      :src="currentUser.avatar" /> {{currentUser.name}}
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item disabled>个人中心</el-dropdown-item>
@@ -33,12 +44,23 @@
           </el-dropdown>
         </div>
       </el-header>
-      <el-main>
+      <el-main :style="{'padding-bottom': 0}">
         <router-view></router-view>
+        <el-footer height="auto"
+                   :style="{padding: 0, flex: '0 0 auto'}">
+          <global-footer :links="footerLinks">
+            <template slot="copyright">
+              <div>
+                Copyright
+                <ant-icon type="copyright" /> 2018 Daizhe
+              </div>
+            </template>
+            <template slot="github-slot">
+              <ant-icon type="github" />
+            </template>
+          </global-footer>
+        </el-footer>
       </el-main>
-      <el-footer :style="{padding: 0}">
-        
-      </el-footer>
     </el-container>
   </el-container>
 </template>
@@ -66,6 +88,7 @@ import Avatar from 'components/Avatar/index.vue'
 import AntIcon from 'components/AntIcon/index.vue'
 import HeaderSearch from 'components/HeaderSearch/index.vue'
 import NoticeIcon from 'components/NoticeIcon/index.vue'
+import GlobalFooter from 'components/GlobalFooter/index.vue'
 
 Vue.use(Container)
 Vue.use(Aside)
@@ -181,6 +204,14 @@ const noticeTabs = [
 
 export default Vue.extend({
   name: 'BasicLayout',
+  components: {
+    SideMenu,
+    Avatar,
+    AntIcon,
+    HeaderSearch,
+    NoticeIcon,
+    GlobalFooter
+  },
   data() {
     const menus: any = navData.reduce((prev: any, current: any) => {
       return prev.concat(current.children)
@@ -188,6 +219,27 @@ export default Vue.extend({
     const openKeys: string[] = []
 
     const suggestionData = ['搜索提示一', '搜索提示二', '搜索提示三']
+
+    const footerLinks = [
+      // {
+      //   key: 'Element UI Pro',
+      //   title: 'Element UI Pro',
+      //   href: '',
+      //   blankTarget: true
+      // },
+      {
+        key: 'github',
+        titleSlot: 'github-slot',
+        href: 'https://github.com/element-pro/element-pro',
+        blankTarget: true
+      }
+      // {
+      //   key: 'Element UI',
+      //   title: 'Element UI',
+      //   href: 'http://element.eleme.io',
+      //   blankTarget: true
+      // }
+    ]
 
     return {
       menus,
@@ -198,6 +250,7 @@ export default Vue.extend({
       suggestionData,
       searchValue: '',
       noticeTabs: noticeTabs,
+      footerLinks,
       currentUser: {
         name: 'Serati Ma',
         avatar:
@@ -221,13 +274,6 @@ export default Vue.extend({
   created() {
     this.selectedKey = this.getCurrentMenuSelectedKey()
     this.openKeys = this.getDefaultCollapsedSubMenus()
-  },
-  components: {
-    SideMenu,
-    Avatar,
-    AntIcon,
-    HeaderSearch,
-    NoticeIcon
   },
   methods: {
     onSearchSelect(value: string) {
