@@ -36,6 +36,9 @@
       <el-main>
         <router-view></router-view>
       </el-main>
+      <el-footer :style="{padding: 0}">
+        
+      </el-footer>
     </el-container>
   </el-container>
 </template>
@@ -49,7 +52,8 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Main
+  Main,
+  Footer
 } from 'element-ui'
 import { debounce } from 'lodash'
 
@@ -70,6 +74,7 @@ Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Main)
+Vue.use(Footer)
 
 interface SubMenu {
   name: string
