@@ -157,6 +157,9 @@ export default Vue.extend({
     this.selectedKey = this.getCurrentMenuSelectedKey()
     this.openKeys = this.getDefaultCollapsedSubMenus()
   },
+  mounted() {
+    this.$store.dispatch('user/fetchCurrent')
+  },
   methods: {
     handleMenuCollapse(collapsed: boolean) {
       this.collapsed = collapsed

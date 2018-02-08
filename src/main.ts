@@ -6,6 +6,7 @@ import 'moment/locale/zh-cn'
 
 import App from './App.vue'
 import router from './router'
+import store from './store'
 
 import 'bootstrap/dist/css/bootstrap-reboot.css'
 import './theme/element-theme.scss'
@@ -21,6 +22,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
