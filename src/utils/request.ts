@@ -2,7 +2,7 @@
 import axios, { AxiosResponse } from 'axios'
 
 const service = axios.create({
-  baseURL: process.env.BASE_API,
+  baseURL: process.env.BASE_URL,
   withCredentials: true
 })
 
