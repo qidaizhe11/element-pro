@@ -1,6 +1,6 @@
 import Vue, { Component } from 'vue'
-import BasicLayout from 'layouts/basic-layout/Index.vue'
-import BlankLayout from 'layouts/blank-layout/Index.vue'
+import BasicLayout from 'layouts/BasicLayout/Index.vue'
+import BlankLayout from 'layouts/BlankLayout/Index.vue'
 
 export interface Layout {
   path: string,
