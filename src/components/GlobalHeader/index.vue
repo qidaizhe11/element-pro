@@ -18,7 +18,7 @@
         :tabs="noticeTabs"
       >
       </notice-icon>
-      <el-dropdown v-if="currentUser.name" class="action">
+      <el-dropdown v-if="currentUser.namea" class="action">
         <span class="action account">
           <avatar
             class="avatar"
@@ -33,7 +33,9 @@
           <el-dropdown-item divided>退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <div v-else class="loading" v-loading="true"></div>
+      <div v-else class="action loading-wrapper">
+        <div class="loading" v-loading="true"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -41,11 +43,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import { debounce } from 'lodash'
+import { Loading } from 'element-ui'
 
 import Avatar from 'components/Avatar/index.vue'
 import AntIcon from 'components/AntIcon/index.vue'
 import HeaderSearch from 'components/HeaderSearch/index.vue'
 import NoticeIcon from 'components/NoticeIcon/index.vue'
+
+Vue.use(Loading)
 
 const noticeTabs = [
   {
@@ -241,6 +246,12 @@ export default Vue.extend({
         color: $primary-color;
         background: rgba(255, 255, 255, 0.85);
         vertical-align: middle;
+      }
+    }
+    .loading-wrapper {
+      .loading {
+        width: 20px;
+        height: 20px;
       }
     }
   }

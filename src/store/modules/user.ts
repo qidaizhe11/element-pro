@@ -14,7 +14,7 @@ const state: State = {
 
 const mutations = {
   saveCurrentUser(state: State, payload: any) {
-    state.currentUser = payload
+    state.currentUser = payload || {}
   }
 }
 

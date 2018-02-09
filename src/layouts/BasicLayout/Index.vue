@@ -132,15 +132,13 @@ export default Vue.extend({
       openKeys,
       collapsed: false,
       searchValue: '',
-      footerLinks,
-      currentUser: {
-        name: 'Serati Ma',
-        avatar:
-          'https://gw.alipayobjects.com/zos/rmsportal/dRFVcIqZOYPcSNrlJsqQ.png'
-      }
+      footerLinks
     }
   },
   computed: {
+    currentUser(): any {
+      return this.$store.state.user.currentUser
+    },
     siderWidth(): string {
       return this.collapsed ? '64px' : '256px'
     }
