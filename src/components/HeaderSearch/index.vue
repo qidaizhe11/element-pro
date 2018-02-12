@@ -1,10 +1,10 @@
 <template>
-  <span class="headerSearch" @click="enterSearchMode">
-    <i class="el-icon-search icon"></i>
+  <span class="headerSearch">
+    <i class="el-icon-search icon" @click="toggleSearchMode"></i>
     <el-autocomplete :value="value" :class="['autocomplete', {show: searchMode}]"
       ref="autocomplete" :fetch-suggestions="querySearch" :select-when-unmatched="true"
       v-bind="$attrs" @input="onSearchInput"
-      @blur="leaveSearchMode" @select="onSearchSelect"></el-autocomplete>
+      @select="onSearchSelect"></el-autocomplete>
   </span>
 </template>
 
@@ -43,7 +43,9 @@ export default Vue.extend({
   methods: {
     querySearch(queryString: string, cb: any) {
       const suggestionData = this.suggestionData
-      const results = queryString ? suggestionData.filter(this.createFilter(queryString)) : suggestionData
+      const results = queryString
+        ? suggestionData.filter(this.createFilter(queryString))
+        : suggestionData
       cb(results)
     },
     createFilter(queryString: string) {
@@ -51,19 +53,16 @@ export default Vue.extend({
         return item.value.toLowerCase().indexOf(queryString.toLowerCase()) >= 0
       }
     },
-    enterSearchMode() {
-      this.searchMode = true
-      const ref: any = this.$refs.autocomplete
-      setTimeout(() => {
-        ref.$refs.input.focus()
-      }, 300)
-    },
-    leaveSearchMode() {
-      this.searchMode = false
-      this.value = ''
-      this.$emit('input', '')
-      const ref: any = this.$refs.autocomplete
-      ref.close()
+    toggleSearchMode() {
+      this.searchMode = !this.searchMode
+      this.$nextTick(() => {
+        if (this.searchMode) {
+          const ref: any = this.$refs.autocomplete
+          setTimeout(() => {
+            ref.$refs.input.focus()
+          }, 300)
+        }
+      })
     },
     onSearchSelect(item: SuggestionItem) {
       this.searchMode = true
