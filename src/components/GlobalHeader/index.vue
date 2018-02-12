@@ -18,7 +18,7 @@
         :tabs="noticeTabs"
       >
       </notice-icon>
-      <el-dropdown v-if="currentUser.namea" class="action">
+      <el-dropdown v-if="currentUser.name" class="action">
         <span class="action account">
           <avatar
             class="avatar"
@@ -250,8 +250,16 @@ export default Vue.extend({
     }
     .loading-wrapper {
       .loading {
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
+
+        /deep/ .el-loading-spinner {
+          margin-top: -15px;
+          .circular {
+            width: 30px;
+            height: 30px;
+          }
+        }
       }
     }
   }
