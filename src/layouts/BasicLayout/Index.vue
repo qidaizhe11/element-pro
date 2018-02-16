@@ -58,7 +58,7 @@ import {
 } from 'element-ui'
 import { debounce } from 'lodash'
 
-import { getRouteData, navData } from 'router'
+import { getMenuData } from 'common/menu'
 import logo from 'assets/logo.png'
 
 import SideMenu from './SideMenu.vue'
@@ -91,6 +91,25 @@ interface MenuItem {
   externalLink: boolean
 }
 
+/**
+ * 根据菜单取得重定向地址.
+ */
+const redirectData: any[] = []
+const getRedirect = (item: any) => {
+  if (item && item.children) {
+    if (item.children[0] && item.children[0].path) {
+      redirectData.push({
+        from: `/${item.path}`,
+        to: `/${item.children[0].path}`
+      })
+      item.children.forEach((children: any) => {
+        getRedirect(children)
+      })
+    }
+  }
+}
+getMenuData().forEach(getRedirect)
+
 export default Vue.extend({
   name: 'BasicLayout',
   components: {
@@ -99,9 +118,10 @@ export default Vue.extend({
     GlobalHeader
   },
   data() {
-    const menus: any = navData.reduce((prev: any, current: any) => {
-      return prev.concat(current.children)
-    }, [])
+    // const menus: any = navData.reduce((prev: any, current: any) => {
+    //   return prev.concat(current.children)
+    // }, [])
+    const menus: any[] = []
     const openKeys: string[] = []
 
     const footerLinks = [

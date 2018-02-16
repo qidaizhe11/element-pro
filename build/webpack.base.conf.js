@@ -36,7 +36,8 @@ module.exports = {
       'vendor': resolve('src/vendor'),
       'theme': resolve('src/theme'),
       'layouts': resolve('src/layouts'),
-      'services': resolve('src/services')
+      'services': resolve('src/services'),
+      'common': resolve('src/common')
     }
   },
   module: {

@@ -56,6 +56,28 @@ export function getTimeDistance(type: string) {
   }
 }
 
+/**
+ * Get router routing configuration
+ * { path:{name,...param}}=>Array<{name,path ...param}>
+ * @param {string} path
+ * @param {routerData} routerData
+ */
+export function getRoutes(path: string, routerData: any) {
+  let routes = Object.keys(routerData).filter(
+    routePath => routePath.indexOf(path) === 0 && routePath !== path
+  )
+  // Replace path to '' eg. path='user' /user/name => name
+  routes = routes.map(item => item.replace(path, ''))
+  // Conversion and stitching parameters
+  return routes.map(item => {
+    return {
+      ...routerData[`${path}${item}`],
+      key: `${path}${item}`,
+      path: `${path}${item}`
+    }
+  })
+}
+
 /* eslint no-useless-escape:0 */
 const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g
 

@@ -1,3 +1,4 @@
+import * as pathToRegexp from 'path-to-regexp'
 import { getMenuData } from './menu'
 
 function getFlatMenuData(menus: any[]) {
@@ -13,7 +14,7 @@ function getFlatMenuData(menus: any[]) {
   return keys
 }
 
-export const getRouteData = () => {
+export const getRouterData = () => {
   const routerConfig: any = {
     '/': {
       component: () => import('../layouts/BasicLayout/index.vue')
@@ -65,4 +66,5 @@ export const getRouteData = () => {
     }
     routerData[path] = router
   })
+  return routerData
 }
