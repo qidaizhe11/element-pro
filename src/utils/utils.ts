@@ -55,3 +55,10 @@ export function getTimeDistance(type: string) {
     return [moment(`${year}-01-01 00:00:00`), moment(`${year}-12-31 23:59:59`)]
   }
 }
+
+/* eslint no-useless-escape:0 */
+const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g
+
+export function isUrl(path: string) {
+  return reg.test(path)
+}
