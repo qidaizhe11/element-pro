@@ -1,6 +1,6 @@
 <template>
   <el-container class="app-container">
-    <el-aside :width="siderWidth"
+    <!-- <el-aside :width="siderWidth"
               :class="{'sider': true, 'collapse': collapsed}">
       <div class="logo">
         <router-link to="/">
@@ -13,7 +13,12 @@
                  :selected-key="selectedKey"
                  :open-keys="openKeys"
                  :collapse="collapsed"></side-menu>
-    </el-aside>
+    </el-aside> -->
+    <sider-menu
+      :collapsed="collapsed" 
+      :logo="logo"
+    >
+    </sider-menu>
     <el-container>
       <el-header :style="{padding: 0}">
         <global-header
@@ -65,6 +70,7 @@ import SideMenu from './SideMenu.vue'
 
 import GlobalFooter from 'components/GlobalFooter/index.vue'
 import GlobalHeader from 'components/GlobalHeader/index.vue'
+import SiderMenu from 'components/SiderMenu/index.vue'
 
 Vue.use(Container)
 Vue.use(Aside)
@@ -115,7 +121,8 @@ export default Vue.extend({
   components: {
     SideMenu,
     GlobalFooter,
-    GlobalHeader
+    GlobalHeader,
+    SiderMenu
   },
   data() {
     // const menus: any = navData.reduce((prev: any, current: any) => {
@@ -214,50 +221,6 @@ export default Vue.extend({
   position: relative;
   height: 100%;
   background: $layout-body-background;
-}
-
-.sider {
-  // height: 100%;
-  min-height: 100vh;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
-  position: relative;
-  z-index: 10;
-  background-color: $layout-sider-background;
-  transition: all 0.3s;
-
-  &.collapse {
-    overflow: inherit;
-  }
-}
-
-.sider.collapse {
-  .logo {
-    padding-left: 16px;
-  }
-}
-
-.logo {
-  height: 64px;
-  position: relative;
-  line-height: 64px;
-  padding-left: 24px;
-  transition: all 0.3s;
-  background: #002140;
-  overflow: hidden;
-  img {
-    display: inline-block;
-    vertical-align: middle;
-    height: 32px;
-  }
-  h1 {
-    color: #fff;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 20px;
-    margin: 0 0 0 12px;
-    // font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    font-weight: 600;
-  }
 }
 </style>
 
