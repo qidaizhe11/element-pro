@@ -10,7 +10,6 @@ import store from './store'
 
 import 'bootstrap/dist/css/bootstrap-reboot.css'
 import './theme/element-theme.scss'
-import './assets/anticon/iconfont.css'
 import './main.scss'
 
 Vue.config.productionTip = false
