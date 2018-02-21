@@ -31,7 +31,7 @@
       </span>
       <span v-if="status || subTotal" class="sub-total">
         {{subTotal}}
-        <ant-icon v-if="status" :type="`caret${status}`"></ant-icon>
+        <ant-icon v-if="status" :type="`caret-${status}`"></ant-icon>
       </span>
     </div>
   </div>

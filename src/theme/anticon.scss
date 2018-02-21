@@ -1,4 +1,4 @@
-@import '../theme';
+@import './theme.scss';
 
 @mixin iconfont-mixin() {
   display: inline-block;
@@ -39,14 +39,14 @@
 // font-face
 @font-face {
   font-family: 'anticon';
-  src: url('@{icon-url}.eot');
+  src: url('#{$icon-url}.eot');
   /* IE9*/
   src :/* chrome、firefox */
-  url('${icon-url}.woff') format('woff'),
+  url('#{$icon-url}.woff') format('woff'),
   /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-  url('@{icon-url}.ttf') format('truetype'),
+  url('#{$icon-url}.ttf') format('truetype'),
   /* iOS 4.1- */
-  url('@{icon-url}.svg#iconfont') format('svg');
+  url('#{$icon-url}.svg#iconfont') format('svg');
 }
 
 .#{$iconfont-css-prefix} {

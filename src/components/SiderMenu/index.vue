@@ -60,7 +60,6 @@ export default Vue.extend({
     },
     getSubMenuOrItem(h: any, item: any) {
       if (item.children && item.children.some((child: any) => child.name)) {
-        console.log('getSubMenu, item:', item)
         return h(
           'el-submenu',
           {
@@ -84,7 +83,10 @@ export default Vue.extend({
               {
                 slot: 'title'
               },
-              item.name
+              [
+                item.icon && h('i', { class: item.icon }),
+                h('span', item.name)
+              ]
             )
           ].concat(this.getNavMenuItems(h, item.children))
         )

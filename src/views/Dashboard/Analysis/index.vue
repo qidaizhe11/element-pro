@@ -21,7 +21,7 @@
         <chart-card title="访问量" :total="numeral(8846).format('0,0')"
           content-height="46px">
           <el-tooltip slot="action" content="指标说明" placement="top">
-            <ant-icon type="infocirlceo"></ant-icon>
+            <ant-icon type="info-circle-o"></ant-icon>
           </el-tooltip>
           <mini-area color="#975FE4" :data="visitData" height="46px">
           </mini-area>
@@ -32,7 +32,7 @@
         <chart-card title="支付笔数" :total="numeral(6560).format('0,0')"
           content-height="46px">
           <el-tooltip slot="action" content="指标说明" placement="top">
-            <ant-icon type="infocirlceo"></ant-icon>
+            <ant-icon type="info-circle-o"></ant-icon>
           </el-tooltip>
           <mini-bar :data="visitData" height="46px"></mini-bar>
           <field slot="footer" label="转化率" value="60%"></field>
@@ -41,7 +41,7 @@
       <el-col v-bind="topColResponsiveProps">
         <chart-card title="运营活动效果" total="78%" content-height="46px">
           <el-tooltip slot="action" content="指标说明" placement="top">
-            <ant-icon type="infocirlceo"></ant-icon>
+            <ant-icon type="info-circle-o"></ant-icon>
           </el-tooltip>
           <mini-progress :percent="78" :stroke-width="8" :target="80" color="#13c2c2">
           </mini-progress>
@@ -136,7 +136,7 @@
                 <span slot="subTitle">
                   搜索用户数
                   <el-tooltip content="指标文案" placement="top">
-                    <ant-icon :style="{marginLeft: '8px'}" type="infocirlceo">
+                    <ant-icon :style="{marginLeft: '8px'}" type="info-circle-o">
                     </ant-icon>
                   </el-tooltip>
                 </span>
@@ -171,7 +171,7 @@
               <span class="title">销售额类别占比</span>
               <span class="icon-group">
                 <el-dropdown placement="bottom-end">
-                  <ant-icon type="ellipsis1"></ant-icon>
+                  <ant-icon type="ellipsis"></ant-icon>
                   <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item>操作一</el-dropdown-item>
                     <el-dropdown-item>操作二</el-dropdown-item>

@@ -1,7 +1,7 @@
 <template>
   <div class="global-header">
     <ant-icon
-      :type="collapsed ? 'menuunfold' : 'menufold'"
+      :type="collapsed ? 'menu-unfold' : 'menu-fold'"
       class="trigger"
       @click="toggle"
     />

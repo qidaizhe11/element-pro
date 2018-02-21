@@ -4,7 +4,7 @@
       <slot></slot>
     </span>
     <span v-if="flag" :class="flag">
-      <ant-icon :type="`caret${flag}`"></ant-icon>
+      <ant-icon :type="`caret-${flag}`"></ant-icon>
     </span>
   </div>
 </template>

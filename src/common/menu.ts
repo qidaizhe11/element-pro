@@ -1,9 +1,13 @@
 import { isUrl } from '../utils/utils'
 
+const anticon = (name: string) => {
+  return `anticon anticon-${name}`
+}
+
 const menuData = [
   {
     name: 'dashboard',
-    icon: 'dashboard',
+    icon: anticon('dashboard'),
     path: 'dashboard',
     children: [
       {
@@ -23,7 +27,7 @@ const menuData = [
   },
   {
     name: '表单页',
-    icon: 'form',
+    icon: anticon('form'),
     path: 'form',
     children: [
       {
@@ -43,7 +47,7 @@ const menuData = [
   },
   // {
   //   name: '列表页',
-  //   icon: 'table',
+  //   icon: anticon('table'),
   //   path: 'list',
   //   children: [
   //     {
@@ -80,7 +84,7 @@ const menuData = [
   // },
   // {
   //   name: '详情页',
-  //   icon: 'profile',
+  //   icon: anticon('profile'),
   //   path: 'profile',
   //   children: [
   //     {
@@ -96,7 +100,7 @@ const menuData = [
   // },
   {
     name: '结果页',
-    icon: 'check-circle-o',
+    icon: anticon('check-circle-o'),
     path: 'result',
     children: [
       {
@@ -111,7 +115,7 @@ const menuData = [
   },
   {
     name: '异常页',
-    icon: 'warning',
+    icon: anticon('warning'),
     path: 'exception',
     children: [
       {
@@ -135,7 +139,7 @@ const menuData = [
   },
   {
     name: '账户',
-    icon: 'user',
+    icon: anticon('user'),
     path: 'user',
     authority: 'guest',
     children: [
