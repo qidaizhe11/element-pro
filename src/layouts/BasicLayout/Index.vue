@@ -17,6 +17,7 @@
     <sider-menu
       :collapsed="collapsed" 
       :logo="logo"
+      :menu-data="getMenuData()"
     >
     </sider-menu>
     <el-container>
@@ -209,6 +210,9 @@ export default Vue.extend({
         return this.menus[0].key
       }
       return path
+    },
+    getMenuData() {
+      return getMenuData()
     }
   }
 })

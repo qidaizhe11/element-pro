@@ -1,79 +1,7 @@
-$--menu-item-color: rgba(255, 255, 255, 0.65);
-$--menu-item-fill: #001529;
-$--menu-item-hover-fill: #001529;
 
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 @import "~element-ui/packages/theme-chalk/src/index";
-
-.el-menu {
-  border-right: 0;
-}
-
-.el-menu-item [class^=anticon], .el-submenu [class^=anticon] {
-  margin-right: 5px;
-  width: 24px;
-  text-align: center;
-  font-size: 18px;
-}
-
-.el-menu-item {
-  &:hover {
-    color: #fff;
-    background: transparent;
-    >a {
-      color: #fff;
-    }
-    i {
-      color: #fff;
-    }
-  }
-  >a {
-    color: $--menu-item-color;
-    text-decoration: none;
-    outline: none;
-  }
-}
-
-.el-submenu {
-  .el-submenu__title {
-    &:hover {
-      color: #fff;
-      background-color: transparent;
-
-      >i {
-        color: #fff;
-      }
-    }
-
-    .el-submenu__icon-arrow {
-      margin-top: -4px;
-    }
-  }
-
-  > .el-menu {
-    background-color: #000c17;
-  }
-}
-
-.el-menu-item.is-active {
-  color: #fff;
-  background-color: #1890ff;
-  >a {
-    color: #fff;
-  }
-  i {
-    color: inherit;
-  }
-}
-.el-submenu.is-active {
-  >.el-submenu__title {
-    color: #fff;
-    >i {
-      color: #fff;
-    }
-  }
-}
 
 .el-dropdown-menu.el-popper[x-placement^="bottom"] {
   margin-top: 4px;
