@@ -2,7 +2,9 @@
 
 Vue 版 Ant Design Pro（基于 Element-ui 实现）
 
-- 预览：
+![](https://element-pro.github.io/element-pro/images/show.png)
+
+- 预览：https://element-pro.github.io/element-pro
 
 ## 特性
 - **漂亮**： 高度还原Ant Design Pro设计效果
