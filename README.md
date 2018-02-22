@@ -1,30 +1,26 @@
-# element-pro
+# Element UI Pro
 
-> A Vue.js project
+Vue 版 Ant Design Pro（基于 Element-ui 实现）
 
-## Build Setup
+- 预览：
+
+## 特性
+- **漂亮**： 高度还原Ant Design Pro设计效果
+- **最新技术栈**：使用 Vue/Element UI/Typescript/ECharts等前端前沿技术开发
+- **响应式**：针对不同屏幕大小设计
+- **代码级还原**：代码组织与实现均在Vue推荐用法基础上尽可能与Ant Design Pro高度一致
+- **Mock 数据**：基于[JSON Server](https://github.com/typicode/json-server)及nodemon实现与Ant Design Pro一致用法的本地数据调试方案
+
+## 使用
 
 ``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+$ git clone https://github.com/element-pro/element-pro.git --depth=1
+$ cd element-pro
+$ npm install
+$ npm run mock
+$ npm run dev
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 兼容性
+
+Modern browsers and IE11.
