@@ -29,7 +29,7 @@ export default Vue.extend({
           }
         },
         [
-          item.icon && h('i', { class: item.icon }),
+          item.icon && h('i', { class: `icon ${item.icon}` }),
           h('span', { slot: 'title' }, item.name)
         ]
       )
@@ -84,7 +84,7 @@ export default Vue.extend({
                 slot: 'title'
               },
               [
-                item.icon && h('i', { class: item.icon }),
+                item.icon && h('i', { class: `icon ${item.icon}` }),
                 h('span', item.name)
               ]
             )
@@ -255,6 +255,10 @@ export default Vue.extend({
             color: #fff;
           }
         }
+      }
+
+      .icon {
+        margin-right: 10px;
       }
     }
   }
