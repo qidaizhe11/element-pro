@@ -1,19 +1,5 @@
 <template>
   <el-container class="app-container">
-    <!-- <el-aside :width="siderWidth"
-              :class="{'sider': true, 'collapse': collapsed}">
-      <div class="logo">
-        <router-link to="/">
-          <img :src="logo"
-               alt="logo" />
-          <h1>Element UI Pro</h1>
-        </router-link>
-      </div>
-      <side-menu :menus="menus"
-                 :selected-key="selectedKey"
-                 :open-keys="openKeys"
-                 :collapse="collapsed"></side-menu>
-    </el-aside> -->
     <sider-menu
       :collapsed="collapsed" 
       :logo="logo"
@@ -67,8 +53,6 @@ import { debounce } from 'lodash'
 import { getMenuData } from 'common/menu'
 import logo from 'assets/logo.png'
 
-import SideMenu from './SideMenu.vue'
-
 import GlobalFooter from 'components/GlobalFooter/index.vue'
 import GlobalHeader from 'components/GlobalHeader/index.vue'
 import SiderMenu from 'components/SiderMenu/index.vue'
@@ -120,18 +104,11 @@ getMenuData().forEach(getRedirect)
 export default Vue.extend({
   name: 'BasicLayout',
   components: {
-    SideMenu,
     GlobalFooter,
     GlobalHeader,
     SiderMenu
   },
   data() {
-    // const menus: any = navData.reduce((prev: any, current: any) => {
-    //   return prev.concat(current.children)
-    // }, [])
-    const menus: any[] = []
-    const openKeys: string[] = []
-
     const footerLinks = [
       // {
       //   key: 'Element UI Pro',
@@ -154,10 +131,7 @@ export default Vue.extend({
     ]
 
     return {
-      menus,
       logo,
-      selectedKey: '',
-      openKeys,
       collapsed: false,
       searchValue: '',
       footerLinks
@@ -166,22 +140,12 @@ export default Vue.extend({
   computed: {
     currentUser(): any {
       return this.$store.state.user.currentUser
-    },
-    siderWidth(): string {
-      return this.collapsed ? '64px' : '256px'
     }
   },
   watch: {
-    collapsed(value) {
-      this.openKeys = this.getDefaultCollapsedSubMenus()
-    },
     searchValue(value) {
       console.log('search input', value)
     }
-  },
-  created() {
-    this.selectedKey = this.getCurrentMenuSelectedKey()
-    this.openKeys = this.getDefaultCollapsedSubMenus()
   },
   mounted() {
     this.$store.dispatch('user/fetchCurrent')
@@ -189,27 +153,6 @@ export default Vue.extend({
   methods: {
     handleMenuCollapse(collapsed: boolean) {
       this.collapsed = collapsed
-    },
-    getDefaultCollapsedSubMenus(): string[] {
-      const currentMenuSelectedKey = this.getCurrentMenuSelectedKey()
-      let keys = currentMenuSelectedKey.split('/').slice(1)
-      if (keys.length === 1 && keys[0] === '') {
-        keys = [this.menus[0].key]
-      }
-      keys.splice(-1, 1)
-      let tempKey = ''
-      const menuKeys = keys.map(key => {
-        tempKey += `/${key}`
-        return tempKey
-      })
-      return menuKeys
-    },
-    getCurrentMenuSelectedKey(): string {
-      const path = this.$route.path
-      if (!path) {
-        return this.menus[0].key
-      }
-      return path
     },
     getMenuData() {
       return getMenuData()

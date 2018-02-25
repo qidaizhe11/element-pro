@@ -1,13 +1,15 @@
 
 <script lang="ts">
 import Vue, { VNode } from 'vue'
-import { Aside, Menu } from 'element-ui'
+import { Aside, Menu, MenuItem, Submenu } from 'element-ui'
 import * as pathToRegexp from 'path-to-regexp'
 
 import { urlToList } from '../utils/pathTools'
 
 Vue.use(Aside)
 Vue.use(Menu)
+Vue.use(MenuItem)
+Vue.use(Submenu)
 
 export const getMenuMatchKeys = (flatMenuKeys: string[], path: string) => {
   return flatMenuKeys.filter(item => {
