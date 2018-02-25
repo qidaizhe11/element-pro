@@ -2,8 +2,18 @@
 <script lang="ts">
 import Vue, { VNode } from 'vue'
 import { Aside, Menu } from 'element-ui'
+import * as pathToRegexp from 'path-to-regexp'
+
+import { urlToList } from '../utils/pathTools'
+
 Vue.use(Aside)
 Vue.use(Menu)
+
+export const getMenuMatchKeys = (flatMenuKeys: string[], path: string) => {
+  return flatMenuKeys.filter(item => {
+    return pathToRegexp(item).test(path)
+  })
+}
 
 export default Vue.extend({
   props: {
@@ -19,7 +29,59 @@ export default Vue.extend({
     },
     logo: String
   },
+  data() {
+    const openKeys: string[] = []
+    const flatMenuKeys: string[] = []
+    return {
+      openKeys,
+      flatMenuKeys,
+      selectedKey: ''
+    }
+  },
+  computed: {
+    menus(): any[] {
+      return this.menuData
+    }
+  },
+  // watch: {
+  //   collapsed() {
+  //     this.openKeys = this.getDefaultCollapsedSubMenus()
+  //   }
+  // },
+  created() {
+    this.flatMenuKeys = this.getFlatMenuKeys(this.menuData)
+    this.openKeys = this.getDefaultCollapsedSubMenus()
+    this.selectedKey = this.getSelectedMenuKey()
+  },
   methods: {
+    /**
+     * Convert pathname to openKeys
+     * /list/search/articles = > ['list','/list/search']
+     * @param  props
+     */
+    getDefaultCollapsedSubMenus() {
+      const pathname = this.$route.path
+      return urlToList(pathname)
+        .map(item => {
+          return getMenuMatchKeys(this.flatMenuKeys, item)[0]
+        })
+        .filter(item => item)
+    },
+    /**
+     * Recursively flatten the data
+     * [{path:string},{path:string}] => {path,path2}
+     * @param  menus
+     */
+    getFlatMenuKeys(menus: any[]) {
+      let keys: string[] = []
+      menus.forEach(item => {
+        if (item.children) {
+          keys = keys.concat(this.getFlatMenuKeys(item.children))
+        }
+        keys.push(item.path)
+      })
+      return keys
+    },
     getMenuItem(h: any, item: any) {
       const elMenuItem = h(
         'el-menu-item',
@@ -104,6 +166,17 @@ export default Vue.extend({
           return this.getSubMenuOrItem(h, item)
         })
     },
+    // Get the currently selected menu
+    getSelectedMenuKeys() {
+      const pathname = this.$route.path
+      return urlToList(pathname).map(itemPath => {
+        return getMenuMatchKeys(this.flatMenuKeys, itemPath).pop()
+      })
+    },
+    getSelectedMenuKey(): string {
+      const pathname = this.$route.path
+      return pathname
+    },
     // conversion Path
     // 转化路径
     conversionPath(path: string) {
@@ -112,10 +185,21 @@ export default Vue.extend({
       } else {
         return `/${path || ''}`.replace(/\/+/g, '/')
       }
+    },
+    handleOpenChange(openKeys: string[]) {
+      const lastOpenKey = openKeys[openKeys.length - 1]
+      const isMainMenu = this.menus.some(
+        item =>
+          !!(
+            lastOpenKey &&
+            (item.key === lastOpenKey || item.path === lastOpenKey)
+          )
+      )
+      this.openKeys = isMainMenu ? [lastOpenKey] : [...openKeys]
     }
   },
   render(h): VNode {
-    const { collapsed, logo } = this
+    const { collapsed, logo, openKeys, selectedKey } = this
     return h(
       'el-aside',
       {
@@ -160,7 +244,9 @@ export default Vue.extend({
             props: {
               mode: 'vertical',
               'unique-opened': true,
-              collapse: collapsed
+              collapse: collapsed,
+              'default-active': selectedKey,
+              'default-openeds': openKeys
             },
             style: {
               padding: '16px 0',
