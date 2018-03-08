@@ -1,5 +1,6 @@
+import Component from 'vue-class-component'
 import Authorized from './Authorized.vue'
-import check, { hasPermission } from './CheckPermissions'
+import { hasPermission } from './CheckPermissions'
 
 let CURRENT: string = 'NULL'
 
@@ -21,5 +22,5 @@ const renderAuthorize = (currentAuthority: string | any) => {
   return Authorized
 }
 
-export { CURRENT, check, hasPermission }
+export { CURRENT, hasPermission }
 export default renderAuthorize

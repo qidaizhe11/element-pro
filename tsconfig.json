@@ -9,6 +9,7 @@
     "module": "esnext",
     "moduleResolution": "node",
 
+    "experimentalDecorators": true,
     "baseUrl": "src"
   }
 }

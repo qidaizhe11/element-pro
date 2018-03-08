@@ -29,7 +29,8 @@ export default Vue.extend({
         return []
       }
     },
-    logo: String
+    logo: String,
+    Authorized: Function
   },
   data() {
     const openKeys: string[] = []
@@ -165,8 +166,11 @@ export default Vue.extend({
       return menusData
         .filter(item => item.name && !item.hideInMenu)
         .map(item => {
-          return this.getSubMenuOrItem(h, item)
+          // make dom
+          const ItemDom = this.getSubMenuOrItem(h, item)
+          return this.checkPermissionItem(item.authority, ItemDom)
         })
+        .filter(item => item)
     },
     // Get the currently selected menu
     getSelectedMenuKeys() {
@@ -187,6 +191,15 @@ export default Vue.extend({
       } else {
         return `/${path || ''}`.replace(/\/+/g, '/')
       }
+    },
+    // permission to check
+    checkPermissionItem(authority: string, ItemDom: VNode) {
+      const Authorized: any = this.Authorized
+      if (Authorized && Authorized.check) {
+        const { check } = Authorized
+        return check(authority, ItemDom)
+      }
+      return ItemDom
     },
     handleOpenChange(openKeys: string[]) {
       const lastOpenKey = openKeys[openKeys.length - 1]

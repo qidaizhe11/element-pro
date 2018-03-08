@@ -1,9 +1,10 @@
 <template>
   <el-container class="app-container">
     <sider-menu
-      :collapsed="collapsed" 
+      :collapsed="collapsed"
       :logo="logo"
       :menu-data="getMenuData()"
+      :Authorized="getAuthrozed()"
     >
     </sider-menu>
     <el-container>
@@ -52,6 +53,7 @@ import { debounce } from 'lodash'
 
 import { getMenuData } from 'common/menu'
 import logo from 'assets/logo.png'
+import Authorized from 'utils/Authorized'
 
 import GlobalFooter from 'components/GlobalFooter/index.vue'
 import GlobalHeader from 'components/GlobalHeader/index.vue'
@@ -156,6 +158,9 @@ export default Vue.extend({
     },
     getMenuData() {
       return getMenuData()
+    },
+    getAuthrozed() {
+      return Authorized
     }
   }
 })

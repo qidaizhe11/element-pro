@@ -1,14 +1,21 @@
 
 <script lang="ts">
 import Vue, { VNode } from 'vue'
+import Component from 'vue-class-component'
 
 import CheckPermissions from './CheckPermissions'
 
-export default Vue.extend({
+@Component({
   props: {
     authority: String
-  },
-  render(h): VNode {
+  }
+})
+export default class Authorized extends Vue {
+  static check: any = CheckPermissions
+
+  authority: string
+
+  render(h: any): VNode {
     const slots = this.$slots
     const children =
       slots.default && slots.default.length > 0 ? slots.default[0] : null
@@ -16,5 +23,5 @@ export default Vue.extend({
       slots.noMatch && slots.noMatch.length > 0 ? slots.noMatch[0] : null
     return CheckPermissions(this.authority, children, noMatch) || h()
   }
-})
+}
 </script>

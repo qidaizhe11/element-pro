@@ -20,8 +20,9 @@ const menuData = [
       },
       {
         name: '工作台',
-        path: 'workplace'
+        path: 'workplace',
         // hideInMenu: true,
+        authority: 'admin'
       }
     ]
   },
