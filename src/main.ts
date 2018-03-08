@@ -8,6 +8,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import './router/authority'
+
 import 'bootstrap/dist/css/bootstrap-reboot.css'
 import './theme/element-theme.scss'
 import './theme/anticon.scss'
