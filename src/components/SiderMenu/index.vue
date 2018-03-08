@@ -85,23 +85,22 @@ export default Vue.extend({
       })
       return keys
     },
-    getMenuItem(h: any, item: any) {
-      const elMenuItem = h(
+    getMenuItem(item: any) {
+      const icon = this.$createElement('i', { class: `icon ${item.icon}` })
+      const title = this.$createElement('span', { slot: 'title' }, item.name)
+      const elMenuItem = this.$createElement(
         'el-menu-item',
         {
           props: {
             index: item.path
           }
         },
-        [
-          item.icon && h('i', { class: `icon ${item.icon}` }),
-          h('span', { slot: 'title' }, item.name)
-        ]
+        [item.icon && icon, title]
       )
 
       const itemPath = this.conversionPath(item.path)
       if (/^https?:\/\//.test(itemPath)) {
-        return h(
+        return this.$createElement(
           'a',
           {
             attrs: {
@@ -112,7 +111,7 @@ export default Vue.extend({
           [elMenuItem]
         )
       } else {
-        return h(
+        return this.$createElement(
           'router-link',
           {
             props: {
@@ -123,9 +122,9 @@ export default Vue.extend({
         )
       }
     },
-    getSubMenuOrItem(h: any, item: any) {
+    getSubMenuOrItem(item: any) {
       if (item.children && item.children.some((child: any) => child.name)) {
-        return h(
+        return this.$createElement(
           'el-submenu',
           {
             props: {
@@ -134,32 +133,21 @@ export default Vue.extend({
             key: item.path,
             scopedSlots: {
               title: (props: any) => {
-                // return [
-                //   item.icon && h('i', { class: item.icon }),
-                //   h('span', { slot: 'title' }, item.name)
-                // ]
-                return h('span', item.name)
+                return [
+                  item.icon &&
+                    this.$createElement('i', { class: `icon ${item.icon}` }),
+                  this.$createElement('span', { slot: 'title' }, item.name)
+                ]
               }
             }
           },
-          [
-            h(
-              'template',
-              {
-                slot: 'title'
-              },
-              [
-                item.icon && h('i', { class: `icon ${item.icon}` }),
-                h('span', item.name)
-              ]
-            )
-          ].concat(this.getNavMenuItems(h, item.children))
+          this.getNavMenuItems(item.children)
         )
       } else {
-        return this.getMenuItem(h, item)
+        return this.getMenuItem(item)
       }
     },
-    getNavMenuItems(h: any, menusData: any[]): any {
+    getNavMenuItems(menusData: any[]): any {
       if (!menusData) {
         return []
       }
@@ -167,7 +155,7 @@ export default Vue.extend({
         .filter(item => item.name && !item.hideInMenu)
         .map(item => {
           // make dom
-          const ItemDom = this.getSubMenuOrItem(h, item)
+          const ItemDom = this.getSubMenuOrItem(item)
           return this.checkPermissionItem(item.authority, ItemDom)
         })
         .filter(item => item)
@@ -269,7 +257,7 @@ export default Vue.extend({
               width: '100%'
             }
           },
-          this.getNavMenuItems(h, this.menuData)
+          this.getNavMenuItems(this.menuData)
         )
       ]
     )
