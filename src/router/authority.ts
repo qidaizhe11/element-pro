@@ -1,10 +1,11 @@
-import { getAuthority } from 'utils/authority'
-import { hasPermission } from 'components/Authorized'
+import Authorized from 'utils/Authorized'
 
 import router from './index'
 
+const authorized: any = Authorized
+
 router.beforeEach((to, from, next) => {
-  if (hasPermission(to.meta.authority, getAuthority())) {
+  if (authorized.pass(to.meta.authority)) {
     next()
   } else {
     next({

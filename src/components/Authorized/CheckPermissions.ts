@@ -75,7 +75,11 @@ const checkPermissions = (
   return Exception
 }
 
-export { checkPermissions, hasPermission }
+const pass = (authority: string | string[] | Promise<any> | Function) => {
+  return hasPermission(authority, CURRENT)
+}
+
+export { checkPermissions, hasPermission, pass }
 
 const check = (
   authority: string | string[] | Promise<any> | Function,

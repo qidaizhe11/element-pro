@@ -3,7 +3,7 @@
 import Vue, { VNode } from 'vue'
 import Component from 'vue-class-component'
 
-import CheckPermissions from './CheckPermissions'
+import CheckPermissions, { pass } from './CheckPermissions'
 
 @Component({
   props: {
@@ -12,6 +12,7 @@ import CheckPermissions from './CheckPermissions'
 })
 export default class Authorized extends Vue {
   static check: any = CheckPermissions
+  static pass: any = pass
 
   authority: string
 
