@@ -30,6 +30,9 @@ export const getRouterData = () => {
       // hideInBreadcrumb: true,
       // name: '工作台',
       authority: 'admin'
+    },
+    '/exception/403': {
+      component: () => import('../views/Exception/403.vue')
     }
     // '/user/:id': {
     //   component: () => import('../routes/User/SomeComponent'),
