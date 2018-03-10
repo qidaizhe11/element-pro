@@ -33,6 +33,12 @@ export const getRouterData = () => {
     },
     '/exception/403': {
       component: () => import('../views/Exception/403.vue')
+    },
+    '/exception/404': {
+      component: () => import('../views/Exception/404.vue')
+    },
+    '/exception/500': {
+      component: () => import('../views/Exception/500.vue')
     }
     // '/user/:id': {
     //   component: () => import('../routes/User/SomeComponent'),
