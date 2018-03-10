@@ -9,7 +9,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     next({
-      path: '/401',
+      path: '/exception/403',
       replace: true
     })
   }
