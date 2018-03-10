@@ -37,13 +37,16 @@ export default Vue.extend({
     const flatMenuKeys: string[] = []
     return {
       openKeys,
-      flatMenuKeys,
-      selectedKey: ''
+      flatMenuKeys
     }
   },
   computed: {
     menus(): any[] {
       return this.menuData
+    },
+    selectedKey(): string {
+      const pathname = this.$route.path
+      return pathname
     }
   },
   // watch: {
@@ -54,7 +57,6 @@ export default Vue.extend({
   created() {
     this.flatMenuKeys = this.getFlatMenuKeys(this.menuData)
     this.openKeys = this.getDefaultCollapsedSubMenus()
-    this.selectedKey = this.getSelectedMenuKey()
   },
   methods: {
     /**
@@ -166,10 +168,6 @@ export default Vue.extend({
       return urlToList(pathname).map(itemPath => {
         return getMenuMatchKeys(this.flatMenuKeys, itemPath).pop()
       })
-    },
-    getSelectedMenuKey(): string {
-      const pathname = this.$route.path
-      return pathname
     },
     // conversion Path
     // 转化路径
