@@ -2,9 +2,9 @@
 
 Vue 版 Ant Design Pro（基于 Element-ui 实现）
 
-![](https://element-pro.github.io/element-pro/images/show.png)
+![](https://qidaizhe11.github.io/element-pro/images/show.png)
 
-- 预览：https://element-pro.github.io/element-pro
+- 预览：https://qidaizhe11.github.io/element-pro
 
 ## 特性
 - **漂亮**： 高度还原Ant Design Pro设计效果
@@ -16,7 +16,7 @@ Vue 版 Ant Design Pro（基于 Element-ui 实现）
 ## 使用
 
 ``` bash
-$ git clone https://github.com/element-pro/element-pro.git --depth=1
+$ git clone https://github.com/qidaizhe11/element-pro.git --depth=1
 $ cd element-pro
 $ npm install
 $ npm run mock
