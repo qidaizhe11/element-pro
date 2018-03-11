@@ -39,6 +39,12 @@ export const getRouterData = () => {
     },
     '/exception/500': {
       component: () => import('../views/Exception/500.vue')
+    },
+    '/user': {
+      component: () => import('../layouts/UserLayout/index.vue')
+    },
+    '/user/login': {
+      component: () => import('../views/User/Login/index.vue')
     }
     // '/user/:id': {
     //   component: () => import('../routes/User/SomeComponent'),

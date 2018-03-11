@@ -8,12 +8,18 @@ import { getRoutes } from '../utils/utils'
 Vue.use(Router)
 
 const routerData: any = getRouterData()
-// const UserLayout = routerData['/user'].component
+const UserLayout = routerData['/user'].component
 const BasicLayout = routerData['/'].component
 
 const basicLayoutRoutes = getRoutes('/', routerData)
+const userLayoutRoutes = getRoutes('/user', routerData)
 
 const routes = [
+  {
+    path: '/user',
+    component: UserLayout,
+    children: userLayoutRoutes
+  },
   {
     path: '/',
     component: BasicLayout,
