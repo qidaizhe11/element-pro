@@ -18,7 +18,16 @@
         </login-tab>
       </template>
       <div>
+        <el-checkbox
+          v-model="autoLogin"
+        >
+          自动登录
+        </el-checkbox>
         <a :style="{float: 'right'}" href="">忘记密码</a>
+      </div>
+      <div class="other">
+        其他登录方式
+        
       </div>
     </login>
   </div>
@@ -26,15 +35,18 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { Checkbox } from 'element-ui'
 
 import Login from 'components/Login'
 
+Vue.use(Checkbox)
 Vue.use(Login)
 
 export default Vue.extend({
   data() {
     return {
-      type: 'account'
+      type: 'account',
+      autoLogin: true
     }
   }
 })
@@ -44,10 +56,8 @@ export default Vue.extend({
 @import '~theme/theme.scss';
 
 .main {
-  // width: 368px;
-  // margin: 0 auto;
-  width: 100%;
-  height: 100%;
+  width: 368px;
+  margin: 0 auto;
 
   .icon {
     font-size: 24px;
