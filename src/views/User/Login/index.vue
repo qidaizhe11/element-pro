@@ -3,18 +3,23 @@
     <login
       :default-active-key="type"
     >
-      <login-tab
-        name="account"
-        label="账号密码登录"
-      >
-        账号登录
-      </login-tab>
-      <login-tab
-        name="mobile"
-        label="手机号登录"
-      >
-        手机号登录
-      </login-tab>
+      <template slot="tab">
+        <login-tab
+          name="account"
+          label="账号密码登录"
+        >
+          账号登录
+        </login-tab>
+        <login-tab
+          name="mobile"
+          label="手机号登录"
+        >
+          手机号登录
+        </login-tab>
+      </template>
+      <div>
+        <a :style="{float: 'right'}" href="">忘记密码</a>
+      </div>
     </login>
   </div>
 </template>

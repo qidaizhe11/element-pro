@@ -39,7 +39,7 @@ export default class Login extends Vue {
       {
         class: 'login'
       },
-      tabs.length
+      this.$slots.tab
         ? [
             h('div', [
               h(
@@ -50,9 +50,9 @@ export default class Login extends Vue {
                     value: type
                   }
                 },
-                this.$slots.default
+                this.$slots.tab
               )
-            ])
+            ].concat(this.$slots.default))
           ]
         : this.$slots.default
     )
