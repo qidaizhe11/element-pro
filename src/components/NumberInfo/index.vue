@@ -39,12 +39,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import AntIcon from 'components/AntIcon/index.vue'
+import AntIcon from 'components/AntIcon'
+
+Vue.use(AntIcon)
 
 export default Vue.extend({
-  components: {
-    AntIcon
-  },
   props: {
     title: String,
     subTitle: String,

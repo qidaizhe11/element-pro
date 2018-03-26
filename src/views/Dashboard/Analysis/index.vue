@@ -246,7 +246,7 @@ import * as numeral from 'numeral'
 import * as moment from 'moment'
 import ElTableWrapper from 'el-table-wrapper'
 
-import AntIcon from 'components/AntIcon/index.vue'
+import AntIcon from 'components/AntIcon'
 import {
   yuan,
   ChartCard,
@@ -279,6 +279,7 @@ Vue.use(Dropdown)
 Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
 Vue.use(ElTableWrapper)
+Vue.use(AntIcon)
 
 // mock data
 
@@ -428,7 +429,6 @@ for (let i = 0; i < 20; i += 1) {
 
 export default Vue.extend({
   components: {
-    AntIcon,
     ChartCard,
     Field,
     Trend,

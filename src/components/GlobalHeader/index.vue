@@ -46,11 +46,12 @@ import { debounce } from 'lodash'
 import { Loading } from 'element-ui'
 
 import Avatar from 'components/Avatar/index.vue'
-import AntIcon from 'components/AntIcon/index.vue'
+import AntIcon from 'components/AntIcon'
 import HeaderSearch from 'components/HeaderSearch/index.vue'
 import NoticeIcon from 'components/NoticeIcon/index.vue'
 
 Vue.use(Loading)
+Vue.use(AntIcon)
 
 const noticeTabs = [
   {
@@ -142,7 +143,6 @@ const noticeTabs = [
 export default Vue.extend({
   components: {
     Avatar,
-    AntIcon,
     HeaderSearch,
     NoticeIcon
   },
