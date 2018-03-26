@@ -27,7 +27,15 @@
       </div>
       <div class="other">
         其他登录方式
-        
+        <ant-icon class="icon" type="wechat" />
+        <ant-icon class="icon" type="qq" />
+        <ant-icon class="icon" type="weibo" />
+        <router-link
+          class="register" 
+          to="/user/register"
+        >
+          注册账户
+        </router-link>
       </div>
     </login>
   </div>
@@ -38,9 +46,11 @@ import Vue from 'vue'
 import { Checkbox } from 'element-ui'
 
 import Login from 'components/Login'
+import AntIcon from 'components/AntIcon'
 
 Vue.use(Checkbox)
 Vue.use(Login)
+Vue.use(AntIcon)
 
 export default Vue.extend({
   data() {
