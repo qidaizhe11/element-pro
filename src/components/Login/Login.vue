@@ -18,43 +18,35 @@ Vue.use(Tabs)
 export default class Login extends Vue {
   defaultActiveKey: string
 
-  tabs: any[] = []
   active: any = {}
   type: string = this.defaultActiveKey
 
-  @Provide('login') login = this
-
-  addTab(id: string) {
-    this.tabs.push(id)
-  }
-
-  removeTab(id: string) {
-    this.tabs = this.tabs.filter(currentId => currentId !== id)
+  renderTabs() {
+    const { type } = this
+    return this.$createElement(
+      'div',
+      [
+        this.$createElement(
+          'el-tabs',
+          {
+            class: 'tabs',
+            props: {
+              value: this.type
+            }
+          },
+          this.$slots.tab
+        )
+      ].concat(this.$slots.default)
+    )
   }
 
   render(h: any): VNode {
-    const { tabs, type } = this
     return h(
       'div',
       {
         class: 'login'
       },
-      this.$slots.tab
-        ? [
-            h('div', [
-              h(
-                'el-tabs',
-                {
-                  class: 'tabs',
-                  props: {
-                    value: type
-                  }
-                },
-                this.$slots.tab
-              )
-            ].concat(this.$slots.default))
-          ]
-        : this.$slots.default
+      this.$slots.tab ? [this.renderTabs()] : this.$slots.default
     )
   }
 }
