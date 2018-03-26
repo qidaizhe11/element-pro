@@ -3,9 +3,10 @@
 import Vue, { VNode } from 'vue'
 import Component from 'vue-class-component'
 import { Provide } from 'vue-property-decorator'
-import { Tabs } from 'element-ui'
+import { Tabs, Form } from 'element-ui'
 
 Vue.use(Tabs)
+Vue.use(Form)
 
 @Component({
   props: {
@@ -20,6 +21,10 @@ export default class Login extends Vue {
 
   active: any = {}
   type: string = this.defaultActiveKey
+
+  handleSubmit(e: any) {
+    e.preventDefault()
+  }
 
   renderTabs() {
     const { type } = this
@@ -46,7 +51,16 @@ export default class Login extends Vue {
       {
         class: 'login'
       },
-      this.$slots.tab ? [this.renderTabs()] : this.$slots.default
+      [
+        h('el-form', {
+          ref: 'form',
+          nativeOn: {
+            submit: this.handleSubmit
+          }
+        }, [
+          this.$slots.tab ? [this.renderTabs()] : this.$slots.default
+        ])
+      ]
     )
   }
 }

@@ -8,7 +8,10 @@
           name="account"
           label="账号密码登录"
         >
-          账号登录
+          <user-name
+            name="userName" 
+            placeholder="admin/user"
+          />
         </login-tab>
         <login-tab
           name="mobile"
