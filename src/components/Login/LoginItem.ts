@@ -1,5 +1,7 @@
 import Vue, { VNode } from 'vue'
 import { Form, FormItem, Button, Row, Col } from 'element-ui'
+import Component from 'vue-class-component'
+import { Inject } from 'vue-property-decorator'
 
 import map from './map'
 
@@ -12,38 +14,62 @@ Vue.use(Col)
 function generator(context: {
   defaultProps: any
   defaultRules: any
-  type: string,
+  type: string
   component: string
 }) {
-  return Vue.extend({
+  @Component({
     props: {
-      name: {
+      prop: {
         type: String,
         default: ''
       }
-    },
-    data() {
-      return {
-        count: 0
-      }
-    },
-    render(h): VNode {
-      const { defaultProps, defaultRules, type, component } = context
-      return h('el-form-item', {
-        props: {
-          rules: defaultRules,
-          prop: this.name
-        }
-      }, [
-        h(component, {
-          props: {
-            ...defaultProps,
-            ...this.$attrs
-          }
-        })
-      ])
     }
   })
+  class LoginItem extends Vue {
+    @Inject('login') login: any
+
+    prop: string
+
+    count: number = 0
+
+    created() {
+      this.login.updateForm(this.prop)
+    }
+
+    mounted() {
+      this.login.updateActive(this.prop)
+    }
+
+    onInput(value: any) {
+      this.login.updateForm(this.prop, value)
+    }
+
+    render(h: any): VNode {
+      const { defaultProps, defaultRules, type, component } = context
+      return h(
+        'el-form-item',
+        {
+          props: {
+            rules: defaultRules,
+            prop: this.prop
+          }
+        },
+        [
+          h(component, {
+            props: {
+              ...defaultProps,
+              ...this.$attrs
+            },
+            on: {
+              input: this.onInput
+            }
+          })
+        ]
+      )
+    }
+  }
+
+  return LoginItem
 }
 
 const LoginItem: any = {}

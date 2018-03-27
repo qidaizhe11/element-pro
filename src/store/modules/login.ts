@@ -35,6 +35,7 @@ const actions = {
       reloadAuthorized()
       router.push('/')
     }
+    return data
   },
   async logout(context: { commit: Commit }) {
     try {
