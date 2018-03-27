@@ -12,6 +12,10 @@
             name="userName" 
             placeholder="admin/user"
           />
+          <password
+            name="password"
+            placeholder="888888/123456"
+          />
         </login-tab>
         <login-tab
           name="mobile"
@@ -48,14 +52,20 @@
 import Vue from 'vue'
 import { Checkbox } from 'element-ui'
 
-import Login from 'components/Login'
+import Login, { LoginItem } from 'components/Login'
+import LoginTab from 'components/LoginTab'
 import AntIcon from 'components/AntIcon'
 
 Vue.use(Checkbox)
 Vue.use(Login)
+Vue.use(LoginTab)
 Vue.use(AntIcon)
 
 export default Vue.extend({
+  components: {
+    UserName: LoginItem.UserName,
+    Password: LoginItem.Password
+  },
   data() {
     return {
       type: 'account',
@@ -78,7 +88,7 @@ export default Vue.extend({
     margin-left: 16px;
     vertical-align: middle;
     cursor: pointer;
-    transition: color .3s;
+    transition: color 0.3s;
 
     &:hover {
       color: $primary-color;

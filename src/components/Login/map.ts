@@ -5,12 +5,17 @@ import AntIcon from '../AntIcon'
 Vue.use(Input)
 Vue.use(AntIcon)
 
+const anticon = (name: string) => {
+  return `anticon anticon-${name}`
+}
+
 const map: any = {
   UserName: {
     component: 'el-input',
     props: {
       size: 'large',
       // prefix: <Icon type="user" className={styles.prefixIcon} />,
+      prefixIcon: anticon('user'),
       placeholder: 'admin'
     },
     rules: [
@@ -25,6 +30,7 @@ const map: any = {
     props: {
       size: 'large',
       // prefix: <Icon type="lock" className={styles.prefixIcon} />,
+      prefixIcon: anticon('lock'),
       type: 'password',
       placeholder: '888888'
     },
@@ -40,6 +46,7 @@ const map: any = {
     props: {
       size: 'large',
       // prefix: <Icon type="mobile" className={styles.prefixIcon} />,
+      prefixIcon: anticon('mobile'),
       placeholder: 'mobile number'
     },
     rules: [
@@ -58,6 +65,7 @@ const map: any = {
     props: {
       size: 'large',
       // prefix: <Icon type="mail" className={styles.prefixIcon} />,
+      prefixIcon: anticon('mail'),
       placeholder: 'captcha'
     },
     rules: [
