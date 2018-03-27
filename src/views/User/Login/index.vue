@@ -32,6 +32,7 @@
         </el-checkbox>
         <a :style="{float: 'right'}" href="">忘记密码</a>
       </div>
+      <login-submit>登录</login-submit>
       <div class="other">
         其他登录方式
         <ant-icon class="icon" type="wechat" />
@@ -54,11 +55,13 @@ import { Checkbox } from 'element-ui'
 
 import Login, { LoginItem } from 'components/Login'
 import LoginTab from 'components/LoginTab'
+import LoginSubmit from 'components/LoginSubmit'
 import AntIcon from 'components/AntIcon'
 
 Vue.use(Checkbox)
 Vue.use(Login)
 Vue.use(LoginTab)
+Vue.use(LoginSubmit)
 Vue.use(AntIcon)
 
 export default Vue.extend({
