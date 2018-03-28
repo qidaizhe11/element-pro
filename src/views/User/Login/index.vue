@@ -46,12 +46,12 @@
         <ant-icon class="icon" type="wechat" />
         <ant-icon class="icon" type="qq" />
         <ant-icon class="icon" type="weibo" />
-        <router-link
+        <!-- <router-link
           class="register" 
           to="/user/register"
         >
           注册账户
-        </router-link>
+        </router-link> -->
       </div>
     </login>
   </div>
