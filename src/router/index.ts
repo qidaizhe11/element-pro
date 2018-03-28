@@ -17,6 +17,7 @@ const userLayoutRoutes = getRoutes('/user', routerData)
 const routes = [
   {
     path: '/user',
+    name: 'user',
     component: UserLayout,
     children: userLayoutRoutes
   },
