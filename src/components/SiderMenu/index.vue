@@ -208,9 +208,8 @@ export default Vue.extend({
           sider: true,
           collapse: collapsed
         },
-        style: {
-          minWidth: collapsed ? '64px' : '256px',
-          maxWidth: collapsed ? '64px' : '256px'
+        props: {
+          width: collapsed ? '64px' : '256px'
         }
       },
       [
@@ -251,7 +250,6 @@ export default Vue.extend({
             },
             style: {
               padding: '16px 0',
-              // width: collapsed ? '64px' : '256px'
               width: '100%'
             }
           },
@@ -276,7 +274,7 @@ export default Vue.extend({
   transition: all 0.3s;
 
   &.collapse {
-    overflow: hidden;
+    overflow: visible;
   }
 
   /deep/ .el-menu {
