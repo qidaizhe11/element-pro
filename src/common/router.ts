@@ -23,7 +23,7 @@ export const getRouterData = () => {
       component: () => import('../views/Dashboard/Analysis/index.vue')
     },
     '/dashboard/monitor': {
-      component: () => import('../components/HelloWorld.vue')
+      component: () => import('../views/Dashboard/Monitor/index.vue')
     },
     '/dashboard/workplace': {
       component: () => import('../views/Dashboard/Workplace/index.vue'),
