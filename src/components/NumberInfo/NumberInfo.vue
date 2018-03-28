@@ -18,15 +18,11 @@
     </div>
     <div class="number-info-value" :style="gapStyle">
       <span>
-        <template v-if="total">{{total}}</template>
-        <slot v-else name="total"></slot>
+        {{total && total}}
+        <slot v-if="$slots.total" name="total"></slot>
         <em v-if="suffix || this.$slots.suffix" class="suffix">
-          <template v-if="suffix">
-            {{suffix}}
-          </template>
-          <template v-else>
-            <slot name="suffix"></slot>
-          </template>
+          {{suffix && suffix}}
+          <slot v-if="$slots.suffix" name="suffix"></slot>
         </em>
       </span>
       <span v-if="status || subTotal" class="sub-total">
