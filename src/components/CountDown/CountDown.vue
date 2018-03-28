@@ -68,9 +68,10 @@ export default Vue.extend({
           this.$emit('end')
         } else {
           this.lastTime = lastTime - this.interval
-          this.$nextTick(() => {
-            this.tick()
-          })
+          // this.$nextTick(() => {
+          //   this.tick()
+          // })
+          this.tick()
         }
       }, this.interval)
     },
