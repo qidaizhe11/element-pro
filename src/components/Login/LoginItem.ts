@@ -37,7 +37,9 @@ function generator(context: {
     }
 
     mounted() {
-      this.login.updateActive(this.prop)
+      const parent: any = this.$parent
+      const parentName = parent && parent.name ? parent.name : ''
+      this.login.updateActive(this.prop, parentName)
     }
 
     onInput(value: any) {

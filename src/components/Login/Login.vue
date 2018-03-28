@@ -29,8 +29,9 @@ export default class Login extends Vue {
     this.form[name] = value || ''
   }
 
-  updateActive(activeItem: string) {
-    const { type, active } = this
+  updateActive(activeItem: string, parentType: string) {
+    const { active } = this
+    const type = parentType || this.type
     if (active[type]) {
       active[type].push(activeItem)
     } else {
@@ -39,16 +40,28 @@ export default class Login extends Vue {
     }
   }
 
-  onSwitch(type: string) {
+  onSwitch(tab: any) {
+    const type = tab.name
     this.type = type
     this.$emit('tab-change', type)
   }
 
   handleSubmit(e: any) {
     e.preventDefault()
+    const { active, type } = this
+    const activeFields = active[type]
     const formRef: any = this.$refs.form
-    formRef.validate((valid: boolean) => {
-      this.$emit('submit', !valid, this.form)
+    let valid = true
+    let count = 0
+    activeFields.forEach((field: string) => {
+      formRef.validateField(field, (err: string) => {
+        if (err) {
+          valid = false
+        }
+        if (++count === activeFields.length) {
+          this.$emit('submit', !valid, this.form)
+        }
+      })
     })
   }
 
@@ -65,7 +78,7 @@ export default class Login extends Vue {
               value: this.type
             },
             on: {
-              tabClick: this.onSwitch
+              'tab-click': this.onSwitch
             }
           },
           this.$slots.tab
