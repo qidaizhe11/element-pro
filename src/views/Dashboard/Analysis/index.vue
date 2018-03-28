@@ -259,7 +259,7 @@ import {
   Pie,
   TimelineChart
 } from 'components/Charts'
-import NumberInfo from 'components/NumberInfo/index.vue'
+import NumberInfo from 'components/NumberInfo'
 
 import { getTimeDistance } from 'utils/utils'
 
@@ -280,6 +280,7 @@ Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
 Vue.use(ElTableWrapper)
 Vue.use(AntIcon)
+Vue.use(NumberInfo)
 
 // mock data
 
@@ -436,7 +437,6 @@ export default Vue.extend({
     MiniBar,
     MiniProgress,
     Bar,
-    NumberInfo,
     Pie,
     TimelineChart
   },
