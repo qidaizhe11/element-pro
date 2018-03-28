@@ -23,8 +23,12 @@
             <el-col :sm="6" :xs="24">
               <number-info
                 sub-title="活动剩余时间"
-                :total="numeral(124543233).format('0,0')"
-              />
+              >
+                <count-down
+                  slot="total"
+                  :target="targetTime"
+                />
+              </number-info>
             </el-col>
             <el-col :sm="6" :xs="24">
               <number-info
@@ -55,14 +59,21 @@ import * as numeral from 'numeral'
 
 import { yuan } from 'components/Charts'
 import NumberInfo from 'components/NumberInfo'
+import CountDown from 'components/CountDown'
 
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Card)
 Vue.use(Tooltip)
 Vue.use(NumberInfo)
+Vue.use(CountDown)
 
 export default Vue.extend({
+  data() {
+    return {
+      targetTime: new Date().getTime() + 3900000
+    }
+  },
   methods: {
     yuan(value: number) {
       return yuan(value)
