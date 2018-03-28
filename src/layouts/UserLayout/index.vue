@@ -12,19 +12,52 @@
       </div>
       <router-view></router-view>
     </div>
+    <global-footer :links="links">
+      <template slot="copyright">
+        <div>
+          Copyright
+          <ant-icon type="copyright" /> 2018 Daizhe
+        </div>
+      </template>
+    </global-footer>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
+import GlobalFooter from 'components/GlobalFooter'
+import AntIcon from 'components/AntIcon'
+
 import logo from 'assets/logo.png'
+
+Vue.use(GlobalFooter)
+Vue.use(AntIcon)
+
+const links = [
+  {
+    key: 'help',
+    title: '帮助',
+    href: ''
+  },
+  {
+    key: 'privacy',
+    title: '隐私',
+    href: ''
+  },
+  {
+    key: 'terms',
+    title: '条款',
+    href: ''
+  }
+]
 
 export default Vue.extend({
   name: 'UserLayout',
   data() {
     return {
-      logo
+      logo,
+      links
     }
   }
 })
