@@ -122,7 +122,7 @@ export default Vue.extend({
       {
         key: 'github',
         titleSlot: 'github-slot',
-        href: 'https://github.com/element-pro/element-pro',
+        href: 'https://github.com/qidaizhe11/element-pro',
         blankTarget: true
       }
       // {
