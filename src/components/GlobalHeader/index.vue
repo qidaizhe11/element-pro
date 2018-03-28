@@ -18,7 +18,11 @@
         :tabs="noticeTabs"
       >
       </notice-icon>
-      <el-dropdown v-if="currentUser.name" class="action">
+      <el-dropdown 
+        v-if="currentUser.name" 
+        class="action"
+        @command="onMenuClick"
+      >
         <span class="action account">
           <avatar
             class="avatar"
@@ -30,7 +34,12 @@
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item disabled>个人中心</el-dropdown-item>
           <el-dropdown-item disabled>设置</el-dropdown-item>
-          <el-dropdown-item divided>退出登录</el-dropdown-item>
+          <el-dropdown-item 
+            divided 
+            command="logout"
+          >
+            退出登录
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <div v-else class="action loading-wrapper">
@@ -174,6 +183,9 @@ export default Vue.extend({
   methods: {
     onSearchSelect(value: string) {
       console.log('search select', value)
+    },
+    onMenuClick(command: string) {
+      this.$emit('menu-click', command)
     },
     toggle() {
       const { collapsed } = this

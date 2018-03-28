@@ -14,6 +14,7 @@
           :current-user="currentUser"
           :collapsed="collapsed"
           @collapse="handleMenuCollapse"
+          @menu-click="handleMenuClick"
         />
       </el-header>
       <el-main :style="{'padding-bottom': 0}">
@@ -155,6 +156,11 @@ export default Vue.extend({
   methods: {
     handleMenuCollapse(collapsed: boolean) {
       this.collapsed = collapsed
+    },
+    handleMenuClick(command: string) {
+      if (command === 'logout') {
+        this.$store.dispatch('login/logout')
+      }
     },
     getMenuData() {
       return getMenuData()
