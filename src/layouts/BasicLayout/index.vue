@@ -29,7 +29,7 @@
               </div>
             </template>
             <template slot="github-slot">
-              <ant-icon type="github" />
+              <ant-icon class="github-icon" type="github" />
             </template>
           </global-footer>
         </el-footer>
@@ -56,7 +56,7 @@ import { getMenuData } from 'common/menu'
 import logo from 'assets/logo.png'
 import Authorized from 'utils/Authorized'
 
-import GlobalFooter from 'components/GlobalFooter/index.vue'
+import GlobalFooter from 'components/GlobalFooter'
 import GlobalHeader from 'components/GlobalHeader/index.vue'
 import SiderMenu from 'components/SiderMenu/index.vue'
 
@@ -68,6 +68,7 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Main)
 Vue.use(Footer)
+Vue.use(GlobalFooter)
 
 interface SubMenu {
   name: string
@@ -107,7 +108,6 @@ getMenuData().forEach(getRedirect)
 export default Vue.extend({
   name: 'BasicLayout',
   components: {
-    GlobalFooter,
     GlobalHeader,
     SiderMenu
   },
@@ -180,5 +180,8 @@ export default Vue.extend({
   height: 100%;
   background: $layout-body-background;
 }
-</style>
 
+.github-icon {
+  font-size: 20px;
+}
+</style>
