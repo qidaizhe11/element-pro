@@ -111,6 +111,10 @@
           header="热门搜索"
           :body-style="{overflow: 'hidden'}"
         >
+          <tag-cloud
+            :data="tags"
+            height="161px"
+          />
         </el-card>
       </el-col>
       <el-col :lg="6" :md="12" :sm="24" :xs="24">
@@ -129,7 +133,7 @@ import Vue from 'vue'
 import { Row, Col, Card, Tooltip } from 'element-ui'
 import * as numeral from 'numeral'
 
-import { yuan, Gauge, Pie } from 'components/Charts'
+import { yuan, Gauge, Pie, TagCloud } from 'components/Charts'
 import NumberInfo from 'components/NumberInfo'
 import CountDown from 'components/CountDown'
 import ActiveChart from 'components/ActiveChart'
@@ -143,6 +147,7 @@ Vue.use(CountDown)
 Vue.use(ActiveChart)
 Vue.use(Gauge)
 Vue.use(Pie)
+Vue.use(TagCloud)
 
 export default Vue.extend({
   data() {

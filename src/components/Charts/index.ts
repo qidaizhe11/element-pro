@@ -10,6 +10,7 @@ import Bar from './Bar'
 import Pie from './Pie'
 import TimelineChart from './TimelineChart'
 import Gauge from './Gauge'
+import TagCloud from './TagCloud'
 
 const yuan = (val: number) => `&yen; ${numeral(val).format('0,0')}`
 
@@ -24,5 +25,6 @@ export {
   Bar,
   Pie,
   TimelineChart,
-  Gauge
+  Gauge,
+  TagCloud
 }
