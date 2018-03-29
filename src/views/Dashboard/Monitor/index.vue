@@ -2,10 +2,9 @@
   <div>
     <el-row :gutter="24">
       <el-col :lg="18" :md="24" :sm="24" :xs="24">
-        <el-card>
-          <div slot="header">
-            活动实时交易情况
-          </div>
+        <el-card
+          header="活动实时交易情况"
+        >
           <el-row>
             <el-col :sm="6" :xs="24">
               <number-info
@@ -46,6 +45,19 @@
               />
             </el-tooltip>
           </div>
+        </el-card>
+      </el-col>
+      <el-col :lg="6" :md="24" :sm="24" :xs="24">
+        <el-card
+          :style="{marginBottom: '24px'}"
+          header="活动情况预测"
+        >
+        </el-card>
+        <el-card
+          :style="{marginBottom: '24px'}"
+          :body-style="{textAlign: 'center'}"
+          header="券核效率"
+        >
         </el-card>
       </el-col>
     </el-row>
