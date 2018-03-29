@@ -122,6 +122,11 @@
           header="资源剩余"
           :body-style="{textAlign: 'center', fontSize: 0}"
         >
+          <water-wave
+            height="161px"
+            title="补贴资金剩余"
+            :percent="34"
+          />
         </el-card>
       </el-col>
     </el-row>
@@ -133,7 +138,7 @@ import Vue from 'vue'
 import { Row, Col, Card, Tooltip } from 'element-ui'
 import * as numeral from 'numeral'
 
-import { yuan, Gauge, Pie, TagCloud } from 'components/Charts'
+import { yuan, Gauge, Pie, TagCloud, WaterWave } from 'components/Charts'
 import NumberInfo from 'components/NumberInfo'
 import CountDown from 'components/CountDown'
 import ActiveChart from 'components/ActiveChart'
@@ -148,6 +153,7 @@ Vue.use(ActiveChart)
 Vue.use(Gauge)
 Vue.use(Pie)
 Vue.use(TagCloud)
+Vue.use(WaterWave)
 
 export default Vue.extend({
   data() {

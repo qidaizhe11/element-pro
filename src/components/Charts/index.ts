@@ -11,6 +11,7 @@ import Pie from './Pie'
 import TimelineChart from './TimelineChart'
 import Gauge from './Gauge'
 import TagCloud from './TagCloud'
+import WaterWave from './WaterWave'
 
 const yuan = (val: number) => `&yen; ${numeral(val).format('0,0')}`
 
@@ -26,5 +27,6 @@ export {
   Pie,
   TimelineChart,
   Gauge,
-  TagCloud
+  TagCloud,
+  WaterWave
 }
