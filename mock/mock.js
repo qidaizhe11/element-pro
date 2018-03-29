@@ -8,6 +8,15 @@ module.exports = {
     userid: '00000001',
     notifyCount: 12
   },
+  'GET /api/tags': mockjs.mock({
+    'list|100': [
+      {
+        name: '@city',
+        'value|1-100': 150,
+        'type|0-2': 1
+      }
+    ]
+  }),
   'POST /api/login/account': (req, res) => {
     const { password, userName, type } = req.body
     if (password === '888888' && userName === 'admin') {

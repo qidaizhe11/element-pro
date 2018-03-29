@@ -106,6 +106,20 @@
           </el-row>
         </el-card>
       </el-col>
+      <el-col :lg="6" :md="12" :sm="24" :xs="24">
+        <el-card
+          header="热门搜索"
+          :body-style="{overflow: 'hidden'}"
+        >
+        </el-card>
+      </el-col>
+      <el-col :lg="6" :md="12" :sm="24" :xs="24">
+        <el-card
+          header="资源剩余"
+          :body-style="{textAlign: 'center', fontSize: 0}"
+        >
+        </el-card>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -135,6 +149,14 @@ export default Vue.extend({
     return {
       targetTime: new Date().getTime() + 3900000
     }
+  },
+  computed: {
+    tags(): any[] {
+      return this.$store.state.monitor.tags
+    }
+  },
+  mounted() {
+    this.$store.dispatch('monitor/fetchTags')
   },
   methods: {
     yuan(value: number) {
