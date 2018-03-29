@@ -16,7 +16,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { debounce } from 'lodash'
 import 'echarts-wordcloud'
 
 import EChart from 'components/EChart/index.vue'
