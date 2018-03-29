@@ -67,6 +67,46 @@
         </el-card>
       </el-col>
     </el-row>
+    <el-row :gutter="24">
+      <el-col :lg="12" :md="24" :sm="24" :xs="24">
+        <el-card
+          header="各品类占比"
+          class="pie-card"
+        >
+          <el-row :style="{padding: '16px 0'}">
+            <el-col :span="8">
+              <pie
+                :percent="28"
+                sub-title="中式快餐"
+                total="28%"
+                height="128px"
+                :line-width="2"
+              />
+            </el-col>
+            <el-col :span="8">
+              <pie
+                color="#5DDECF"
+                :percent="22"
+                sub-title="西餐"
+                total="22%"
+                height="128px"
+                :line-width="2"
+              />
+            </el-col>
+            <el-col :span="8">
+              <pie
+                color="#2FC25B"
+                :percent="32"
+                sub-title="火锅"
+                total="32%"
+                height="128px"
+                :line-width="2"
+              />
+            </el-col>
+          </el-row>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -75,7 +115,7 @@ import Vue from 'vue'
 import { Row, Col, Card, Tooltip } from 'element-ui'
 import * as numeral from 'numeral'
 
-import { yuan, Gauge } from 'components/Charts'
+import { yuan, Gauge, Pie } from 'components/Charts'
 import NumberInfo from 'components/NumberInfo'
 import CountDown from 'components/CountDown'
 import ActiveChart from 'components/ActiveChart'
@@ -88,6 +128,7 @@ Vue.use(NumberInfo)
 Vue.use(CountDown)
 Vue.use(ActiveChart)
 Vue.use(Gauge)
+Vue.use(Pie)
 
 export default Vue.extend({
   data() {
@@ -117,6 +158,12 @@ export default Vue.extend({
     display: inline-block;
     max-width: 100%;
     max-height: 437px;
+  }
+}
+
+.pie-card {
+  /deep/ .pie-stat {
+    font-size: 24px;
   }
 }
 
