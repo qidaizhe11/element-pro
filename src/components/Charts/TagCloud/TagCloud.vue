@@ -29,12 +29,6 @@ export default Vue.extend({
   components: {
     EChart
   },
-  data() {
-    const maskImage: any = null
-    return {
-      maskImage
-    }
-  },
   props: {
     data: {
       type: Array,
@@ -45,6 +39,12 @@ export default Vue.extend({
     height: {
       type: String,
       default: '100%'
+    }
+  },
+  data() {
+    const maskImage: any = null
+    return {
+      maskImage
     }
   },
   computed: {
