@@ -281,6 +281,15 @@ Vue.use(DropdownMenu)
 Vue.use(ElTableWrapper)
 Vue.use(AntIcon)
 Vue.use(NumberInfo)
+Vue.use(ChartCard)
+Vue.use(Field)
+Vue.use(Trend)
+Vue.use(MiniArea)
+Vue.use(MiniBar)
+Vue.use(MiniProgress)
+Vue.use(Bar)
+Vue.use(Pie)
+Vue.use(TimelineChart)
 
 // mock data
 
@@ -429,17 +438,6 @@ for (let i = 0; i < 20; i += 1) {
 }
 
 export default Vue.extend({
-  components: {
-    ChartCard,
-    Field,
-    Trend,
-    MiniArea,
-    MiniBar,
-    MiniProgress,
-    Bar,
-    Pie,
-    TimelineChart
-  },
   data() {
     const topColResponsiveProps = {
       xs: 24,

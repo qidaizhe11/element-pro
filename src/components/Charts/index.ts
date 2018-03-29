@@ -1,14 +1,14 @@
 import * as numeral from 'numeral'
 
-import ChartCard from './ChartCard/index.vue'
-import Field from './Field/index.vue'
-import Trend from './Trend/index.vue'
-import MiniArea from './MiniArea/index.vue'
-import MiniBar from './MiniBar/index.vue'
-import MiniProgress from './MiniProgress/index.vue'
-import Bar from './Bar/index.vue'
-import Pie from './Pie/index.vue'
-import TimelineChart from './TimelineChart/index.vue'
+import ChartCard from './ChartCard'
+import Field from './Field'
+import Trend from './Trend'
+import MiniArea from './MiniArea'
+import MiniBar from './MiniBar'
+import MiniProgress from './MiniProgress'
+import Bar from './Bar'
+import Pie from './Pie'
+import TimelineChart from './TimelineChart'
 
 const yuan = (val: number) => `&yen; ${numeral(val).format('0,0')}`
 
