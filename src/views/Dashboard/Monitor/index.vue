@@ -59,6 +59,11 @@
           :body-style="{textAlign: 'center'}"
           header="券核效率"
         >
+          <gauge
+            title="跳出率"
+            height="180px"
+            :percent="87"
+          />
         </el-card>
       </el-col>
     </el-row>
@@ -70,7 +75,7 @@ import Vue from 'vue'
 import { Row, Col, Card, Tooltip } from 'element-ui'
 import * as numeral from 'numeral'
 
-import { yuan } from 'components/Charts'
+import { yuan, Gauge } from 'components/Charts'
 import NumberInfo from 'components/NumberInfo'
 import CountDown from 'components/CountDown'
 import ActiveChart from 'components/ActiveChart'
@@ -82,6 +87,7 @@ Vue.use(Tooltip)
 Vue.use(NumberInfo)
 Vue.use(CountDown)
 Vue.use(ActiveChart)
+Vue.use(Gauge)
 
 export default Vue.extend({
   data() {

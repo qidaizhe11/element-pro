@@ -9,6 +9,7 @@ import MiniProgress from './MiniProgress'
 import Bar from './Bar'
 import Pie from './Pie'
 import TimelineChart from './TimelineChart'
+import Gauge from './Gauge'
 
 const yuan = (val: number) => `&yen; ${numeral(val).format('0,0')}`
 
@@ -22,5 +23,6 @@ export {
   MiniProgress,
   Bar,
   Pie,
-  TimelineChart
+  TimelineChart,
+  Gauge
 }
