@@ -1,7 +1,10 @@
 <template>
   <div>
     <el-row :gutter="24">
-      <el-col :lg="18" :md="24" :sm="24" :xs="24">
+      <el-col
+        :lg="18" :md="24" :sm="24" :xs="24"
+        :style="{marginBottom: '24px'}"
+      >
         <el-card
           header="活动实时交易情况"
         >
