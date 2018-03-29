@@ -52,6 +52,7 @@
           :style="{marginBottom: '24px'}"
           header="活动情况预测"
         >
+          <active-chart />
         </el-card>
         <el-card
           :style="{marginBottom: '24px'}"
@@ -72,6 +73,7 @@ import * as numeral from 'numeral'
 import { yuan } from 'components/Charts'
 import NumberInfo from 'components/NumberInfo'
 import CountDown from 'components/CountDown'
+import ActiveChart from 'components/ActiveChart'
 
 Vue.use(Row)
 Vue.use(Col)
@@ -79,6 +81,7 @@ Vue.use(Card)
 Vue.use(Tooltip)
 Vue.use(NumberInfo)
 Vue.use(CountDown)
+Vue.use(ActiveChart)
 
 export default Vue.extend({
   data() {
