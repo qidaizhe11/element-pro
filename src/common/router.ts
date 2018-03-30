@@ -31,6 +31,9 @@ export const getRouterData = () => {
       // name: '工作台',
       authority: 'admin'
     },
+    '/form/basic-form': {
+      component: () => import('../views/Forms/BasicForm/index.vue')
+    },
     '/exception/403': {
       component: () => import('../views/Exception/403.vue')
     },
