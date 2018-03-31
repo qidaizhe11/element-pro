@@ -1,6 +1,12 @@
 <script lang="ts">
 import Vue, { VNode } from 'vue'
+import { Breadcrumb, BreadcrumbItem } from 'element-ui'
 import * as pathToRegexp from 'path-to-regexp'
+
+import { urlToList } from '../utils/pathTools'
+
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
 
 export function getBreadcrumb(breadcrumbNameMap: any, url: string) {
   let breadcrumb = breadcrumbNameMap[url]
@@ -22,7 +28,106 @@ export default Vue.extend({
     content: String,
     extraContent: String,
     breadcrumbList: Array,
-    breadcrumbNameMap: Object
+    breadcrumbNameMap: Object,
+    breadcrumbSeparator: String,
+    linkElement: {
+      type: String,
+      default: 'a'
+    }
+  },
+  methods: {
+    renderItem(linkElement: string, href: string, title: string) {
+      return this.$createElement(
+        linkElement,
+        {
+          props: linkElement !== 'a' ? { to: href } : {},
+          attrs: linkElement === 'a' ? { href: href } : {}
+        },
+        title
+      )
+    },
+    conversionFromProps() {
+      const { breadcrumbList, breadcrumbSeparator, linkElement } = this
+      return this.$createElement(
+        'el-breadcrumb',
+        {
+          class: 'breadcrumb',
+          props: {
+            separator: breadcrumbSeparator
+          }
+        },
+        breadcrumbList.map(item => {
+          return this.$createElement(
+            'el-breadcrumb-item',
+            {
+              key: item.title
+            },
+            [
+              item.href
+                ? this.renderItem(linkElement, item.href, item.title)
+                : item.title
+            ]
+          )
+        })
+      )
+    },
+    conversionFromLocation(routerPath: string, breadcrumbNameMap: any) {
+      const { breadcrumbSeparator, linkElement } = this
+      // Convert the url to an array
+      const pathSnippets = urlToList(routerPath)
+      // Loop data mosaic routing
+      const extraBreadcrumbItems = pathSnippets.map((url, index) => {
+        const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url)
+        const isLinkable =
+          index !== pathSnippets.length - 1 && currentBreadcrumb.component
+        if (currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb) {
+          return this.$createElement(
+            'el-breadcrumb-item',
+            {
+              key: url
+            },
+            [
+              this.renderItem(
+                isLinkable ? linkElement : 'span',
+                url,
+                currentBreadcrumb.name
+              )
+            ]
+          )
+        }
+        return this.$createElement()
+      })
+      // Add home breadcrumbs to your head
+      extraBreadcrumbItems.unshift(
+        this.$createElement(
+          'el-breadcrumb-item',
+          {
+            key: 'home'
+          },
+          [this.renderItem(linkElement, '/', '首页')]
+        )
+      )
+      return this.$createElement(
+        'el-breadcrumb',
+        {
+          class: 'breadcrumb',
+          props: {
+            separator: breadcrumbSeparator
+          }
+        },
+        extraBreadcrumbItems
+      )
+    },
+    conversionBreadcrumbList() {
+      const { breadcrumbList, breadcrumbSeparator, breadcrumbNameMap } = this
+      const routerPath = this.$route.path
+      if (breadcrumbList && breadcrumbList.length) {
+        return this.conversionFromProps()
+      }
+      if (routerPath) {
+        // return this.
+      }
+    }
   },
   render(h: any): VNode {
     const { logo, title, action, content, extraContent } = this
@@ -32,6 +137,7 @@ export default Vue.extend({
         class: 'page-header'
       },
       [
+        this.conversionBreadcrumbList(),
         h(
           'div',
           {
