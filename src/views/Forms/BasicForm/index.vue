@@ -1,12 +1,21 @@
 <template>
-  <div>基础表单</div>
+  <page-header-layout
+    title="基础表单"
+    content="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。"
+  >
+
+  </page-header-layout>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({
+import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 
+export default Vue.extend({
+  components: {
+    PageHeaderLayout
+  }
 })
 </script>
 
