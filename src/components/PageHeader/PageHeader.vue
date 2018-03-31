@@ -32,7 +32,7 @@ export default Vue.extend({
     breadcrumbSeparator: String,
     linkElement: {
       type: String,
-      default: 'a'
+      default: 'router-link'
     }
   },
   methods: {
