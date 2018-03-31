@@ -18,7 +18,9 @@
         />
       </el-header>
       <el-main :style="{'padding-bottom': 0}">
-        <router-view></router-view>
+        <router-view
+          :breadcrumbNameMap="breadcrumbNameMap"
+        />
         <el-footer height="auto"
                    :style="{padding: 0, flex: '0 0 auto'}">
           <global-footer :links="footerLinks">
@@ -53,8 +55,10 @@ import {
 import { debounce } from 'lodash'
 
 import { getMenuData } from 'common/menu'
+import { getRouterData } from 'common/router'
 import logo from 'assets/logo.png'
 import Authorized from 'utils/Authorized'
+import { getRoutes } from 'utils/utils'
 
 import GlobalFooter from 'components/GlobalFooter'
 import GlobalHeader from 'components/GlobalHeader/index.vue'
@@ -105,6 +109,25 @@ const getRedirect = (item: any) => {
 }
 getMenuData().forEach(getRedirect)
 
+/**
+ * 获取面包屑映射
+ * @param {Object} menuData 菜单配置
+ * @param {Object} routerData 路由配置
+ */
+const getBreadcrumbNameMap = (menuData: any, routerData: any) => {
+  const result: any = {}
+  const childResult: any = {}
+  for (const i of menuData) {
+    if (!routerData[i.path]) {
+      result[i.path] = i
+    }
+    if (i.children) {
+      Object.assign(childResult, getBreadcrumbNameMap(i.children, routerData))
+    }
+  }
+  return Object.assign({}, routerData, result, childResult)
+}
+
 export default Vue.extend({
   name: 'BasicLayout',
   components: {
@@ -133,11 +156,17 @@ export default Vue.extend({
       // }
     ]
 
+    const breadcrumbNameMap = getBreadcrumbNameMap(
+      getMenuData(),
+      getRoutes('/', getRouterData())
+    )
+
     return {
       logo,
       collapsed: false,
       searchValue: '',
-      footerLinks
+      footerLinks,
+      breadcrumbNameMap
     }
   },
   computed: {

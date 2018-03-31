@@ -125,7 +125,7 @@ export default Vue.extend({
         return this.conversionFromProps()
       }
       if (routerPath) {
-        // return this.
+        return this.conversionFromLocation(routerPath, breadcrumbNameMap)
       }
     }
   },
@@ -194,6 +194,11 @@ export default Vue.extend({
 
   .breadcrumb {
     margin-bottom: 16px;
+    /deep/ .el-breadcrumb {
+      &__inner, &__inner a {
+        font-weight: normal;
+      }
+    }
   }
 
   .tabs {
