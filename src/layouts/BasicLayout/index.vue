@@ -8,7 +8,10 @@
     >
     </sider-menu>
     <el-container>
-      <el-header :style="{padding: 0}">
+      <el-header
+        :style="{padding: 0}"
+        height="64px"
+      >
         <global-header
           :logo="logo"
           :current-user="currentUser"
@@ -17,7 +20,9 @@
           @menu-click="handleMenuClick"
         />
       </el-header>
-      <el-main :style="{'padding-bottom': 0}">
+      <el-main
+        :style="{'padding-bottom': 0}"
+      >
         <router-view
           :breadcrumbNameMap="breadcrumbNameMap"
         />

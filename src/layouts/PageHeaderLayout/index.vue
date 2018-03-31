@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ margin: '-24px -24px 0 '}">
+  <div :style="{ margin: '-20px -20px 0 '}">
     <slot name="top"></slot>
     <page-header
       v-bind="$attrs"
