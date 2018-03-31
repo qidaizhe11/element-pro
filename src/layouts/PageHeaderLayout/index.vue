@@ -2,6 +2,7 @@
   <div :style="{ margin: '-20px -20px 0 '}">
     <slot name="top"></slot>
     <page-header
+      :title="title"
       v-bind="$attrs"
       v-on="$listeners"
     />
@@ -22,6 +23,9 @@ import { PageHeader } from 'components/PageHeader'
 export default Vue.extend({
   components: {
     PageHeader
+  },
+  props: {
+    title: String
   }
 })
 </script>
