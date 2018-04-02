@@ -6,12 +6,13 @@
   >
     <el-card>
       <el-form
-        :ref="form"
+        ref="form"
         :model="form"
         :rules="rules"
         :style="{marginTop: '8px'}"
         label-width="30%"
         class="form"
+        @submit.native="handleSubmit"
       >
         <el-form-item
           label="标题"
@@ -39,6 +40,7 @@
           prop="goal"
         >
           <el-input
+            v-model="form.goal"
             type="textarea"
             :style="{minHeight: '32px'}"
             placeholder="请输入你的阶段性工作目标"
@@ -50,6 +52,7 @@
           prop="standard"
         >
           <el-input
+            v-model="form.standard"
             type="textarea"
             :style="{minHeight: '32px'}"
             placeholder="请输入衡量标准"
@@ -141,6 +144,7 @@
           <el-button
             type="primary"
             native-type="submit"
+            :loading="submitting"
           >
             提交
           </el-button>
@@ -211,7 +215,27 @@ export default Vue.extend({
         date: [{ required: true, message: '请选择起止日期' }],
         goal: [{ required: true, message: '请输入目标描述' }],
         standard: [{ required: true, message: '请输入衡量标准' }]
-      }
+      },
+      submitting: false
+    }
+  },
+  methods: {
+    handleSubmit(e: any) {
+      e.preventDefault()
+      const formRef: any = this.$refs.form
+      formRef.validate((valid: boolean) => {
+        if (valid) {
+          this.submitting = true
+          this.$store
+            .dispatch('form/submitRegularForm', this.form)
+            .then(() => {
+              this.submitting = false
+            })
+            .catch(() => {
+              this.submitting = false
+            })
+        }
+      })
     }
   }
 })

@@ -8,6 +8,11 @@ module.exports = {
     userid: '00000001',
     notifyCount: 12
   },
+  'POST /api/forms': (req, res) => {
+    res.send({
+      message: 'ok'
+    })
+  },
   'GET /api/tags': mockjs.mock({
     'list|100': [
       {
