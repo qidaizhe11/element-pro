@@ -29,3 +29,17 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+@import '~theme/theme.scss';
+
+.content {
+  margin: 24px 24px 0;
+}
+
+@media screen and (max-width: $screen-sm) {
+  .content {
+    margin: 24px 0 0;
+  }
+}
+</style>
