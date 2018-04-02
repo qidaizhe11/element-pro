@@ -79,6 +79,77 @@
             placeholder="请描述你服务的客户，内部客户直接 @姓名／工号"
           />
         </el-form-item>
+        <el-form-item
+          prop="invites"
+        >
+          <span slot="label">
+            邀评人<em class="optional">（选填）</em>
+          </span>
+          <el-input
+            v-model="form.invites"
+            placeholder="请直接 @姓名／工号，最多可邀请 5 人"
+          />
+        </el-form-item>
+        <el-form-item
+          prop="weight"
+        >
+          <span slot="label">
+            权重<em class="optional">（选填）</em>
+          </span>
+          <el-input-number
+            v-model="form.weight"
+            placeholder="请输入"
+            :min="0"
+            :max="100"
+            :controls="false"
+          />
+          <span>%</span>
+        </el-form-item>
+        <el-form-item
+          label="目标公开"
+          prop="public"
+        >
+          <div class="item-public">
+            <el-radio-group v-model="form.public">
+              <el-radio label="1">公开</el-radio>
+              <el-radio label="2">部分公开</el-radio>
+              <el-radio label="3">不公开</el-radio>
+            </el-radio-group>
+            <el-form-item
+              :style="{marginBottom: 0}"
+              v-show="form.public === '2'"
+            >
+              <el-select
+                multiple
+                v-model="form.publicUsers"
+                placeholder="公开给"
+                :style="{margin: '8px 0'}"
+              >
+                <el-option value="1" label="同事甲" />
+                <el-option value="2" label="同事乙" />
+                <el-option value="3" label="同事丙" />
+              </el-select>
+            </el-form-item>
+            <div class="form-explain">
+              客户、邀评人默认被分享
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item
+          :style="{marginTop: '32px'}"
+        >
+          <el-button
+            type="primary"
+            native-type="submit"
+          >
+            提交
+          </el-button>
+          <el-button
+            :style="{marginLeft: '8px'}"
+          >
+            保存
+          </el-button>
+        </el-form-item>
       </el-form>
     </el-card>
   </page-header-layout>
@@ -86,7 +157,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Card, Form, FormItem, Input, DatePicker, Tooltip } from 'element-ui'
+import {
+  Card,
+  Form,
+  FormItem,
+  Input,
+  DatePicker,
+  Tooltip,
+  InputNumber,
+  Radio,
+  RadioGroup,
+  Select,
+  Option,
+  Button
+} from 'element-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 import AntIcon from 'components/AntIcon'
@@ -97,6 +181,12 @@ Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(DatePicker)
 Vue.use(Tooltip)
+Vue.use(InputNumber)
+Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(Button)
 Vue.use(AntIcon)
 
 export default Vue.extend({
@@ -113,22 +203,14 @@ export default Vue.extend({
         client: '',
         invites: '',
         weight: '',
-        public: '',
+        public: '1',
         publicUsers: ''
       },
       rules: {
-        title: [
-          { required: true, message: '请输入标题' }
-        ],
-        date: [
-          { required: true, message: '请选择起止日期' }
-        ],
-        goal: [
-          { required: true, message: '请输入目标描述' }
-        ],
-        standard: [
-          { required: true, message: '请输入衡量标准' }
-        ]
+        title: [{ required: true, message: '请输入标题' }],
+        date: [{ required: true, message: '请选择起止日期' }],
+        goal: [{ required: true, message: '请输入目标描述' }],
+        standard: [{ required: true, message: '请输入衡量标准' }]
       }
     }
   }
@@ -139,13 +221,39 @@ export default Vue.extend({
 @import '~theme/theme.scss';
 
 .form {
-  /deep/ .el-form-item__content {
-    width: 50%;
+  /deep/ .el-form-item {
+    &__content {
+      width: 50%;
+    }
+  }
+
+  .item-public {
+    /deep/ .el-radio-group {
+      line-height: inhert;
+
+      .el-radio {
+        margin-bottom: 0;
+        line-height: inhert;
+      }
+    }
+
+    /deep/ .el-form-item__content {
+      width: 100%;
+    }
+
+    /deep/ .el-select {
+      width: 100%;
+    }
   }
 }
 
 .optional {
   color: $text-color-secondary;
   font-style: normal;
+}
+
+.form-explain {
+  color: rgba(0, 0, 0, 0.45);
+  line-height: 1.5;
 }
 </style>
