@@ -9,8 +9,7 @@ const authorized: any = Authorized
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  const isUser =
-    to.matched && to.matched.length > 0 && to.matched[0].path === '/user'
+  const isUser = to.meta.isUserLayout
   if (isUser) {
     next()
     NProgress.done()

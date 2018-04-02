@@ -14,6 +14,10 @@ const BasicLayout = routerData['/'].component
 const basicLayoutRoutes = getRoutes('/', routerData)
 const userLayoutRoutes = getRoutes('/user', routerData)
 
+userLayoutRoutes.forEach(item => {
+  item.meta.isUserLayout = true
+})
+
 const routes = [
   {
     path: '/user',
