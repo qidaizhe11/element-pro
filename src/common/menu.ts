@@ -35,11 +35,11 @@ const menuData = [
       {
         name: '基础表单',
         path: 'basic-form'
+      },
+      {
+        name: '分步表单',
+        path: 'step-form'
       }
-      // {
-      //   name: '分步表单',
-      //   path: 'step-form'
-      // },
       // {
       //   name: '高级表单',
       //   authority: 'admin',

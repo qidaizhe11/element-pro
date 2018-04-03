@@ -34,6 +34,27 @@ export const getRouterData = () => {
     '/form/basic-form': {
       component: () => import('../views/Forms/BasicForm/index.vue')
     },
+    '/form/step-form': {
+      component: () => import('../views/Forms/StepForm/index.vue'),
+      redirect: '/form/step-form/info',
+      children: [
+        {
+          path: 'info',
+          name: '分步表单（填写转账信息）',
+          component: () => import('../views/Forms/StepForm/Step1.vue')
+        },
+        {
+          path: 'confirm',
+          name: '分步表单（确认转账信息）',
+          component: () => import('../views/Forms/StepForm/Step2.vue')
+        },
+        {
+          path: 'result',
+          name: '分步表单（完成）',
+          component: () => import('../views/Forms/StepForm/Step3.vue')
+        }
+      ]
+    },
     '/exception/403': {
       component: () => import('../views/Exception/403.vue')
     },
