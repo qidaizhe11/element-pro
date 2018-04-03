@@ -62,6 +62,7 @@
       <el-form-item>
         <el-button
           type="primary"
+          @click="onValidateForm"
         >
           下一步
         </el-button>
@@ -138,8 +139,7 @@ export default Vue.extend({
             message: '请输入合法金额数字'
           }
         ]
-      },
-      submitting: false
+      }
     }
   },
   computed: {
@@ -153,6 +153,17 @@ export default Vue.extend({
       handler: function(val) {
         this.form = val
       }
+    }
+  },
+  methods: {
+    onValidateForm() {
+      const formRef: any = this.$refs.form
+      formRef.validate((valid: boolean) => {
+        if (valid) {
+          this.$store.dispatch('form/saveStepFormData', this.form)
+          this.$router.push('/form/step-form/confirm')
+        }
+      })
     }
   }
 })

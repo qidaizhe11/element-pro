@@ -2,6 +2,8 @@ import Vue from 'vue'
 import { Commit, Dispatch } from 'vuex'
 import { Message } from 'element-ui'
 
+import router from 'router'
+
 import { fakeSubmitForm } from 'services/api'
 
 interface Step {
@@ -24,10 +26,25 @@ const state: State = {
   }
 }
 
+const mutations = {
+  saveStepFormData(state: State, payload: Step) {
+    state.step = {
+      ...state.step,
+      ...payload
+    }
+  }
+}
+
 const actions = {
   async submitRegularForm(context: { commit: Commit }, payload: any) {
     await fakeSubmitForm(payload)
     Message.success('提交成功')
+  },
+  async submitStepForm(context: { commit: Commit }, payload: any) {
+    await fakeSubmitForm(payload)
+    context.commit('saveStepFormData', payload)
+    Message.success('提交成功')
+    router.push('/form/step-form/result')
   }
 }
 
