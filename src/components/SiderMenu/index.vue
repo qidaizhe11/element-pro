@@ -43,10 +43,6 @@ export default Vue.extend({
   computed: {
     menus(): any[] {
       return this.menuData
-    },
-    selectedKey(): string {
-      const pathname = this.$route.path
-      return pathname
     }
   },
   // watch: {
@@ -200,7 +196,13 @@ export default Vue.extend({
     }
   },
   render(h): VNode {
-    const { collapsed, logo, openKeys, selectedKey } = this
+    const { collapsed, logo, openKeys } = this
+    // if pathname can't match, use the nearest parent's key
+    let selectedKeys = this.getSelectedMenuKeys().filter(item => item)
+    if (!selectedKeys.length) {
+      selectedKeys = [openKeys[openKeys.length - 1]]
+    }
+    const selectedKey = selectedKeys[selectedKeys.length - 1]
     return h(
       'el-aside',
       {
