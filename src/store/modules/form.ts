@@ -43,7 +43,6 @@ const actions = {
   async submitStepForm(context: { commit: Commit }, payload: any) {
     await fakeSubmitForm(payload)
     context.commit('saveStepFormData', payload)
-    Message.success('提交成功')
     router.push('/form/step-form/result')
   }
 }

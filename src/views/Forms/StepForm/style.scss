@@ -1,5 +1,12 @@
 @import '~theme/theme.scss';
 
+@mixin money {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 14px;
+}
+
 .step-form {
   margin: 40px auto 0;
   max-width: 500px;
@@ -22,10 +29,7 @@
   }
 
   .money {
-    font-family: 'Helvetica Neue', sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 14px;
+    @include money;
   }
 
   .uppercase {
@@ -69,26 +73,26 @@
   margin: 0 auto;
   max-width: 560px;
   padding: 24px 0 8px;
+
+  .money {
+    @include money;
+  }
 }
 
 .step-information {
   line-height: 22px;
-  // :global {
-  //   .ant-row:not(:last-child) {
-  //     margin-bottom: 24px;
-  //   }
-  // }
+  .el-row:not(:last-child) {
+    margin-bottom: 24px;
+  }
   .label {
-    color:$heading-color;
+    color: $heading-color;
     text-align: right;
     padding-right: 8px;
   }
 }
-
 
 @media screen and (max-width: $screen-md) {
   .step-desc {
     padding: 0;
   }
 }
-
