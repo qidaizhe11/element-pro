@@ -50,7 +50,7 @@
         >
         </el-input>
       </el-form-item>
-      <e-form-item
+      <el-form-item
         :style="{marginBottom: '8px', marginLeft: '20%'}"
       >
         <el-button
@@ -66,20 +66,14 @@
         >
           上一步
         </el-button>
-      </e-form-item>
+      </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import {
-  Form,
-  FormItem,
-  Input,
-  Button,
-  Alert
-} from 'element-ui'
+import { Form, FormItem, Input, Button, Alert } from 'element-ui'
 
 import { digitUppercase } from 'utils/utils'
 
@@ -111,8 +105,18 @@ export default Vue.extend({
       const formRef: any = this.$refs.form
       formRef.validate((valid: boolean) => {
         if (valid) {
-          this.$store.dispatch('form/saveStepFormData', this.form)
-          this.$router.push('/form/step-form/confirm')
+          this.submitting = true
+          this.$store
+            .dispatch('form/submitStepForm', {
+              ...this.form,
+              ...this.formData
+            })
+            .then(() => {
+              this.submitting = false
+            })
+            .catch(() => {
+              this.submitting = false
+            })
         }
       })
     },
@@ -127,4 +131,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" src="./style.scss">
+
 </style>

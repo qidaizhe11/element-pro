@@ -150,7 +150,7 @@ export default Vue.extend({
       const formRef: any = this.$refs.form
       formRef.validate((valid: boolean) => {
         if (valid) {
-          this.$store.dispatch('form/saveStepFormData', this.form)
+          this.$store.commit('form/saveStepFormData', this.form)
           this.$router.push('/form/step-form/confirm')
         }
       })
