@@ -41,8 +41,7 @@ const actions = {
     try {
       // get location pathname
       const urlParams = new URL(window.location.href)
-      // const pathname = yield select(state => state.routing.location.pathname);
-      const pathname = window.location.pathname
+      const pathname = router.currentRoute.path
       // add the parameters in the url
       urlParams.searchParams.set('redirect', pathname)
       window.history.replaceState(null, 'login', urlParams.href)
