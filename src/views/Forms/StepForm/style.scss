@@ -1,3 +1,5 @@
+@import '~theme/theme.scss';
+
 .step-form {
   margin: 40px auto 0;
   max-width: 500px;
@@ -10,3 +12,36 @@
     }
   }
 }
+
+.step-divider {
+  display: block;
+  height: 1px;
+  width: 100%;
+  position: relative;
+  top: -0.06em;
+  line-height: 1.5;
+  background: #e8e8e8;
+}
+
+.step-desc {
+  padding: 0 56px;
+  color: $text-color-secondary;
+  h3 {
+    font-size: 16px;
+    margin: 0 0 12px 0;
+    color: $text-color-secondary;
+    line-height: 32px;
+  }
+  h4 {
+    margin: 0 0 4px 0;
+    color: $text-color-secondary;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 22px;
+  }
+}
+
