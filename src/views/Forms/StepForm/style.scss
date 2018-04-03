@@ -64,3 +64,31 @@
     line-height: 22px;
   }
 }
+
+.step-result {
+  margin: 0 auto;
+  max-width: 560px;
+  padding: 24px 0 8px;
+}
+
+.step-information {
+  line-height: 22px;
+  // :global {
+  //   .ant-row:not(:last-child) {
+  //     margin-bottom: 24px;
+  //   }
+  // }
+  .label {
+    color:$heading-color;
+    text-align: right;
+    padding-right: 8px;
+  }
+}
+
+
+@media screen and (max-width: $screen-md) {
+  .step-desc {
+    padding: 0;
+  }
+}
+
