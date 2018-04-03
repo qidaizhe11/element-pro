@@ -1,23 +1,19 @@
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { VNode } from 'vue'
+
 export default Vue.component('ant-icon', {
-  functional: true,
   props: {
     type: {
       type: String,
       required: true
     }
   },
-  render: function(h, context) {
+  render: function(h: any): VNode {
+    const { type } = this
     return h('i', {
-      'class': {
-        'anticon': true,
-        [`anticon-${context.props.type}`]: true,
-        [context.data.staticClass || '']: context.data.staticClass
-      },
-      style: context.data.style,
-      on: context.data.on
+      class: ['anticon', `anticon-${type}`],
+      on: this.$listeners
     })
   }
 })
