@@ -93,11 +93,6 @@ import {
   Form,
   FormItem,
   Input,
-  DatePicker,
-  Tooltip,
-  InputNumber,
-  Radio,
-  RadioGroup,
   Select,
   Option,
   Button
@@ -107,11 +102,6 @@ Vue.use(Card)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
-Vue.use(DatePicker)
-Vue.use(Tooltip)
-Vue.use(InputNumber)
-Vue.use(Radio)
-Vue.use(RadioGroup)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Button)

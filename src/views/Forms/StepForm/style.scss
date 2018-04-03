@@ -12,7 +12,24 @@
     }
     &__label {
       margin-bottom: 0;
+      &::after {
+        content: ':';
+        margin: 0 0 0 2px;
+        position: relative;
+        top: -0.5px;
+      }
     }
+  }
+
+  .money {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 14px;
+  }
+
+  .uppercase {
+    font-size: 12px;
   }
 }
 
@@ -47,4 +64,3 @@
     line-height: 22px;
   }
 }
-
