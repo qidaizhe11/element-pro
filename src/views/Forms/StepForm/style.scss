@@ -1,0 +1,12 @@
+.step-form {
+  margin: 40px auto 0;
+  max-width: 500px;
+  .el-form-item {
+    &__content {
+      width: 80%;
+      .el-input__prefix {
+        left: 10px;
+      }
+    }
+  }
+}
