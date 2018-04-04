@@ -55,6 +55,9 @@ export const getRouterData = () => {
         }
       ]
     },
+    '/profile/basic': {
+      component: () => import('../views/Profile/BasicProfile/index.vue')
+    },
     '/exception/403': {
       component: () => import('../views/Exception/403.vue')
     },

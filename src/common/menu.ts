@@ -84,22 +84,22 @@ const menuData = [
   //     }
   //   ]
   // },
-  // {
-  //   name: '详情页',
-  //   icon: anticon('profile'),
-  //   path: 'profile',
-  //   children: [
-  //     {
-  //       name: '基础详情页',
-  //       path: 'basic'
-  //     },
-  //     {
-  //       name: '高级详情页',
-  //       path: 'advanced',
-  //       authority: 'admin'
-  //     }
-  //   ]
-  // },
+  {
+    name: '详情页',
+    icon: anticon('profile'),
+    path: 'profile',
+    children: [
+      {
+        name: '基础详情页',
+        path: 'basic'
+      }
+      // {
+      //   name: '高级详情页',
+      //   path: 'advanced',
+      //   authority: 'admin'
+      // }
+    ]
+  },
   // {
   //   name: '结果页',
   //   icon: anticon('check-circle-o'),
