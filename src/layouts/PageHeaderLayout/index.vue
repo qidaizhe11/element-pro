@@ -3,6 +3,8 @@
     <slot name="top"></slot>
     <page-header
       :title="title"
+      :content="content"
+      :breadcrumbNameMap="breadcrumbNameMap"
       v-bind="$attrs"
       v-on="$listeners"
     />
@@ -25,7 +27,9 @@ export default Vue.extend({
     PageHeader
   },
   props: {
-    title: String
+    title: String,
+    content: String,
+    breadcrumbNameMap: Object
   }
 })
 </script>
