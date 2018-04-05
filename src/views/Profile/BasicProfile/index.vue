@@ -4,7 +4,13 @@
     v-bind="$attrs"
   >
     <el-card>
-      11
+      <description-list
+        size="large"
+        title="退款申请"
+        :style="{marginBottom: '32px'}"
+      >
+        <description term="取货单号">1000000000</description>
+      </description-list>
     </el-card>
   </page-header-layout>
 </template>
@@ -14,8 +20,12 @@ import Vue from 'vue'
 import { Card } from 'element-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
+import DescriptionList from 'components/DescriptionList'
+import Description from 'components/Description'
 
 Vue.use(Card)
+Vue.use(DescriptionList)
+Vue.use(Description)
 
 export default Vue.extend({
   components: {
