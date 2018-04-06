@@ -14,6 +14,7 @@
         <description term="销售单号">1234123421</description>
         <description term="子订单">3214321432</description>
       </description-list>
+      <divider :style="{marginBottom: '32px'}" />
       <description-list
         size="large"
         title="用户信息"
@@ -141,6 +142,7 @@ import { Card, Table, TableColumn, Loading, Tag } from 'element-ui'
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 import DescriptionList from 'components/DescriptionList'
 import Description from 'components/Description'
+import Divider from 'components/Divider'
 
 Vue.use(Card)
 Vue.use(Table)
@@ -148,6 +150,7 @@ Vue.use(TableColumn)
 Vue.use(Tag)
 Vue.use(DescriptionList)
 Vue.use(Description)
+Vue.use(Divider)
 
 export default Vue.extend({
   components: {
