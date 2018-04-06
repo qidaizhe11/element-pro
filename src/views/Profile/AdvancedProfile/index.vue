@@ -1,7 +1,10 @@
 <template>
   <page-header-layout
     title="单号：234231029431"
+    :tab-list="tabList"
+    :tab-active-key="headerTabKey"
     v-bind="$attrs"
+    @tab-change="onTabChange"
   >
     <img
       slot="logo"
@@ -83,9 +86,31 @@ Vue.use(DescriptionList)
 Vue.use(Description)
 Vue.use(AntIcon)
 
+const tabList = [
+  {
+    key: 'detail',
+    tab: '详情'
+  },
+  {
+    key: 'rule',
+    tab: '规则'
+  }
+]
+
 export default Vue.extend({
   components: {
     PageHeaderLayout
+  },
+  data() {
+    return {
+      tabList: tabList,
+      headerTabKey: 'detail'
+    }
+  },
+  methods: {
+    onTabChange(key: string) {
+      this.headerTabKey = key
+    }
   }
 })
 </script>

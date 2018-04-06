@@ -1,12 +1,14 @@
 <script lang="ts">
 import Vue, { VNode } from 'vue'
-import { Breadcrumb, BreadcrumbItem } from 'element-ui'
+import { Breadcrumb, BreadcrumbItem, Tabs, TabPane } from 'element-ui'
 import * as pathToRegexp from 'path-to-regexp'
 
 import { urlToList } from '../utils/pathTools'
 
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
+Vue.use(Tabs)
+Vue.use(TabPane)
 
 export function getBreadcrumb(breadcrumbNameMap: any, url: string) {
   let breadcrumb = breadcrumbNameMap[url]
@@ -33,9 +35,15 @@ export default Vue.extend({
     linkElement: {
       type: String,
       default: 'router-link'
-    }
+    },
+    tabList: Array,
+    tabActiveKey: String
   },
   methods: {
+    onChange(tab: any) {
+      const key = tab.name
+      this.$emit('tab-change', key)
+    },
     renderItem(linkElement: string, href: string, title: string) {
       return this.$createElement(
         linkElement,
@@ -127,10 +135,33 @@ export default Vue.extend({
       if (routerPath) {
         return this.conversionFromLocation(routerPath, breadcrumbNameMap)
       }
+    },
+    renderTabs() {
+      const { tabList, tabActiveKey } = this
+      return this.$createElement(
+        'el-tabs',
+        {
+          class: 'tabs',
+          props: {
+            value: tabActiveKey
+          },
+          on: {
+            'tab-click': this.onChange
+          }
+        },
+        tabList.map(item => {
+          return this.$createElement('el-tab-pane', {
+            props: {
+              label: item.tab,
+              name: item.key
+            }
+          })
+        })
+      )
     }
   },
   render(h: any): VNode {
-    const { logo, title, action, content, extraContent } = this
+    const { logo, title, action, content, extraContent, tabList } = this
     return h(
       'div',
       {
@@ -169,7 +200,8 @@ export default Vue.extend({
               ])
             ])
           ]
-        )
+        ),
+        tabList && tabList.length && this.renderTabs()
       ]
     )
   }
@@ -195,16 +227,17 @@ export default Vue.extend({
   .breadcrumb {
     margin-bottom: 16px;
     /deep/ .el-breadcrumb {
-      &__inner, &__inner a {
+      &__inner,
+      &__inner a {
         font-weight: normal;
       }
     }
   }
 
   .tabs {
-    margin: 0 0 -17px -8px;
+    margin: 0 0 -16px -8px;
 
-    /deep/ .ant-tabs-bar {
+    /deep/ .el-tabs__header {
       border-bottom: $border-width-base $border-style-base $border-color-split;
     }
   }

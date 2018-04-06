@@ -7,7 +7,9 @@
       :logo="logo || $slots.logo"
       :action="action || $slots.action"
       :extra-content="extraContent || $slots['extra-content']"
-      :breadcrumbNameMap="breadcrumbNameMap"
+      :breadcrumb-name-map="breadcrumbNameMap"
+      :tab-list="tabList"
+      :tab-active-key="tabActiveKey"
       v-bind="$attrs"
       v-on="$listeners"
     />
@@ -35,7 +37,9 @@ export default Vue.extend({
     logo: String,
     action: String,
     extraContent: String,
-    breadcrumbNameMap: Object
+    breadcrumbNameMap: Object,
+    tabList: Array,
+    tabActiveKey: String
   }
 })
 </script>
