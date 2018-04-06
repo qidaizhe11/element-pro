@@ -54,6 +54,50 @@
         <div class="heading">¥ 568.08</div>
       </el-col>
     </el-row>
+    <el-card
+      header="流程进度"
+      :style="{marginBottom: '24px'}"
+    >
+      <el-steps
+        :active="1"
+        align-center
+      >
+        <el-step title="创建项目">
+          <div
+            slot="description"
+            :class="['text-secondary', 'step-description']"
+          >
+            <div>
+              曲丽丽
+              <ant-icon
+                type="dingding-o"
+                :style="{marginLeft: '8px'}"
+              />
+            </div>
+            <div>2016-12-12 12:32</div>
+          </div>
+        </el-step>
+        <el-step title="部门初审">
+          <div
+            slot="description"
+            :class="['text-secondary', 'step-description']"
+          >
+            <div>
+              周毛毛
+              <ant-icon
+                type="dingding-o"
+                :style="{color: '#00A0E9', marginLeft: '8px'}"
+              />
+            </div>
+            <div>
+              <a href="">催一下</a>
+            </div>
+          </div>
+        </el-step>
+        <el-step title="财务复核"></el-step>
+        <el-step title="完成"></el-step>
+      </el-steps>
+    </el-card>
   </page-header-layout>
 </template>
 
@@ -66,7 +110,10 @@ import {
   DropdownMenu,
   DropdownItem,
   Row,
-  Col
+  Col,
+  Card,
+  Steps,
+  Step
 } from 'element-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
@@ -82,6 +129,9 @@ Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
 Vue.use(Row)
 Vue.use(Col)
+Vue.use(Card)
+Vue.use(Steps)
+Vue.use(Step)
 Vue.use(DescriptionList)
 Vue.use(Description)
 Vue.use(AntIcon)
@@ -121,6 +171,15 @@ export default Vue.extend({
 .heading {
   color: $heading-color;
   font-size: 20px;
+}
+
+.step-description {
+  font-size: 14px;
+  position: relative;
+  & > div {
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
 }
 
 .text-secondary {
