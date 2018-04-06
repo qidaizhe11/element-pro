@@ -2,8 +2,11 @@
   <div :style="{ margin: '-20px -20px 0 '}">
     <slot name="top"></slot>
     <page-header
-      :title="title"
-      :content="content"
+      :title="title || $slots.title"
+      :content="content || $slots.content"
+      :logo="logo || $slots.logo"
+      :aciton="action || $slots.action"
+      :extra-content="extraContent || $slots.extraContent"
       :breadcrumbNameMap="breadcrumbNameMap"
       v-bind="$attrs"
       v-on="$listeners"
@@ -29,6 +32,9 @@ export default Vue.extend({
   props: {
     title: String,
     content: String,
+    logo: String,
+    action: String,
+    extraContent: String,
     breadcrumbNameMap: Object
   }
 })

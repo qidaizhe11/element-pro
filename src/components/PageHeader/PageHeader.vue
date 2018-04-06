@@ -22,11 +22,11 @@ export function getBreadcrumb(breadcrumbNameMap: any, url: string) {
 
 export default Vue.extend({
   props: {
-    title: String,
-    logo: String,
-    action: String,
-    content: String,
-    extraContent: String,
+    title: [String, Array],
+    logo: [String, Array],
+    action: [String, Array],
+    content: [String, Array],
+    extraContent: [String, Array],
     breadcrumbList: Array,
     breadcrumbNameMap: Object,
     breadcrumbSeparator: String,

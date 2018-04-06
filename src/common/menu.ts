@@ -92,12 +92,12 @@ const menuData = [
       {
         name: '基础详情页',
         path: 'basic'
+      },
+      {
+        name: '高级详情页',
+        path: 'advanced',
+        authority: 'admin'
       }
-      // {
-      //   name: '高级详情页',
-      //   path: 'advanced',
-      //   authority: 'admin'
-      // }
     ]
   },
   // {
