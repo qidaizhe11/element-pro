@@ -68,8 +68,7 @@
         </el-button>
       </el-form-item>
     </el-form>
-    <div
-      class="step-divider"
+    <divider
       :style="{ margin: '40px 0 24px' }"
     />
     <div class="step-desc">
@@ -98,6 +97,8 @@ import {
   Button
 } from 'element-ui'
 
+import Divider from 'components/Divider'
+
 Vue.use(Card)
 Vue.use(Form)
 Vue.use(FormItem)
@@ -105,6 +106,7 @@ Vue.use(Input)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Button)
+Vue.use(Divider)
 
 export default Vue.extend({
   data() {

@@ -34,8 +34,7 @@
         <span class="money">{{formData.amount}}</span>
         <span class="uppercase">（{{digitUppercase(formData.amount)}}）</span>
       </el-form-item>
-      <div
-        class="step-divider"
+      <divider
         :style="{ margin: '24px 0' }"
       />
       <el-form-item
@@ -75,6 +74,8 @@
 import Vue from 'vue'
 import { Form, FormItem, Input, Button, Alert } from 'element-ui'
 
+import Divider from 'components/Divider'
+
 import { digitUppercase } from 'utils/utils'
 
 Vue.use(Form)
@@ -82,6 +83,7 @@ Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Button)
 Vue.use(Alert)
+Vue.use(Divider)
 
 export default Vue.extend({
   data() {
