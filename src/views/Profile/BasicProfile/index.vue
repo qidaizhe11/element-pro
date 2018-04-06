@@ -89,13 +89,54 @@
           </template>
         </el-table-column>
       </el-table>
+      <div class="title">退货进度</div>
+      <el-table
+        :style="{marginBottom: '16px'}"
+        v-loading="loading"
+        :data="basicProgress"
+      >
+        <el-table-column
+          prop="time"
+          label="时间"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="rate"
+          label="当前进度"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="status"
+          label="状态"
+        >
+          <template slot-scope="scope">
+            <el-tag
+              v-if="scope.row.status === 'success'"
+              type="success"
+            >
+              成功
+            </el-tag>
+            <el-tag v-else>进行中</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="operator"
+          label="操作员ID"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="cost"
+          label="耗时"
+        >
+        </el-table-column>
+      </el-table>
     </el-card>
   </page-header-layout>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Card, Table, TableColumn, Loading } from 'element-ui'
+import { Card, Table, TableColumn, Loading, Tag } from 'element-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 import DescriptionList from 'components/DescriptionList'
@@ -104,6 +145,7 @@ import Description from 'components/Description'
 Vue.use(Card)
 Vue.use(Table)
 Vue.use(TableColumn)
+Vue.use(Tag)
 Vue.use(DescriptionList)
 Vue.use(Description)
 
