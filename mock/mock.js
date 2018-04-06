@@ -1,5 +1,10 @@
 const mockjs = require('mockjs')
 
+const {
+  getProfileAdvancedData,
+  getProfileBasicData
+} = require('./modules/profile')
+
 module.exports = {
   'GET /api/currentUser': {
     name: 'Serati Ma',
@@ -22,6 +27,8 @@ module.exports = {
       }
     ]
   }),
+  'GET /api/profile/basic': getProfileBasicData,
+  'GET /api/profile/advanced': getProfileAdvancedData,
   'POST /api/login/account': (req, res) => {
     const { password, userName, type } = req.body
     if (password === '888888' && userName === 'admin') {

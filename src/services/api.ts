@@ -11,3 +11,11 @@ export function fakeSubmitForm(params: any) {
 export function queryTags() {
   return request.get('/api/tags')
 }
+
+export function queryBasicProfile() {
+  return request.get('/api/profile/basic')
+}
+
+export function queryAdvancedProfile() {
+  return request.get('/api/profile/advanced')
+}

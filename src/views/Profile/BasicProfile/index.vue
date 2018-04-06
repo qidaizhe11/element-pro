@@ -25,29 +25,136 @@
         <description term="取货地址">浙江省杭州市西湖区万塘路18号</description>
         <description term="备注">无</description>
       </description-list>
+      <div class="title">退货商品</div>
+      <el-table
+        :style="{marginBottom: '24px'}"
+        v-loading="loading"
+        :data="goodsData"
+      >
+        <el-table-column
+          prop="id"
+          label="商品编号"
+        >
+          <template slot-scope="scope">
+            <template v-if="scope.$index < basicGoods.length">
+              <a href="">{{scope.row.id}}</a>
+            </template>
+            <template v-else>
+              <span :style="{fontWeight: 600 }">总计</span>
+            </template>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="商品名称"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="barcode"
+          label="商品条码"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="price"
+          label="单价"
+          align="right"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="num"
+          label="数量（件）"
+          align="right"
+        >
+          <template slot-scope="scope">
+            <template v-if="scope.$index < basicGoods.length">
+              {{scope.row.num}}
+            </template>
+            <template v-else>
+              <span :style="{fontWeight: 600 }">{{scope.row.num}}</span>
+            </template>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="amount"
+          label="金额"
+          align="right"
+        >
+          <template slot-scope="scope">
+            <template v-if="scope.$index < basicGoods.length">
+              {{scope.row.amount}}
+            </template>
+            <template v-else>
+              <span :style="{fontWeight: 600 }">{{scope.row.amount}}</span>
+            </template>
+          </template>
+        </el-table-column>
+      </el-table>
     </el-card>
   </page-header-layout>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Card } from 'element-ui'
+import { Card, Table, TableColumn, Loading } from 'element-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 import DescriptionList from 'components/DescriptionList'
 import Description from 'components/Description'
 
 Vue.use(Card)
+Vue.use(Table)
+Vue.use(TableColumn)
 Vue.use(DescriptionList)
 Vue.use(Description)
 
 export default Vue.extend({
   components: {
     PageHeaderLayout
+  },
+  data() {
+    return {
+      loading: false
+    }
+  },
+  computed: {
+    basicGoods(): any[] {
+      return this.$store.state.profile.basicGoods
+    },
+    basicProgress(): any[] {
+      return this.$store.state.profile.basicProgress
+    },
+    goodsData() {
+      const basicGoods: any[] = this.basicGoods
+      let goodsData = []
+      if (basicGoods.length) {
+        let num = 0
+        let amount = 0
+        basicGoods.forEach(item => {
+          num += Number(item.num)
+          amount += Number(item.amount)
+        })
+        goodsData = basicGoods.concat({
+          id: '总计',
+          num,
+          amount
+        })
+      }
+      return goodsData
+    }
+  },
+  mounted() {
+    this.$store.dispatch('profile/fetchBasic')
   }
 })
 </script>
 
 <style lang="scss" scoped>
+@import '~theme/theme.scss';
 
+.title {
+  color: $heading-color;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
 </style>
