@@ -26,6 +26,7 @@
         <description term="取货地址">浙江省杭州市西湖区万塘路18号</description>
         <description term="备注">无</description>
       </description-list>
+      <divider :style="{marginBottom: '32px'}" />
       <div class="title">退货商品</div>
       <el-table
         :style="{marginBottom: '24px'}"
