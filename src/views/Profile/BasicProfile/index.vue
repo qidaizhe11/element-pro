@@ -10,6 +10,9 @@
         :style="{marginBottom: '32px'}"
       >
         <description term="取货单号">1000000000</description>
+        <description term="状态">已取货</description>
+        <description term="销售单号">1234123421</description>
+        <description term="子订单">3214321432</description>
       </description-list>
     </el-card>
   </page-header-layout>
