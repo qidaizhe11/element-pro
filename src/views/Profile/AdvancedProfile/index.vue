@@ -57,6 +57,7 @@
     <a-card
       title="流程进度"
       :style="{marginBottom: '24px'}"
+      :bordered="false"
     >
       <el-steps
         :active="1"
@@ -98,6 +99,87 @@
         <el-step title="完成"></el-step>
       </el-steps>
     </a-card>
+    <a-card
+      title="用户信息"
+      :style="{marginBottom: '24px'}"
+      :bordered="false"
+    >
+      <description-list
+        :style="{marginBottom: '24px'}"
+      >
+        <Description term="用户姓名">付小小</Description>
+        <Description term="会员卡号">32943898021309809423</Description>
+        <Description term="身份证">3321944288191034921</Description>
+        <Description term="联系方式">18112345678</Description>
+        <Description term="联系地址">
+          曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口
+        </Description>
+      </description-list>
+      <description-list
+        :style="{marginBottom: '24px'}"
+        :title="信息组"
+      >
+        <Description term="某某数据">725</Description>
+        <Description term="该数据更新时间">2017-08-08</Description>
+        <Description>&nbsp;</Description>
+        <description>
+          <span slot="term">
+            某某数据
+            <el-tooltip
+              content="数据说明"
+              placement="top"
+            >
+              <ant-icon
+                type="info-circle-o"
+                :style="{color: 'rgba(0, 0, 0, 0.43)', marginLeft: '4px'}"
+              />
+            </el-tooltip>
+          </span>
+          725
+        </description>
+        <Description term="该数据更新时间">2017-08-08</Description>
+      </description-list>
+      <h4 :style="{marginBottom: '16px'}">
+        信息组
+      </h4>
+      <a-card
+        title="多层级信息组"
+      >
+        <description-list
+          size="small"
+          :style="{marginBottom: '16px'}"
+          title="组名称"
+        >
+          <Description term="负责人">林东东</Description>
+          <Description term="角色码">1234567</Description>
+          <Description term="所属部门">XX公司 - YY部</Description>
+          <Description term="过期时间">2017-08-08</Description>
+          <Description term="描述">
+            这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...
+          </Description>
+        </description-list>
+        <divider :style="{margin: '16px 0'}" />
+        <description-list
+          size="small"
+          :style="{marginBottom: '16px'}"
+          title="组名称"
+          :col="1"
+        >
+          <Description term="学名">
+            Citrullus lanatus (Thunb.) Matsum. et
+            Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..
+          </Description>
+        </description-list>
+        <divider :style="{margin: '16px 0'}" />
+        <description-list
+          size="small"
+          title="组名称"
+        >
+          <Description term="负责人">付小小</Description>
+          <Description term="角色码">1234568</Description>
+        </description-list>
+      </a-card>
+    </a-card>
   </page-header-layout>
 </template>
 
@@ -112,7 +194,8 @@ import {
   Row,
   Col,
   Steps,
-  Step
+  Step,
+  Tooltip
 } from 'element-ui'
 import { Card } from 'vue-antd-ui'
 
@@ -121,6 +204,7 @@ import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 import DescriptionList from 'components/DescriptionList'
 import Description from 'components/Description'
 import AntIcon from 'components/AntIcon'
+import Divider from 'components/Divider'
 
 Vue.use(ButtonGroup)
 Vue.use(Button)
@@ -131,9 +215,11 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Steps)
 Vue.use(Step)
+Vue.use(Tooltip)
 Vue.use(DescriptionList)
 Vue.use(Description)
 Vue.use(AntIcon)
+Vue.use(Divider)
 
 Vue.component(Card.name, Card)
 
