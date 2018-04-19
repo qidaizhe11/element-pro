@@ -180,6 +180,40 @@
         </description-list>
       </a-card>
     </a-card>
+    <a-card
+      title="用户近半年来电记录"
+      :style="{marginBottom: '24px'}"
+      :bordered="false"
+    >
+      <div class="no-data">
+        <ant-icon type="frown-o" />暂无数据
+      </div>
+    </a-card>
+    <a-card
+      class="tabs-card"
+      :bordered="false"
+      :tabList="operationTabList"
+      @tabChange="onOperationTabChange"
+    >
+      <a-table
+        :pagination="false"
+        dataSource=""
+        :columns="columns"
+      >
+        <template slot="status" slot-scope="status">
+          <a-badge
+            v-if="scope.status === 'agree'"
+            status="success" 
+            text="成功"
+          />
+          <a-badge
+            v-else
+            status="error" 
+            text="驳回"
+          />
+        </template>
+      </a-table>
+    </a-card>
   </page-header-layout>
 </template>
 
@@ -197,7 +231,7 @@ import {
   Step,
   Tooltip
 } from 'element-ui'
-import { Card } from 'vue-antd-ui'
+import { Card, Table } from 'vue-antd-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 
@@ -222,6 +256,7 @@ Vue.use(AntIcon)
 Vue.use(Divider)
 
 Vue.component(Card.name, Card)
+Vue.component(Table.name, Table)
 
 const tabList = [
   {
@@ -234,6 +269,52 @@ const tabList = [
   }
 ]
 
+const operationTabList = [
+  {
+    key: 'tab1',
+    tab: '操作日志一'
+  },
+  {
+    key: 'tab2',
+    tab: '操作日志二'
+  },
+  {
+    key: 'tab3',
+    tab: '操作日志三'
+  }
+]
+
+const columns = [
+  {
+    title: '操作类型',
+    dataIndex: 'type',
+    key: 'type'
+  },
+  {
+    title: '操作人',
+    dataIndex: 'name',
+    key: 'name'
+  },
+  {
+    title: '执行结果',
+    dataIndex: 'status',
+    key: 'status',
+    scopedSlots: {
+      customRender: 'status'
+    }
+  },
+  {
+    title: '操作时间',
+    dataIndex: 'updatedAt',
+    key: 'updatedAt'
+  },
+  {
+    title: '备注',
+    dataIndex: 'memo',
+    key: 'memo'
+  }
+]
+
 export default Vue.extend({
   components: {
     PageHeaderLayout
@@ -241,12 +322,21 @@ export default Vue.extend({
   data() {
     return {
       tabList: tabList,
-      headerTabKey: 'detail'
+      headerTabKey: 'detail',
+      operationTabList: operationTabList,
+      operationKey: 'tab1',
+      columns: columns
     }
+  },
+  mounted() {
+    this.$store.dispatch('profile/fetchAdvanced')
   },
   methods: {
     onTabChange(key: string) {
       this.headerTabKey = key
+    },
+    onOperationTabChange(key: string) {
+      this.operationKey = key
     }
   }
 })
@@ -254,6 +344,19 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '~theme/theme.scss';
+
+.no-data {
+  color: $disabled-color;
+  text-align: center;
+  line-height: 64px;
+  font-size: 16px;
+  i {
+    font-size: 24px;
+    margin-right: 16px;
+    position: relative;
+    top: 3px;
+  }
+}
 
 .heading {
   color: $heading-color;
