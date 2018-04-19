@@ -197,12 +197,12 @@
     >
       <a-table
         :pagination="false"
-        dataSource=""
+        :dataSource="activeOperationTableData"
         :columns="columns"
       >
         <template slot="status" slot-scope="status">
           <a-badge
-            v-if="scope.status === 'agree'"
+            v-if="status === 'agree'"
             status="success" 
             text="成功"
           />
@@ -231,7 +231,7 @@ import {
   Step,
   Tooltip
 } from 'element-ui'
-import { Card, Table } from 'vue-antd-ui'
+import { Card, Table, Badge } from 'vue-antd-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 
@@ -257,6 +257,7 @@ Vue.use(Divider)
 
 Vue.component(Card.name, Card)
 Vue.component(Table.name, Table)
+Vue.component(Badge.name, Badge)
 
 const tabList = [
   {
@@ -326,6 +327,35 @@ export default Vue.extend({
       operationTabList: operationTabList,
       operationKey: 'tab1',
       columns: columns
+    }
+  },
+  computed: {
+    advancedOperation1(): any[] {
+      return this.$store.state.profile.advancedOperation1
+    },
+    advancedOperation2(): any[] {
+      return this.$store.state.profile.advancedOperation2
+    },
+    advancedOperation3(): any[] {
+      return this.$store.state.profile.advancedOperation3
+    },
+    activeOperationTableData(): any[] {
+      const {
+        operationKey,
+        advancedOperation1,
+        advancedOperation2,
+        advancedOperation3
+      } = this
+      switch (operationKey) {
+        case 'tab1':
+          return advancedOperation1
+        case 'tab2':
+          return advancedOperation2
+        case 'tab3':
+          return advancedOperation3
+        default:
+          return []
+      }
     }
   },
   mounted() {
