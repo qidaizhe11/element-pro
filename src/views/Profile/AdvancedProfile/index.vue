@@ -54,8 +54,8 @@
         <div class="heading">¥ 568.08</div>
       </el-col>
     </el-row>
-    <el-card
-      header="流程进度"
+    <a-card
+      title="流程进度"
       :style="{marginBottom: '24px'}"
     >
       <el-steps
@@ -97,7 +97,7 @@
         <el-step title="财务复核"></el-step>
         <el-step title="完成"></el-step>
       </el-steps>
-    </el-card>
+    </a-card>
   </page-header-layout>
 </template>
 
@@ -111,10 +111,10 @@ import {
   DropdownItem,
   Row,
   Col,
-  Card,
   Steps,
   Step
 } from 'element-ui'
+import { Card } from 'vue-antd-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 
@@ -129,12 +129,13 @@ Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
 Vue.use(Row)
 Vue.use(Col)
-Vue.use(Card)
 Vue.use(Steps)
 Vue.use(Step)
 Vue.use(DescriptionList)
 Vue.use(Description)
 Vue.use(AntIcon)
+
+Vue.component(Card.name, Card)
 
 const tabList = [
   {

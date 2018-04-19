@@ -6,3 +6,4 @@ declare module "*.vue" {
 declare module '*.png'
 
 declare module 'el-table-wrapper'
+declare module 'vue-antd-ui'
