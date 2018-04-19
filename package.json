@@ -29,6 +29,7 @@
     "numeral": "^2.0.6",
     "path-to-regexp": "^2.1.0",
     "vue": "^2.5.2",
+    "vue-antd-ui": "^0.3.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
