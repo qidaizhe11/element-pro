@@ -1,5 +1,5 @@
 <template>
-  <ll-card :body-style="{padding: '20px 24px 8px 24px'}">
+  <el-card :body-style="{padding: '20px 24px 8px 24px'}">
     <div class="chart-card">
       <div class="chart-top" :class="{'chart-top-margin': !hasChildren && !hasFooter}">
         <div v-if="$slots.avatar" class="avatar">
@@ -24,21 +24,16 @@
         <slot name="footer"></slot>
       </div>
     </div>
-  </ll-card>
+  </el-card>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Card } from 'element-ui'
 
-import LlCard from 'components/Card/index.vue'
-
 Vue.use(Card)
 
 export default Vue.extend({
-  components: {
-    LlCard
-  },
   props: {
     title: String,
     total: {
