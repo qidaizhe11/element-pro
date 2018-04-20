@@ -126,6 +126,7 @@ import { Card, Button, Row, Col, Steps, Step } from 'element-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 import Result from 'components/Result'
+import AntIcon from 'components/AntIcon'
 
 Vue.use(Card)
 Vue.use(Button)
@@ -134,6 +135,7 @@ Vue.use(Col)
 Vue.use(Steps)
 Vue.use(Step)
 Vue.use(Result)
+Vue.use(AntIcon)
 
 export default Vue.extend({
   components: {

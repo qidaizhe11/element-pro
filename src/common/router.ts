@@ -64,6 +64,9 @@ export const getRouterData = () => {
     '/result/success': {
       component: () => import('../views/Result/Success/index.vue')
     },
+    '/result/fail': {
+      component: () => import('../views/Result/Error/index.vue')
+    },
     '/exception/403': {
       component: () => import('../views/Exception/403.vue')
     },
