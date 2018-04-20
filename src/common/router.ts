@@ -61,6 +61,9 @@ export const getRouterData = () => {
     '/profile/advanced': {
       component: () => import('../views/Profile/AdvancedProfile/index.vue')
     },
+    '/result/success': {
+      component: () => import('../views/Result/Success/index.vue')
+    },
     '/exception/403': {
       component: () => import('../views/Exception/403.vue')
     },

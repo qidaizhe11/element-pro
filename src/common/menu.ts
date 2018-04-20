@@ -100,21 +100,21 @@ const menuData = [
       }
     ]
   },
-  // {
-  //   name: '结果页',
-  //   icon: anticon('check-circle-o'),
-  //   path: 'result',
-  //   children: [
-  //     {
-  //       name: '成功',
-  //       path: 'success'
-  //     },
-  //     {
-  //       name: '失败',
-  //       path: 'fail'
-  //     }
-  //   ]
-  // },
+  {
+    name: '结果页',
+    icon: anticon('check-circle-o'),
+    path: 'result',
+    children: [
+      {
+        name: '成功',
+        path: 'success'
+      },
+      {
+        name: '失败',
+        path: 'fail'
+      }
+    ]
+  },
   {
     name: '异常页',
     icon: anticon('warning'),
