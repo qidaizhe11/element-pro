@@ -179,6 +179,17 @@
             </el-row>
           </el-form>
         </div>
+        <standard-table
+          :data="rule"
+          :columns="columns"
+        >
+          <template slot-scope="scope" slot="callNo">
+            {{scope.row.callNo}} 万
+          </template>
+          <template slot-scope="scope" slot="updatedAt">
+            <span>{{moment(scope.row.updatedAt).format('YYYY-MM-DD HH:mm:ss')}}</span>
+          </template>
+        </standard-table>
       </div>
     </el-card>
   </page-header-layout>
@@ -198,9 +209,11 @@ import {
   InputNumber,
   DatePicker
 } from 'element-ui'
+import * as moment from 'moment'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 import AntIcon from 'components/AntIcon'
+import StandardTable from 'components/StandardTable'
 
 Vue.use(Card)
 Vue.use(Form)
@@ -213,12 +226,35 @@ Vue.use(Option)
 Vue.use(InputNumber)
 Vue.use(DatePicker)
 Vue.use(AntIcon)
+Vue.use(StandardTable)
 
 export default Vue.extend({
   components: {
     PageHeaderLayout
   },
   data() {
+    const columns = [
+      {
+        prop: 'no',
+        label: '规则编号'
+      },
+      {
+        prop: 'description',
+        label: '描述'
+      },
+      {
+        prop: 'callNo',
+        label: '服务调用次数',
+        align: 'right',
+        scopedSlot: 'callNo'
+      },
+      {
+        prop: 'updatedAt',
+        label: '更新时间',
+        sortable: true,
+        scopedSlot: 'updatedAt'
+      }
+    ]
     return {
       modalVisible: false,
       expandForm: false,
@@ -231,7 +267,8 @@ export default Vue.extend({
         status4: ''
       },
       selectedRows: [],
-      loading: false
+      loading: false,
+      columns: columns
     }
   },
   computed: {
@@ -272,6 +309,9 @@ export default Vue.extend({
             })
         }
       })
+    },
+    moment(value: any) {
+      return moment(value)
     }
   }
 })
