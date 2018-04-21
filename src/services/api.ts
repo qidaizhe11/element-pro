@@ -1,5 +1,25 @@
 import request from 'utils/request'
 
+export function queryRule(params: any) {
+  return request.get('/api/rule', {
+    params: params
+  })
+}
+
+export function removeRule(params: any) {
+  return request.post('/api/rule', {
+    method: 'delete',
+    ...params
+  })
+}
+
+export function addRule(params: any) {
+  return request.post('/api/rule', {
+    method: 'post',
+    ...params
+  })
+}
+
 export function fakeAccountLogin(params: any) {
   return request.post('/api/login/account', params)
 }

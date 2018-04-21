@@ -5,6 +5,8 @@ const {
   getProfileBasicData
 } = require('./modules/profile')
 
+const { getRule, postRule } = require('./modules/rule')
+
 module.exports = {
   'GET /api/currentUser': {
     name: 'Serati Ma',
@@ -13,6 +15,8 @@ module.exports = {
     userid: '00000001',
     notifyCount: 12
   },
+  'GET /api/rule': getRule,
+  'POST /api/rule': postRule,
   'POST /api/forms': (req, res) => {
     res.send({
       message: 'ok'

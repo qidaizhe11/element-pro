@@ -11,7 +11,7 @@
             ref="form"
             :model="form"
             inline
-            @submit.native="handleSubmit"
+            @submit.native="handleSearch"
           >
             <el-row :gutter="8">
               <el-col :xs="24" :sm="8">
@@ -55,10 +55,10 @@
               <el-col :xs="24" :sm="8">
                 <el-form-item
                   label="更新日期"
-                  prop="date"
+                  prop="updatedAt"
                 >
                   <el-date-picker
-                    v-model="form.date"
+                    v-model="form.updatedAt"
                     :style="{width: '100%'}"
                     placeholder="请输入更新日期"
                   />
@@ -105,6 +105,7 @@
                 </el-button>
                 <el-button
                   :style="{marginLeft: '8px'}"
+                  @click="handleFormReset"
                 >
                   重置
                 </el-button>
@@ -123,7 +124,7 @@
             ref="form"
             :model="form"
             inline
-            @submit.native="handleSubmit"
+            @submit.native="handleSearch"
           >
             <el-row :gutter="8">
               <el-col :xs="24" :sm="8">
@@ -162,6 +163,7 @@
                   </el-button>
                   <el-button
                     :style="{marginLeft: '8px'}"
+                    @click="handleFormReset"
                   >
                     重置
                   </el-button>
@@ -184,7 +186,18 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Card, Form, FormItem, Row, Col, Input, Select, Option, InputNumber, DatePicker } from 'element-ui'
+import {
+  Card,
+  Form,
+  FormItem,
+  Row,
+  Col,
+  Input,
+  Select,
+  Option,
+  InputNumber,
+  DatePicker
+} from 'element-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 import AntIcon from 'components/AntIcon'
@@ -207,20 +220,58 @@ export default Vue.extend({
   },
   data() {
     return {
+      modalVisible: false,
       expandForm: false,
       form: {
         no: '',
         status: '',
         number: '',
-        date: '',
+        updatedAt: '',
         status3: '',
         status4: ''
-      }
+      },
+      selectedRows: [],
+      loading: false
     }
   },
+  computed: {
+    rule(): any {
+      return this.$store.state.rule
+    }
+  },
+  mounted() {
+    this.$store.dispatch('rule/fetch')
+  },
   methods: {
+    handleFormReset() {
+      const formRef: any = this.$refs.form
+      formRef.resetFields()
+      this.$store.dispatch('rule/fetch', {})
+    },
     toggleForm() {
       this.expandForm = !this.expandForm
+    },
+    handleSearch(e: any) {
+      e.preventDefault()
+
+      const formRef: any = this.$refs.form
+      formRef.validate((valid: boolean) => {
+        if (valid) {
+          this.loading = true
+          const vaules: any = {
+            ...this.form,
+            updatedAt: this.form.updatedAt && this.form.updatedAt.valueOf()
+          }
+          this.$store
+            .dispatch('rule/fetch', vaules)
+            .then(() => {
+              this.loading = false
+            })
+            .catch(() => {
+              this.loading = false
+            })
+        }
+      })
     }
   }
 })
