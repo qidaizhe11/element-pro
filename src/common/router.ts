@@ -55,6 +55,9 @@ export const getRouterData = () => {
         }
       ]
     },
+    '/list/table-list': {
+      component: () => import('../views/List/TableList/index.vue')
+    },
     '/profile/basic': {
       component: () => import('../views/Profile/BasicProfile/index.vue')
     },

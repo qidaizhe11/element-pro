@@ -47,43 +47,43 @@ const menuData = [
       // }
     ]
   },
-  // {
-  //   name: '列表页',
-  //   icon: anticon('table'),
-  //   path: 'list',
-  //   children: [
-  //     {
-  //       name: '查询表格',
-  //       path: 'table-list'
-  //     },
-  //     {
-  //       name: '标准列表',
-  //       path: 'basic-list'
-  //     },
-  //     {
-  //       name: '卡片列表',
-  //       path: 'card-list'
-  //     },
-  //     {
-  //       name: '搜索列表',
-  //       path: 'search',
-  //       children: [
-  //         {
-  //           name: '搜索列表（文章）',
-  //           path: 'articles'
-  //         },
-  //         {
-  //           name: '搜索列表（项目）',
-  //           path: 'projects'
-  //         },
-  //         {
-  //           name: '搜索列表（应用）',
-  //           path: 'applications'
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // },
+  {
+    name: '列表页',
+    icon: anticon('table'),
+    path: 'list',
+    children: [
+      {
+        name: '查询表格',
+        path: 'table-list'
+      }
+      // {
+      //   name: '标准列表',
+      //   path: 'basic-list'
+      // },
+      // {
+      //   name: '卡片列表',
+      //   path: 'card-list'
+      // },
+      // {
+      //   name: '搜索列表',
+      //   path: 'search',
+      //   children: [
+      //     {
+      //       name: '搜索列表（文章）',
+      //       path: 'articles'
+      //     },
+      //     {
+      //       name: '搜索列表（项目）',
+      //       path: 'projects'
+      //     },
+      //     {
+      //       name: '搜索列表（应用）',
+      //       path: 'applications'
+      //     }
+      //   ]
+      // }
+    ]
+  },
   {
     name: '详情页',
     icon: anticon('profile'),
