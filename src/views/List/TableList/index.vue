@@ -13,6 +13,110 @@
             inline
             @submit.native="handleSubmit"
           >
+            <el-row :gutter="8">
+              <el-col :xs="24" :sm="8">
+                <el-form-item
+                  label="规则编号"
+                  prop="no"
+                >
+                  <el-input
+                    v-model="form.no"
+                    placeholder="请输入"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-col :xs="24" :sm="8">
+                <el-form-item
+                  label="使用状态"
+                  prop="status"
+                >
+                  <el-select
+                    v-model="form.status"
+                    placeholder="请选择"
+                    :style="{width: '100%'}"
+                  >
+                    <el-option value="0" label="关闭" />
+                    <el-option value="1" label="运行中" />
+                  </el-select>
+                </el-form-item>
+              </el-col>
+              <el-col :xs="24" :sm="8">
+                <el-form-item
+                  label="调用次数"
+                  prop="number"
+                >
+                  <el-input-number
+                    v-model="form.number"
+                  />
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row :gutter="8">
+              <el-col :xs="24" :sm="8">
+                <el-form-item
+                  label="更新日期"
+                  prop="date"
+                >
+                  <el-date-picker
+                    v-model="form.date"
+                    :style="{width: '100%'}"
+                    placeholder="请输入更新日期"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-col :xs="24" :sm="8">
+                <el-form-item
+                  label="使用状态"
+                  prop="status3"
+                >
+                  <el-select
+                    v-model="form.status3"
+                    placeholder="请选择"
+                    :style="{width: '100%'}"
+                  >
+                    <el-option value="0" label="关闭" />
+                    <el-option value="1" label="运行中" />
+                  </el-select>
+                </el-form-item>
+              </el-col>
+              <el-col :xs="24" :sm="8">
+                <el-form-item
+                  label="使用状态"
+                  prop="status4"
+                >
+                  <el-select
+                    v-model="form.status4"
+                    placeholder="请选择"
+                    :style="{width: '100%'}"
+                  >
+                    <el-option value="0" label="关闭" />
+                    <el-option value="1" label="运行中" />
+                  </el-select>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <div :style="{overflow: 'hidden'}">
+              <span :style="{float: 'right', marginBottom: '24px'}">
+                <el-button
+                  type="primary"
+                  native-type="submit"
+                >
+                  查询
+                </el-button>
+                <el-button
+                  :style="{marginLeft: '8px'}"
+                >
+                  重置
+                </el-button>
+                <a
+                  :style="{marginLeft: '8px'}"
+                  href="javascript:;"
+                  @click="toggleForm"
+                >
+                  收起 <ant-icon type="up" />
+                </a>
+              </span>
+            </div>
           </el-form>
           <el-form
             v-else
@@ -64,6 +168,7 @@
                   <a
                     :style="{marginLeft: '8px'}"
                     href="javascript:;"
+                    @click="toggleForm"
                   >
                     展开 <ant-icon type="down" />
                   </a>
@@ -79,7 +184,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Card, Form, FormItem, Row, Col, Input, Select, Option } from 'element-ui'
+import { Card, Form, FormItem, Row, Col, Input, Select, Option, InputNumber, DatePicker } from 'element-ui'
 
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 import AntIcon from 'components/AntIcon'
@@ -92,6 +197,8 @@ Vue.use(Col)
 Vue.use(Input)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(InputNumber)
+Vue.use(DatePicker)
 Vue.use(AntIcon)
 
 export default Vue.extend({
@@ -103,8 +210,17 @@ export default Vue.extend({
       expandForm: false,
       form: {
         no: '',
-        status: ''
+        status: '',
+        number: '',
+        date: '',
+        status3: '',
+        status4: ''
       }
+    }
+  },
+  methods: {
+    toggleForm() {
+      this.expandForm = !this.expandForm
     }
   }
 })
