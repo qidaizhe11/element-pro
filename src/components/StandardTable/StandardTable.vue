@@ -23,6 +23,14 @@ export default Vue.extend({
       }
     }
   },
+  data() {
+    const filters: any = {}
+    return {
+      pagination: {},
+      filters,
+      sorter: ''
+    }
+  },
   computed: {
     paginationProps(): any {
       const { pagination } = this.data
@@ -40,6 +48,21 @@ export default Vue.extend({
   methods: {
     handleRowSelectChange(selectedRows: any[]) {
       this.$emit('select-row', selectedRows)
+    },
+    handlePaginationChange(pagination: any) {
+      // this.$emit('pagination-change', pagination)
+      this.$emit('change', pagination, this.filters, this.sorter)
+      this.pagination = pagination
+    },
+    handleSortChange(sorter: any) {
+      // this.$emit('sorter-change', sorter)
+      this.$emit('change', this.paginationProps, this.filters, sorter)
+      this.sorter = sorter
+    },
+    handleFilterChange(filters: any) {
+      // this.$emit('filter-change', filters)
+      this.$emit('change', this.paginationProps, filters, this.sorter)
+      this.filters = filters
     }
   },
   render(h: any): VNode {
@@ -60,7 +83,10 @@ export default Vue.extend({
           pagination: paginationProps
         },
         on: {
-          'selection-change': this.handleRowSelectChange
+          'selection-change': this.handleRowSelectChange,
+          'pagination-change': this.handlePaginationChange,
+          'sort-change': this.handleSortChange,
+          'filter-change': this.handleFilterChange
         },
         scopedSlots: this.$scopedSlots
       })

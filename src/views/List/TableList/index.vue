@@ -203,6 +203,7 @@
           :data="rule"
           :columns="columns"
           @select-row="handleSelectRows"
+          @change="handleStandardTableChange"
         >
           <template slot-scope="scope" slot="callNo">
             {{scope.row.callNo}} 万
@@ -285,6 +286,11 @@ Vue.use(DropdownMenu)
 Vue.use(AntIcon)
 Vue.use(StandardTable)
 
+const getValue = (obj: any) =>
+  Object.keys(obj)
+    .map(key => obj[key])
+    .join(',')
+
 export default Vue.extend({
   components: {
     PageHeaderLayout
@@ -344,6 +350,25 @@ export default Vue.extend({
     this.$store.dispatch('rule/fetch')
   },
   methods: {
+    handleStandardTableChange(pagination: any, filtersArg: any, sorter: any) {
+      const filters = Object.keys(filtersArg).reduce((obj, key) => {
+        const newObj: any = { ...obj }
+        newObj[key] = getValue(filtersArg[key])
+        return newObj
+      }, {})
+
+      const params = {
+        currentPage: pagination.currentPage,
+        pageSize: pagination.pageSize,
+        ...this.form,
+        ...filters
+      }
+      if (sorter.prop) {
+        params.sorter = `${sorter.prop}_${sorter.order}`
+      }
+
+      this.$store.dispatch('rule/fetch', params)
+    },
     handleFormReset() {
       const formRef: any = this.$refs.form
       formRef.resetFields()
