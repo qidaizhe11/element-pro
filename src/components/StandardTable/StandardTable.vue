@@ -23,26 +23,34 @@ export default Vue.extend({
       }
     }
   },
+  computed: {
+    paginationProps(): any {
+      const { pagination } = this.data
+      const props = {
+        layout: 'prev, pager, next, sizes, jumper',
+        background: true,
+        ...pagination
+      }
+      if (pagination.current) {
+        props.currentPage = pagination.current
+      }
+      return props
+    }
+  },
   methods: {
     handleRowSelectChange(selectedRows: any[]) {
       this.$emit('select-row', selectedRows)
     }
   },
   render(h: any): VNode {
-    const { data, columns } = this
-    const { list, pagination } = data
+    const { columns, paginationProps } = this
+    const { list } = this.data
 
     const columnsProps = [
       {
         type: 'selection'
       }
     ].concat(columns)
-
-    const paginationProps = {
-      layout: 'prev, pager, next, sizes, jumper',
-      background: true,
-      ...pagination
-    }
 
     return h('div', { class: 'standard-table' }, [
       h('el-table-wrapper', {
