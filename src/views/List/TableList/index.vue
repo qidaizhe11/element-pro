@@ -211,6 +211,19 @@
           <template slot-scope="scope" slot="updatedAt">
             <span>{{moment(scope.row.updatedAt).format('YYYY-MM-DD HH:mm:ss')}}</span>
           </template>
+          <template slot-scope="scope" slot="status">
+            <a-badge
+              :status="statusMap[scope.row.status]"
+              :text="status[scope.row.status]"
+            />
+          </template>
+          <template slot-scope="scope" slot="operation">
+            <div>
+              <a href="">配置</a>
+              <Divider type="vertical" />
+              <a href="">订阅警报</a>
+            </div>
+          </template>
         </standard-table>
       </div>
     </el-card>
@@ -265,9 +278,12 @@ import {
 } from 'element-ui'
 import * as moment from 'moment'
 
+import { Badge } from 'vue-antd-ui'
+
 import PageHeaderLayout from 'layouts/PageHeaderLayout/index.vue'
 import AntIcon from 'components/AntIcon'
 import StandardTable from 'components/StandardTable'
+import Divider from 'components/Divider'
 
 Vue.use(Card)
 Vue.use(Form)
@@ -285,11 +301,17 @@ Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
 Vue.use(AntIcon)
 Vue.use(StandardTable)
+Vue.use(Divider)
+
+Vue.component(Badge.name, Badge)
 
 const getValue = (obj: any) =>
   Object.keys(obj)
     .map(key => obj[key])
     .join(',')
+
+const statusMap = ['default', 'processing', 'success', 'error']
+const status = ['关闭', '运行中', '已上线', '异常']
 
 export default Vue.extend({
   components: {
@@ -309,13 +331,45 @@ export default Vue.extend({
         prop: 'callNo',
         label: '服务调用次数',
         align: 'right',
+        sortable: true,
         scopedSlot: 'callNo'
+      },
+      {
+        prop: 'status',
+        label: '状态',
+        scopedSlot: 'status',
+        columnKey: 'status',
+        filters: [
+          {
+            text: status[0],
+            value: 0
+          },
+          {
+            text: status[1],
+            value: 1
+          },
+          {
+            text: status[2],
+            value: 2
+          },
+          {
+            text: status[3],
+            value: 3
+          }
+        ],
+        filterMethod: (value: string, row: any, column: any) => {
+          return row.status.toString() === value.toString()
+        }
       },
       {
         prop: 'updatedAt',
         label: '更新时间',
         sortable: true,
         scopedSlot: 'updatedAt'
+      },
+      {
+        label: '操作',
+        scopedSlot: 'operation'
       }
     ]
     const selectedRows: any[] = []
@@ -333,6 +387,8 @@ export default Vue.extend({
       selectedRows,
       loading: false,
       columns: columns,
+      status,
+      statusMap,
       addForm: {
         desc: ''
       },
@@ -451,5 +507,20 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.table-list {
+  &-operator {
+    margin-bottom: 16px;
+    button {
+      margin-right: 8px;
+    }
+  }
+}
 
+.table-list-form {
+  /deep/ .el-form-item {
+    &__label {
+      margin-bottom: 0;
+    }
+  }
+}
 </style>

@@ -43,6 +43,14 @@ export default Vue.extend({
         props.currentPage = pagination.current
       }
       return props
+    },
+    columnsProps(): any {
+      const { columns } = this
+      return [
+        {
+          type: 'selection'
+        }
+      ].concat(columns)
     }
   },
   methods: {
@@ -66,14 +74,8 @@ export default Vue.extend({
     }
   },
   render(h: any): VNode {
-    const { columns, paginationProps } = this
+    const { columns, paginationProps, columnsProps } = this
     const { list } = this.data
-
-    const columnsProps = [
-      {
-        type: 'selection'
-      }
-    ].concat(columns)
 
     return h('div', { class: 'standard-table' }, [
       h('el-table-wrapper', {
