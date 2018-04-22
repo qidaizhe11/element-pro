@@ -179,6 +179,14 @@
             </el-row>
           </el-form>
         </div>
+        <div class="table-list-operator">
+          <el-button
+            type="primary"
+            @click="handleModalVisible(true)"
+          >
+            新建
+          </el-button>
+        </div>
         <standard-table
           :data="rule"
           :columns="columns"
@@ -192,6 +200,33 @@
         </standard-table>
       </div>
     </el-card>
+    <el-dialog
+      title="新建规则"
+      :visible="modalVisible"
+      @close="handleModalVisible(false)"
+    >
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleModalVisible(false)">取 消</el-button>
+        <el-button type="primary" @click="handleModalOk">确 定</el-button>
+      </span>
+      <el-form
+        ref="addForm"
+        :model="addForm"
+        :rules="addFormRules"
+      >
+        <el-form-item
+          label="描述"
+          prop="desc"
+          label-width="20%"
+        >
+          <el-input
+            v-model="addForm.desc"
+            placeholder="请输入"
+            :style="{width: '80%'}"
+          />
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </page-header-layout>
 </template>
 
@@ -207,7 +242,9 @@ import {
   Select,
   Option,
   InputNumber,
-  DatePicker
+  DatePicker,
+  Message,
+  Dialog
 } from 'element-ui'
 import * as moment from 'moment'
 
@@ -225,6 +262,7 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(InputNumber)
 Vue.use(DatePicker)
+Vue.use(Dialog)
 Vue.use(AntIcon)
 Vue.use(StandardTable)
 
@@ -255,6 +293,7 @@ export default Vue.extend({
         scopedSlot: 'updatedAt'
       }
     ]
+    const selectedRows: any[] = []
     return {
       modalVisible: false,
       expandForm: false,
@@ -266,9 +305,15 @@ export default Vue.extend({
         status3: '',
         status4: ''
       },
-      selectedRows: [],
+      selectedRows,
       loading: false,
-      columns: columns
+      columns: columns,
+      addForm: {
+        desc: ''
+      },
+      addFormRules: {
+        desc: [{ required: true, message: 'Please input some description...' }]
+      }
     }
   },
   computed: {
@@ -287,6 +332,30 @@ export default Vue.extend({
     },
     toggleForm() {
       this.expandForm = !this.expandForm
+    },
+    handleMenuClick(e: any) {
+      const { selectedRows } = this
+
+      if (!selectedRows) {
+        return
+      }
+
+      switch (e.key) {
+        case 'remove':
+          this.$store
+            .dispatch('rule/remove', {
+              no: selectedRows.map(row => row.no).join(',')
+            })
+            .then(() => {
+              this.selectedRows = []
+            })
+          break
+        default:
+          break
+      }
+    },
+    handleSelectRows(rows: any) {
+      this.selectedRows = rows
     },
     handleSearch(e: any) {
       e.preventDefault()
@@ -309,6 +378,26 @@ export default Vue.extend({
             })
         }
       })
+    },
+    handleModalVisible(flag: boolean) {
+      this.modalVisible = !!flag
+    },
+    handleModalOk() {
+      const formRef: any = this.$refs.addForm
+      formRef.validate((valid: boolean) => {
+        if (valid) {
+          this.handleAdd(this.addForm)
+          formRef.resetFields()
+        }
+      })
+    },
+    handleAdd(fields: any) {
+      this.$store.dispatch('rule/add', {
+        description: fields.desc
+      })
+
+      Message.success('添加成功')
+      this.modalVisible = false
     },
     moment(value: any) {
       return moment(value)

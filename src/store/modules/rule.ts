@@ -1,6 +1,6 @@
 import { Commit, Dispatch } from 'vuex'
 
-import { queryRule, addRule } from 'services/api'
+import { queryRule, addRule, removeRule } from 'services/api'
 
 export interface State {
   list: any[]
@@ -33,6 +33,16 @@ const actions = {
   async add(context: { commit: Commit }, payload: any) {
     try {
       const response = await addRule(payload)
+      const data = response.data
+      context.commit('save', data)
+      return data
+    } catch (error) {
+      throw error
+    }
+  },
+  async remove(context: { commit: Commit }, payload: any) {
+    try {
+      const response = await removeRule(payload)
       const data = response.data
       context.commit('save', data)
       return data
