@@ -186,10 +186,23 @@
           >
             新建
           </el-button>
+          <span v-if="selectedRows.length > 0">
+            <el-button>批量操作</el-button>
+            <el-dropdown @command="handleMenuClick">
+              <el-button>
+                更多操作 <ant-icon type="down" />
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="remove">删除</el-dropdown-item>
+                <el-dropdown-item command="approval">批量审批</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </span>
         </div>
         <standard-table
           :data="rule"
           :columns="columns"
+          @select-row="handleSelectRows"
         >
           <template slot-scope="scope" slot="callNo">
             {{scope.row.callNo}} 万
@@ -244,7 +257,10 @@ import {
   InputNumber,
   DatePicker,
   Message,
-  Dialog
+  Dialog,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu
 } from 'element-ui'
 import * as moment from 'moment'
 
@@ -263,6 +279,9 @@ Vue.use(Option)
 Vue.use(InputNumber)
 Vue.use(DatePicker)
 Vue.use(Dialog)
+Vue.use(Dropdown)
+Vue.use(DropdownItem)
+Vue.use(DropdownMenu)
 Vue.use(AntIcon)
 Vue.use(StandardTable)
 
@@ -333,14 +352,14 @@ export default Vue.extend({
     toggleForm() {
       this.expandForm = !this.expandForm
     },
-    handleMenuClick(e: any) {
+    handleMenuClick(key: string) {
       const { selectedRows } = this
 
       if (!selectedRows) {
         return
       }
 
-      switch (e.key) {
+      switch (key) {
         case 'remove':
           this.$store
             .dispatch('rule/remove', {
