@@ -20,7 +20,7 @@
     "echarts": "^4.0.2",
     "echarts-liquidfill": "^2.0.0",
     "echarts-wordcloud": "^1.1.3",
-    "el-table-wrapper": "^2.0.3",
+    "el-table-wrapper": "^2.0.4",
     "element-ui": "^2.0.11",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
