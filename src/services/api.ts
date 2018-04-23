@@ -28,6 +28,10 @@ export function fakeSubmitForm(params: any) {
   return request.post('/api/forms', params)
 }
 
+export function fakeChartData() {
+  return request.get('/api/fake_chart_data')
+}
+
 export function queryTags() {
   return request.get('/api/tags')
 }

@@ -291,149 +291,11 @@ Vue.use(Bar)
 Vue.use(Pie)
 Vue.use(TimelineChart)
 
-// mock data
-
-const rankingListData: object[] = []
+const rankingListData: any[] = []
 for (let i = 0; i < 7; i += 1) {
   rankingListData.push({
     title: `工专路 ${i} 号店`,
     total: 323234
-  })
-}
-
-const visitData: object[] = []
-const beginDay = new Date().getTime()
-
-const fakeY = [7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5]
-for (let i = 0; i < fakeY.length; i += 1) {
-  visitData.push({
-    x: moment(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format(
-      'YYYY-MM-DD'
-    ),
-    y: fakeY[i]
-  })
-}
-
-const visitData2: object[] = []
-const fakeY2 = [1, 6, 4, 8, 3, 7, 2]
-for (let i = 0; i < fakeY2.length; i += 1) {
-  visitData2.push({
-    x: moment(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format(
-      'YYYY-MM-DD'
-    ),
-    y: fakeY2[i]
-  })
-}
-
-const salesData: object[] = []
-for (let i = 0; i < 12; i += 1) {
-  salesData.push({
-    x: `${i + 1}月`,
-    y: Math.floor(Math.random() * 1000) + 200
-  })
-}
-
-const searchData: object[] = []
-for (let i = 0; i < 50; i += 1) {
-  searchData.push({
-    index: i + 1,
-    keyword: `搜索关键词-${i}`,
-    count: Math.floor(Math.random() * 1000),
-    range: Math.floor(Math.random() * 100),
-    status: Math.floor((Math.random() * 10) % 2)
-  })
-}
-
-const salesTypeData = [
-  {
-    x: '家用电器',
-    y: 4544
-  },
-  {
-    x: '食用酒水',
-    y: 3321
-  },
-  {
-    x: '个护健康',
-    y: 3113
-  },
-  {
-    x: '服饰箱包',
-    y: 2341
-  },
-  {
-    x: '母婴产品',
-    y: 1231
-  },
-  {
-    x: '其他',
-    y: 1231
-  }
-]
-
-const salesTypeDataOnline = [
-  {
-    x: '家用电器',
-    y: 244
-  },
-  {
-    x: '食用酒水',
-    y: 321
-  },
-  {
-    x: '个护健康',
-    y: 311
-  },
-  {
-    x: '服饰箱包',
-    y: 41
-  },
-  {
-    x: '母婴产品',
-    y: 121
-  },
-  {
-    x: '其他',
-    y: 111
-  }
-]
-
-const salesTypeDataOffline = [
-  {
-    x: '家用电器',
-    y: 99
-  },
-  {
-    x: '个护健康',
-    y: 188
-  },
-  {
-    x: '服饰箱包',
-    y: 344
-  },
-  {
-    x: '母婴产品',
-    y: 255
-  },
-  {
-    x: '其他',
-    y: 65
-  }
-]
-
-const offlineData: any[] = []
-for (let i = 0; i < 10; i += 1) {
-  offlineData.push({
-    name: `门店${i}`,
-    cvr: Math.ceil(Math.random() * 9) / 10
-  })
-}
-const offlineChartData: any[] = []
-for (let i = 0; i < 20; i += 1) {
-  offlineChartData.push({
-    x: new Date().getTime() + 1000 * 60 * 30 * i,
-    y1: Math.floor(Math.random() * 100) + 10,
-    y2: Math.floor(Math.random() * 100) + 10
   })
 }
 
@@ -476,24 +338,61 @@ export default Vue.extend({
     }
     return {
       topColResponsiveProps,
-      rankingListData,
-      visitData,
-      visitData2,
-      salesData,
-      searchData,
-      offlineData,
-      offlineChartData,
       salesTabName: 'sales',
       salesType: 'all',
       rangePickerValue: getTimeDistance('year'),
       columns,
       pagination,
-      currentTabKey: offlineData[0] && offlineData[0].name
+      rankingListData,
+      currentTabKey: ''
     }
   },
   computed: {
+    chart(): any {
+      return this.$store.state.chart.chartData
+    },
+    loading(): any {
+      return this.$store.state.chart.loading
+    },
+    visitData() {
+      const chart: any = this.chart
+      return chart.visitData
+    },
+    visitData2() {
+      const chart: any = this.chart
+      return chart.visitData2
+    },
+    salesData() {
+      const chart: any = this.chart
+      return chart.salesData
+    },
+    searchData() {
+      const chart: any = this.chart
+      return chart.searchData
+    },
+    offlineData() {
+      const chart: any = this.chart
+      return chart.offlineData
+    },
+    offlineChartData() {
+      const chart: any = this.chart
+      return chart.offlineChartData
+    },
+    salesTypeData() {
+      const chart: any = this.chart
+      return chart.salesTypeData
+    },
+    salesTypeDataOnline() {
+      const chart: any = this.chart
+      return chart.salesTypeDataOnline
+    },
+    salesTypeDataOffline() {
+      const chart: any = this.chart
+      return chart.salesTypeDataOffline
+    },
     salesPieData() {
       const { salesType } = this
+      const { salesTypeData, salesTypeDataOnline, salesTypeDataOffline } = this
       switch (salesType) {
         case 'all':
           return salesTypeData
@@ -507,6 +406,16 @@ export default Vue.extend({
     //   const { currentTabKey, offlineData } = this
     //   return currentTabKey || (offlineData[0] && offlineData[0].name)
     // }
+  },
+  watch: {
+    offlineData: function(val) {
+      if (val && val[0]) {
+        this.currentTabKey = val[0].name
+      }
+    }
+  },
+  mounted() {
+    this.$store.dispatch('chart/fetch')
   },
   methods: {
     yuan(value: number) {

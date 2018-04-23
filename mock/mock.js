@@ -4,8 +4,8 @@ const {
   getProfileAdvancedData,
   getProfileBasicData
 } = require('./modules/profile')
-
 const { getRule, postRule } = require('./modules/rule')
+const { getFakeChartData } = require('./modules/chart')
 
 module.exports = {
   'GET /api/currentUser': {
@@ -31,6 +31,7 @@ module.exports = {
       }
     ]
   }),
+  'GET /api/fake_chart_data': getFakeChartData,
   'GET /api/profile/basic': getProfileBasicData,
   'GET /api/profile/advanced': getProfileAdvancedData,
   'POST /api/login/account': (req, res) => {
