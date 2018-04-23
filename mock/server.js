@@ -1,5 +1,5 @@
 const jsonServer = require('json-server')
-const roadhog = require('./roadhog')
+const roadhog = require('./utils/roadhog')
 
 const server = jsonServer.create()
 const middlewares = jsonServer.defaults()

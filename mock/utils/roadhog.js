@@ -1,6 +1,6 @@
 const assert = require('assert')
 
-const config = require('./mock.js')
+const config = require('../mock.js')
 
 function parseKey(key) {
   let method = 'get'
