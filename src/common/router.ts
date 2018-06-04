@@ -102,7 +102,7 @@ export const getRouterData = () => {
     // eg.  router /user/:id === /user/chen
     const pathRegexp = pathToRegexp(path)
     const menuKey = Object.keys(menuData).find(key =>
-      pathRegexp.test(`/${key}`)
+      pathRegexp.test(key)
     )
     let menuItem: any = {}
     // If menuKey is not empty
